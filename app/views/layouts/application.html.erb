@@ -19,13 +19,11 @@
 	<div class="container content">
 		<div class="row-fluid">
 			<% flash.each do |key, value| %>
-			<div class="alert alert-<%= key %>"><%= value %></div>
+				<%= content_tag(:div, value, class: "alert alert-#{key}") %>
 			<% end %>
 
 			<div class="hero-unit">
 			  <%= yield %>
-			  
-			  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
 			</div>			
 		</div>		
 	</div>

@@ -4,10 +4,9 @@
 #
 #  id              :integer          not null, primary key
 #  name            :string(250)
-#  email           :string(100)
-#  fio             :string(255)
-#  active          :boolean
-#  roles           :string(255)
+#  email           :string(100)      not null
+#  active          :boolean          default(TRUE), not null
+#  roles           :string(255)      default("ROLES_USER"), not null
 #  password_digest :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -18,6 +17,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   before_save { |user| user.email = email.downcase }
+  before_save :create_remember_token
 
   validates :name,  presence: true, length: { maximum: 50 }
 
@@ -26,4 +26,12 @@ class User < ActiveRecord::Base
 
   validates :password, presence: true, length: { minimum: 4 }
   validates :password_confirmation, presence: true
+
+
+  private
+
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
+
 end

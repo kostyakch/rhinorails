@@ -14,11 +14,13 @@ RhinoCMS::Application.routes.draw do
 
   # Site URLs
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/signup',  to: 'users#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
   root :to => 'pages#index'
-  match '/signup',  to: 'users#new'
-  #match '/users',  to: 'users#new'
-
   match '*url' => 'pages#index', :as => :page
 
   

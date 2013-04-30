@@ -12,8 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require_tree .
-
-function function_name (argument) {
-	// body...
-}
