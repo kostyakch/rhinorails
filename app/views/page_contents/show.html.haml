@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @page_content.name
+
+= link_to 'Edit', edit_page_content_path(@page_content)
+\|
+= link_to 'Back', page_contents_path

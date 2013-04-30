@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= full_title(yield(:title)) %></title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
+ 
+    <%= render 'layouts/shim' %>
+</head>
+
+<body>
+	<%= render 'layouts/header' %>
+
+	<ul class="nav pull-right menu">
+		<%= render 'layouts/top_menu' %>
+	</ul> 
+
+	<div class="container content">
+		<div class="row-fluid">
+			<div class="span10"><%= yield %></div>
+
+			<div class="center hero-unit">
+			  <h1>Welcome to the Sample App</h1>
+
+			  <h2>
+			    This is the home page for the
+			    <a href="http://railstutorial.ru/chapters/filling-in-the-layout#sec-adding_to_the_layout">Ruby on Rails Tutorial</a>
+			    sample application.
+			  </h2>
+
+			  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+			</div>			
+		</div>		
+	</div>
+	<div class="subcontent">
+		<div class="container"></div>
+	</div>
+
+	<%= render 'layouts/footer' %>
+</body>
+</html>

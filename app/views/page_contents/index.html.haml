@@ -1,0 +1,19 @@
+%h1 Listing page_contents
+
+%table
+  %tr
+    %th Name
+    %th
+    %th
+    %th
+
+  - @page_contents.each do |page_content|
+    %tr
+      %td= page_content.name
+      %td= link_to 'Show', page_content
+      %td= link_to 'Edit', edit_page_content_path(page_content)
+      %td= link_to 'Destroy', page_content, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Page content', new_page_content_path

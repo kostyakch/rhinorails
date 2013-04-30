@@ -1,0 +1,120 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :integer          not null, primary key
+#  username   :string(20)       not null
+#  email      :string(100)      not null
+#  fio        :string(255)
+#  active     :boolean
+#  roles      :string(255)      not null
+#  password   :string(20)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+require 'digest/sha1'
+
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :active, :email, :fio, :password, :password_confirmation, :roles, :username
+
+  #default_scope :active => true
+
+ # Validations
+  validates_uniqueness_of :username
+
+  validates_confirmation_of :password, :if => :confirm_password?
+
+  validates_presence_of :username, :email
+  validates_presence_of :password, :password_confirmation #, :if => :new_record?
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates_format_of :email, :allow_nil => true, :with => VALID_EMAIL_REGEX
+
+  validates_length_of :fio, :maximum => 250, :allow_nil => true
+  validates_length_of :username, :within => 3..40, :allow_nil => false
+  validates_length_of :password, :within => 3..40, :allow_nil => true, :if => :validate_length_of_password?
+  validates_length_of :email, :maximum => 255, :allow_nil => false
+
+
+
+  # validates :username, :email, :presence => true
+  # validates :username, :email, uniqueness: { case_sensitive: false }
+  # validates :password, :length => { :in => 3..20 }
+  # validates :fio, :length => { :minimum => 3, :maximum => 500 }
+
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  # validates :email, format: { with: VALID_EMAIL_REGEX }, :on => :create
+  # #validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, :on => :create
+
+  # def self.authenticate_unsafely(username, password)
+  #   where("username = '#{username}' AND password = '#{password}'").first
+  # end  
+
+
+  attr_writer :confirm_password
+	class << self
+		def unprotected_attributes
+			@unprotected_attributes ||= [:fio, :email, :username, :password, :password_confirmation]
+		end
+
+		def unprotected_attributes=(array)
+		  @unprotected_attributes = array.map{|att| att.to_sym }
+		end
+	end
+
+	def has_role?(role)
+		respond_to?("#{role}?") && send("#{role}?")
+	end
+
+	def sha1(phrase)
+		Digest::SHA1.hexdigest("--#{salt}--#{phrase}--")
+	end
+
+	def self.authenticate(login_or_email, password)
+		user = find(:first, :conditions => ["username = ? OR email = ?", login_or_email, login_or_email])
+		user if user && user.authenticated?(password)
+	end
+
+	def authenticated?(password)
+		self.password == sha1(password)
+	end
+
+	def after_initialize
+		@confirm_password = true
+	end
+
+	def confirm_password?
+		@confirm_password
+	end
+
+	private
+		def validate_length_of_password?
+			new_record? or not password.to_s.empty?
+		end
+
+		before_create :encrypt_password
+		def encrypt_password
+			self.salt = Digest::SHA1.hexdigest("--#{Time.now}--#{username}--sweet harmonious biscuits--")
+			self.password = sha1(password)
+		end
+
+		before_update :encrypt_password_unless_empty_or_unchanged
+		def encrypt_password_unless_empty_or_unchanged
+			user = self.class.find(self.id)
+			case password
+			when ''
+				self.password = user.password
+			when user.password
+			else
+				encrypt_password
+			end
+		end    
+end
