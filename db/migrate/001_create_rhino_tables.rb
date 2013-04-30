@@ -36,7 +36,7 @@ class CreateRhinoTables < ActiveRecord::Migration
 
     create_table :users do |t|
       t.string :name, :limit => 250 #, :null => false
-      t.string :email, :limit => 100 #, :null => false
+      t.string :email, :limit => 100 , :null => false
       t.string :fio 
       t.boolean :active
       t.string :roles #, :null     => false
@@ -44,7 +44,7 @@ class CreateRhinoTables < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :users, :name, unique: true
+    #add_index :users, :name, unique: true
     add_index :users, :email, unique: true
 
   end  

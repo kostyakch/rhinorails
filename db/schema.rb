@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 1) do
 
   create_table "users", :force => true do |t|
     t.string   "name",            :limit => 250
-    t.string   "email",           :limit => 100
+    t.string   "email",           :limit => 100, :null => false
     t.string   "fio"
     t.boolean  "active"
     t.string   "roles"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
 
   add_foreign_key "page_contents", "pages", :name => "page_contents_page_id_fk"
 

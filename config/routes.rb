@@ -1,12 +1,10 @@
 RhinoCMS::Application.routes.draw do
 
-  get "users/new"
 
   # Admin URLs
-  namespace :admin do
-    match '/' => "pages#index"
-    #resources :pages
-  end
+  # namespace :admin do
+  #   match '/' => "pages#index"
+  # end
   # scope '/admin' do
   #   match '/' => "users#index"
   #   # get '/:level' => 'users#new', :as => :signup_new
@@ -15,9 +13,12 @@ RhinoCMS::Application.routes.draw do
 
 
   # Site URLs
+  resources :users
+
   root :to => 'pages#index'
   match '/signup',  to: 'users#new'
-  
+  #match '/users',  to: 'users#new'
+
   match '*url' => 'pages#index', :as => :page
 
   
