@@ -4,9 +4,9 @@
 #
 #  id         :integer          not null, primary key
 #  parent_id  :integer
-#  name       :string(255)
-#  slug       :string(100)
-#  position   :integer          not null
+#  name       :string(255)      not null
+#  slug       :string(100)      not null
+#  position   :integer          default(0), not null
 #  visible    :integer          default(1)
 #  menu       :integer          default(1)
 #  active     :boolean          default(TRUE)
@@ -34,7 +34,7 @@ class Page < ActiveRecord::Base
   validates :slug, length: { maximum: 100 }
 
   VALID_SLUG_REGEX = %r{^([-_.A-Za-z0-9]*|/)$}
-  validates :slug, format: { with: VALID_SLUG_REGEX }, uniqueness: { case_sensitive: false }
+  validates :slug, uniqueness: { case_sensitive: false }, format: { with: VALID_SLUG_REGEX }
   #validates_format_of :slug, :with => %r{^([-_.A-Za-z0-9]*|/)$}
   validates_uniqueness_of :slug, :scope => :parent_id
 

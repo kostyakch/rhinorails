@@ -8,19 +8,19 @@ gem 'rails', '3.2.13'
 gem 'mysql2'
 gem 'activerecord-mysql-adapter'
 gem 'foreigner'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'jquery-rails'
   gem 'sass-rails'
   gem 'bootstrap-sass', '~> 2.3.1.1'
   gem 'coffee-rails'
 
   gem 'uglifier', '1.2.3'
 end
-
-gem 'jquery-rails'
-
 
 
 # To use ActiveModel has_secure_password
@@ -40,6 +40,7 @@ gem 'jbuilder'
 
 group :development do
   gem 'annotate', '2.5.0'
+  gem 'faker', '1.0'
 end
 
 gem "devise"

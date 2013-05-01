@@ -35,5 +35,7 @@ module SessionsHelper
     session[:return_to] = request.url
   end
 
-
+  def has_role?(role)
+    current_user.roles == role
+  end
 end

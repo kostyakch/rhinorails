@@ -4,6 +4,9 @@
 ru:
   locale: Рус
   _PAGE_SUCCESSFULLY_UPDATED: Страница успешно обновлена.
+  _BTN_CREATE: Создать
+  _BTN_EDIT: Сохранить
+  _BTN_SAVE: Сохранить
 
   activerecord:
     models:

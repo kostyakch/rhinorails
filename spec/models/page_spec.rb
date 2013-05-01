@@ -4,9 +4,9 @@
 #
 #  id         :integer          not null, primary key
 #  parent_id  :integer
-#  name       :string(255)
-#  slug       :string(100)
-#  position   :integer          not null
+#  name       :string(255)      not null
+#  slug       :string(100)      not null
+#  position   :integer          default(0), not null
 #  visible    :integer          default(1)
 #  menu       :integer          default(1)
 #  active     :boolean          default(TRUE)

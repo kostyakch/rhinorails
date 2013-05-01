@@ -1,0 +1,40 @@
+<div class="form-horizontal">
+    <div class="control-group">
+        <%= f.label :name, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_field :name %>
+        </div>
+    </div>  
+
+    <div class="control-group">
+        <%= f.label :slug, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_field :slug %>
+        </div>
+    </div>  
+
+    <div class="control-group">
+        <%= f.label :position, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_field :position %>
+        </div>
+    </div>  
+
+    <div class="row">
+        <div class="offset2 span2" style="margin-left: 220px;">
+            <%= f.label :visible %>
+            <%= f.check_box :visible %>
+        </div>
+
+        <div class="span2">
+            <%= f.label :menu %>
+            <%= f.check_box :menu %>
+        </div>
+
+        <div class="span2">
+            <%= f.label :active %>
+            <%= f.check_box :active %>
+        </div>
+    </div>
+</div>
+

@@ -9,6 +9,7 @@
 	<%= link_to 'Добавить', new_admin_page_path, class: 'btn btn-primary' %>
 </div>
 
+<%= will_paginate %>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -27,4 +28,4 @@
 		<% end %> 
 	</tbody>
 </table>
-      
+<%= will_paginate %>  

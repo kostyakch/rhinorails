@@ -19,12 +19,27 @@ class ApplicationController < ActionController::Base
     def signed_in_user
       unless signed_in?
         store_location
-        redirect_to signin_url, notice: "Please sign in."
+
+        flash[:error] = t('_SIGN_IN')
+        redirect_to signin_url
       end
     end   
     
     def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)   
-    end      
+      if params[:id]
+        @user = User.find(params[:id])
+        redirect_to(root_path) unless current_user?(@user)   
+      end
+    end
+
+    def admin_only
+      # if !signed_in? or !has_role?('ROLE_ADMIN')
+      #   flash[:error] = t('_SIGN_IN')
+      #   redirect_to signin_url
+      # end
+      unless signed_in? && has_role?('ROLE_ADMIN')
+        flash[:error] = t('_SIGN_IN')
+        redirect_to signin_url
+      end       
+    end 
 end

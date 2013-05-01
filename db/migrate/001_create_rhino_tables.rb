@@ -38,12 +38,14 @@ class CreateRhinoTables < ActiveRecord::Migration
       t.string :name, :limit => 250 #, :null => false
       t.string :email, :limit => 100 , :null => false
       t.boolean :active, :default => true, :null => false
-      t.string :roles, :default => "ROLES_USER", :null => false
+      t.string :roles, :default => "ROLE_USER", :null => false
       t.string :password_digest
+      t.string :remember_token
 
       t.timestamps
     end
     add_index :users, :email, unique: true
+    add_index  :users, :remember_token      
 
   end  
 

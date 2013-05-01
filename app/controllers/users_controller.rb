@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, except: [:new, :create] #only: [:edit, :update]
-  before_filter :correct_user, except: [:new, :create]   #only: [:edit, :update]
+  before_filter :signed_in_user, only: [:index, :edit, :update]
+  before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_only, only: [:edit, :update, :destroy]
+
+
+  def index
+    @users = User.paginate(page: params[:page])
+  end
 
 	def show
 		@user = User.find(params[:id])
@@ -35,5 +41,10 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end  
- 
+
+  def destroy
+    User.find(params[:id]).destroy
+    redirect_to users_path
+  end
+
 end
