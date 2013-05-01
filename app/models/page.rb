@@ -17,15 +17,7 @@
 #
 
 class Page < ActiveRecord::Base
-  class MissingRootPageError < StandardError
-    def initialize(message = 'Database missing root page'); super end
-  end
-
-
-  #attr_accessible :name, :slug, :position, :visible, :menu, :active
-
-  # Callbacks
-  #before_save :update_virtual, :update_status, :set_allowed_children_cache
+  attr_accessible :name, :slug, :position, :visible, :menu, :active
 
   # Associations
   #acts_as_tree :order => 'virtual DESC, title ASC'
@@ -36,17 +28,25 @@ class Page < ActiveRecord::Base
   #accepts_nested_attributes_for :fields, :allow_destroy => true
 
   # Validations
-  validates_presence_of :name, :slug, :position, :visible, :menu, :active
+  validates :name, :slug, :position, :visible, :menu, :active, presence: true
 
-  validates_length_of :name, :maximum => 255
-  validates_length_of :slug, :maximum => 100
+  validates :name, length: { maximum: 255 }
+  validates :slug, length: { maximum: 100 }
 
-  validates_format_of :slug, :with => %r{^([-_.A-Za-z0-9]*|/)$}
+  VALID_SLUG_REGEX = %r{^([-_.A-Za-z0-9]*|/)$}
+  validates :slug, format: { with: VALID_SLUG_REGEX }, uniqueness: { case_sensitive: false }
+  #validates_format_of :slug, :with => %r{^([-_.A-Za-z0-9]*|/)$}
   validates_uniqueness_of :slug, :scope => :parent_id
 
-  validate :valid_class_name
 
 
+  # validates :name,  presence: true, length: { maximum: 50 }
+
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  # validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+
+  # validates :password, presence: true, length: { minimum: 4 }
+  # validates :password_confirmation, presence: true
 
   class << self
 

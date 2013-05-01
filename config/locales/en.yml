@@ -2,7 +2,8 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  hello: "Hello world"  
+  _PAGE_SUCCESSFULLY_UPDATED: Page content was successfully updated.
 
   activerecord:
     attributes:

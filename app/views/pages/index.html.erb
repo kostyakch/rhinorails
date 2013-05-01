@@ -1,5 +1,7 @@
 <% provide(:title, @page.name) %>
 
 <h1><%= @page.name %></h1>
-      
+
+<% if @page.page_content.first %>
 <%= raw @page.page_content.first.content %>
+<% end %>

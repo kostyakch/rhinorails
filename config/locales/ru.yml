@@ -3,6 +3,7 @@
 
 ru:
   locale: Рус
+  _PAGE_SUCCESSFULLY_UPDATED: Страница успешно обновлена.
 
   activerecord:
     models:
@@ -15,6 +16,14 @@ ru:
         roles: Роли
         password: Пароль
         password_confirmation: Подтверждение пароля
+
+      page:
+        name: Наименование
+        slug: Url страницы
+        position: Сортировка
+        menu: Отображать в меню
+        active: Активность
+        
 
 
 

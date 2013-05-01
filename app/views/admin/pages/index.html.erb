@@ -1,5 +1,30 @@
-<% provide(:title, "Админка: #{@page.name}") %>
+<% provide(:title, "Админка") %>
 
-<h1>Админка для страницы</h1>
-<h2><%= @page.name %></h2>
+<ul class="nav nav-tabs">
+	<li class="active"><a href="/admin/pages/">Страницы</a></li>
+	<li><a href="/admin/page/news/">Новости</a></li>
+</ul>
+
+<div style="padding: 6px 6px;" class="well">
+	<%= link_to 'Добавить', new_admin_page_path, class: 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Страница</th>
+			<th>Статус</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @pages.each do |p| %>
+			<tr class="content-t level_0" id="cat_<%= p.id %>">
+				<td><%= link_to p.name, edit_admin_page_path(p) %></td>
+				<td><%= link_to 'Destroy', admin_page_path(p), :method => :delete, :data => { :confirm => '_DELETE_CONFIRM' } %></td>
+				<td></td>
+			</tr>
+		<% end %> 
+	</tbody>
+</table>
       

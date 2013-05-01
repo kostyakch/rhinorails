@@ -2,14 +2,20 @@ RhinoCMS::Application.routes.draw do
 
 
   # Admin URLs
-  # namespace :admin do
-  #   match '/' => "pages#index"
-  # end
-  # scope '/admin' do
-  #   match '/' => "users#index"
-  #   # get '/:level' => 'users#new', :as => :signup_new
-  #   # post '/:level' => 'users#create', :as => :signup_create
-  # end
+  namespace :admin do        
+    match '/' => "pages#index"
+
+    resources :pages
+  end
+
+
+#     admin_pages GET    /admin/pages(.:format)            admin/pages#index
+#                 POST   /admin/pages(.:format)            admin/pages#create
+#  new_admin_page GET    /admin/pages/new(.:format)        admin/pages#new
+# edit_admin_page GET    /admin/pages/:id/edit(.:format)   admin/pages#edit
+#      admin_page GET    /admin/pages/:id(.:format)        admin/pages#show
+#                 PUT    /admin/pages/:id(.:format)        admin/pages#update
+#                 DELETE /admin/pages/:id(.:format)        admin/pages#destroy
 
 
   # Site URLs

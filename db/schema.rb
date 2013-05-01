@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(:version => 20130430121119) do
 
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
-    t.string   "name"
-    t.string   "slug",       :limit => 100
-    t.integer  "position",                                                                       :null => false
+    t.string   "name",                                                                           :null => false
+    t.string   "slug",       :limit => 100,                                                      :null => false
+    t.integer  "position",                                                 :default => 0,        :null => false
     t.integer  "visible",                                                  :default => 1
     t.integer  "menu",                                                     :default => 1
     t.boolean  "active",                                                   :default => true

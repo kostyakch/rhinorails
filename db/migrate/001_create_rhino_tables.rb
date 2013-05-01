@@ -10,14 +10,14 @@ class CreateRhinoTables < ActiveRecord::Migration
       t.integer :parent_id
       t.foreign_key :pages, column: 'parent_id'
 
-      t.string :name
-      t.string :slug, :limit => 100
-      t.integer :position, :null => false
+      t.string :name, :null => false
+      t.string :slug, :null => false, :limit => 100
+      t.integer :position, :default => 0, :null => false
       t.integer :visible, :default => true
       t.integer :menu, :default => true
       t.boolean :active, :default => true
       t.string  :sm_p,  :limit => 7, :default => "weekly", :null => false
-      t.decimal :st_pr, :precision => 10, :scale => 2, :default => 0.5,      :null => false
+      t.decimal :st_pr, :precision => 10, :scale => 2, :default => 0.5, :null => false
 
       t.timestamps
     end
