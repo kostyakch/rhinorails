@@ -4,10 +4,9 @@
 <div class="row">
   <div class="span10 offset1">
 	<%= form_for @page, :url => admin_pages_path do |f| %>
-	    <legend>Добавление раздела</legend>
+	    <legend>Добавление раздела</legend>   
 
-	   	<%= render 'fields', f: f %>
-	    <%= f.submit t("_BTN_CREATE"), class: "btn btn-large btn-primary" %>
+	   	<%= render 'fields', f: f, pc: @page_content %>	   
 	<% end %>
   </div>
 </div>

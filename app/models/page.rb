@@ -17,25 +17,29 @@
 #
 
 class Page < ActiveRecord::Base
-  attr_accessible :name, :slug, :position, :visible, :menu, :active
+  attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :page_content_attributes, :page_field_attributes
 
   # Associations
-  #acts_as_tree :order => 'virtual DESC, title ASC'
-  has_many :page_content, :class_name => 'PageContent', :order => 'id', :dependent => :destroy
+  default_scope order: 'position'
+  #default_scope :parent_id, :dependent => :destroy
+
+  has_many :page_content, :order => 'position', :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_content, :allow_destroy => true
+
+  has_many :page_field, :order => 'position', :autosave => true, :dependent => :destroy
+  accepts_nested_attributes_for :page_field, :allow_destroy => true
 
   #has_many :fields, :class_name => 'PageField', :order => 'id', :dependent => :destroy
   #accepts_nested_attributes_for :fields, :allow_destroy => true
 
   # Validations
-  validates :name, :slug, :position, :visible, :menu, :active, presence: true
+  validates :name, :slug, :position, :menu, presence: true
 
   validates :name, length: { maximum: 255 }
   validates :slug, length: { maximum: 100 }
 
   VALID_SLUG_REGEX = %r{^([-_.A-Za-z0-9]*|/)$}
   validates :slug, uniqueness: { case_sensitive: false }, format: { with: VALID_SLUG_REGEX }
-  #validates_format_of :slug, :with => %r{^([-_.A-Za-z0-9]*|/)$}
   validates_uniqueness_of :slug, :scope => :parent_id
 
 
@@ -51,7 +55,7 @@ class Page < ActiveRecord::Base
   class << self
 
     def find_by_path(path)
-      return self.find_by_slug(path)
+      return self.find_by_slug(path, :conditions => ["active=?", true])
     end
 
   end

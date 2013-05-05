@@ -4,21 +4,47 @@
 ru:
   locale: Рус
   _PAGE_SUCCESSFULLY_UPDATED: Страница успешно обновлена.
+  _PAGE_SUCCESSFULLY_CREATED: Страница успешно создана.
+  _PAGE_SUCCESSFULLY_DELITED: "Страница \"%{name}\" успешно удалена."
+  _EDIT_USER_SUCCESS: Данные пользователя изменены
+  _WELCOME: Добро пожаловать в систему!
   _BTN_CREATE: Создать
   _BTN_EDIT: Сохранить
   _BTN_SAVE: Сохранить
+  _BTN_CANCEL: Отменить
+  _BTN_SAVE_AND_CONTINUE: Применить
+  _SIGN_IN: Пожалуйста авторизуйтесь.
+  main_content: Основной контент
+  description: Мета-Описание
+  keywords: Ключевые слова
+  _DELETE_CONFIRM: "Вы уверены, что хотите удалить запись?"
+
+  # Admin menu
+  Settings: Настройки
+  Profile: Профиль пользователя
+  Sign in: Вход
+  Sign out: Выход
+  Users: Пользователи
+  Help: Справка
+  Content: Контент
+  _ERROR_AUTHENTICATE: Не возможно авторизоваться. Попробуйте еще раз.
+
+  # User
+  You sure?: Вы уверены?
+  Edit profile: Редактировать профиль
 
   activerecord:
     models:
       user: Пользователь
     attributes:
       user:
-        username: "Имя пользователя"
-        fio: "Имя (ФИО)"
+        name: "Имя пользователя"
         active: Активность
         roles: Роли
         password: Пароль
         password_confirmation: Подтверждение пароля
+        password_digest: Подтверждение пароля
+        Confirmation: Подтверждение пароля
 
       page:
         name: Наименование
@@ -34,20 +60,31 @@ ru:
       models:
         user:
           attributes:            
-            username:
-              blank: "Не должно быть пустым"
+            name:
+              blank: "не должно быть пустым"
               too_short: 'сликом короткое. Должно быть не меньше %{count} символов'
             password_confirmation:
-              blank: "йу"
+              blank: "не может быть пустым"
+            password_digest:
+              blank: "не может быть пустым"
             password:
-              confirmation: йцу""
-              blank:  "фыв"
-              too_short: "фвы"
-            login:
-              taken: "фвы"
-              blank: "фыв"
-              too_short: "фв"
+              confirmation: "и подтверждение не совпадает"
+              blank:  "не может быть пустым"
+              too_short: "слишком короткий. Должен быть не меньше %{count} символов."
             email:
-              blank: "Не должно быть пустым"
-              too_short: "Сликом короткое"
-              invalid: "Имеет не правильный формат"
+              blank: "не может быть пустым"
+              invalid: "имеет не правильный формат"
+              taken: " - уже присутствует в системе"
+
+        page:
+          attributes:            
+            name:
+              blank: "не должно быть пустым"
+              too_short: 'сликом короткое. Должно быть не меньше %{count} символов'
+            slug:
+              blank:  "не может быть пустым"
+              too_short: "слишком короткий. Должен быть не меньше %{count} символов."
+              invalid: "должен содержать только цифры, латинские бквы и символы '_-'"
+              taken: должен быть уникальным. Попробууйте изменить Url.
+
+#ru.activerecord.errors.models.user.attributes.email.taken

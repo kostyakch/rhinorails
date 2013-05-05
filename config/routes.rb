@@ -1,30 +1,29 @@
 RhinoCMS::Application.routes.draw do
 
-
   # Admin URLs
-  namespace :admin do        
-    match '/' => "pages#index"
+  namespace :admin do
+    root :to => 'pages#index'
 
     resources :pages
+    match '/page/:id/show_hide' => 'pages#showhide', :as => :page_showhide
+    match '/page/:parent_id/new' => 'pages#new', :as => :new_children_page
+
+    match '/page_fields/:page_id/new' => 'page_fields#new', :as => :new_field_to_page
+
+    resources :page_contents
+    resources :page_fields
+    resources :users
+    resources :config
   end
-
-
-#     admin_pages GET    /admin/pages(.:format)            admin/pages#index
-#                 POST   /admin/pages(.:format)            admin/pages#create
-#  new_admin_page GET    /admin/pages/new(.:format)        admin/pages#new
-# edit_admin_page GET    /admin/pages/:id/edit(.:format)   admin/pages#edit
-#      admin_page GET    /admin/pages/:id(.:format)        admin/pages#show
-#                 PUT    /admin/pages/:id(.:format)        admin/pages#update
-#                 DELETE /admin/pages/:id(.:format)        admin/pages#destroy
-
+  
 
   # Site URLs
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/login',  to: 'sessions#new'
+  match '/logout', to: 'sessions#destroy', via: :delete
 
   root :to => 'pages#index'
   match '*url' => 'pages#index', :as => :page

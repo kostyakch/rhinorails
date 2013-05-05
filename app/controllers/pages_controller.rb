@@ -9,18 +9,8 @@ class PagesController < ApplicationController
     end
 
     url = (params[:url] ? params[:url] : 'index')  
-    if @page = Page.find_by_path(url)
-      puts @page.inspect
-    else
+    if !@page = Page.find_by_path(url)
       render :template => 'site/not_found', :status => 404
     end  
-  end
-
-  
-  private
-
-    def find_page(url)
-      found = Page.find_by_path(url)
-      #found if found and (found.published? or dev?)
-    end  
+  end 
 end

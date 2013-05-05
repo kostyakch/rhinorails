@@ -1,0 +1,11 @@
+<div class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="/">Rhino CMS</a>
+		<ul class="nav">
+			<% menu.each do |m| %>
+				<li><%= link_to m.name, (m.slug == 'index' ? '/' : "/#{m.slug}") %></li>			
+			<% end %>
+		</ul>
+	</div>
+</div>
+

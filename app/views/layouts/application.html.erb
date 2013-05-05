@@ -5,16 +5,14 @@
 	<%= stylesheet_link_tag    "application", :media => "all" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
- 
+
+ 	<%= yield(:metatags) %>
+
     <%= render 'layouts/shim' %>
 </head>
 
 <body>
-	<%= render 'layouts/header' %>
-
-	<ul class="nav pull-right menu">
-		<%= render 'layouts/top_menu' %>
-	</ul> 
+	<%= render 'layouts/top_menu', menu: top_menu %>
 
 	<div class="container content">
 		<div class="row-fluid">

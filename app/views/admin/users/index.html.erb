@@ -1,0 +1,17 @@
+<% provide(:title, 'All users') %>
+
+<ul class="nav nav-tabs">
+	<li class="active">
+		<%= link_to 'Пользователи', admin_users_path %>
+	</li>
+</ul>
+
+<div style="padding: 6px 6px;" class="well">
+	<%= link_to 'Добавить', new_admin_user_path, class: 'btn btn-primary' %>
+</div>
+
+<%= will_paginate %>
+<ul class="users">
+  <%= render @users %>
+</ul>
+<%= will_paginate %>

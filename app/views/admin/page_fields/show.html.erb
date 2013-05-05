@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @admin_page_field.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @admin_page_field.value %>
+</p>
+
+<p>
+  <b>String:</b>
+  <%= @admin_page_field.string %>
+</p>
+
+<p>
+  <b>Position:</b>
+  <%= @admin_page_field.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_page_field_path(@admin_page_field) %> |
+<%= link_to 'Back', admin_page_fields_path %>

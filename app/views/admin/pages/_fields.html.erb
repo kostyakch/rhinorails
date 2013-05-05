@@ -1,3 +1,5 @@
+<%= render 'shared/error_messages', object: f.object %>
+
 <div class="form-horizontal">
     <div class="control-group">
         <%= f.label :name, class: 'control-label' %>
@@ -12,18 +14,14 @@
             <%= f.text_field :slug %>
         </div>
     </div>  
-
-    <div class="control-group">
-        <%= f.label :position, class: 'control-label' %>
-        <div class="controls">
-            <%= f.text_field :position %>
-        </div>
-    </div>  
+   
+    <!-- Page fields -->
+    <%= render 'field_row', f: f %>
 
     <div class="row">
-        <div class="offset2 span2" style="margin-left: 220px;">
-            <%= f.label :visible %>
-            <%= f.check_box :visible %>
+        <div class="offset2 span2" style="margin-left: 210px;">
+            <%= f.label :position %>
+            <%= f.number_field :position %>
         </div>
 
         <div class="span2">
@@ -35,6 +33,28 @@
             <%= f.label :active %>
             <%= f.check_box :active %>
         </div>
+
+        <div class="span2">
+            <%= f.label :parent_id %>
+            <%= f.text_field :parent_id %>
+        </div>
+
     </div>
+
+    <br>
+
+    <!-- Page contents -->
+    <%= render 'content_row', f: f %>
+    
+
+
+    <div class="control-group">
+        <div class="controls">
+            <%= f.button t("_BTN_SAVE"), class: "btn btn-primary" %>
+            <%= f.button t('_BTN_SAVE_AND_CONTINUE'), class: 'btn btn-success', name: 'continue' %>
+            <%= link_to t("_BTN_CANCEL"), admin_pages_path, class: "btn" %>
+        </div>
+    </div>  
+
 </div>
 

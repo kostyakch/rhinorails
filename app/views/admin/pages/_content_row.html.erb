@@ -1,0 +1,27 @@
+<div class="control-group">
+    <div class="controls">
+        <div class="tabbable" style="margin-bottom: 18px;">
+            <ul class="nav nav-tabs">
+            <% i = 0 %>
+            <%= f.fields_for :page_content do |c| %>                    
+                <li class="<% if i == 0 %>active<% end %>">
+                    <a href="#<%= "tab#{c.object.id}" %>" data-toggle="tab">
+                        <%=t c.object.name %>
+                    </a>
+                </li>
+                <% i += 1 %>
+            <% end %>
+            </ul>
+            <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+            <% i = 0 %>
+            <%= f.fields_for :page_content do |c| %>
+                <%= c.hidden_field :name %>
+                <div class="tab-pane <% if i == 0 %>active <% end %>" id="<%= "tab#{c.object.id}" %>">
+                    <%= c.text_area :content %>
+                </div>
+                <% i += 1 %>                    
+            <% end %>
+            </div>
+        </div>                  
+    </div>
+</div>

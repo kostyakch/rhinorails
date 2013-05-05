@@ -2,12 +2,13 @@
 
 
 <div class="row">
-  <div class="span10 offset1">
 	<%= form_for @page, :url => admin_page_path do |f| %>
 	    <legend>Редактирование раздела: <%= @page.name %></legend>
 
-	   	<%= render 'fields', f: f %>
-	    <%= f.submit t("_BTN_SAVE"), class: "btn btn-large btn-primary" %>
+	   	<%= render 'fields', f: f %>	    
 	<% end %>
-  </div>
 </div>
+
+<script type="text/javascript">
+	<%= raw page_edit_javascripts %>
+</script>

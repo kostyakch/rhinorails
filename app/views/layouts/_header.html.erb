@@ -16,10 +16,6 @@
                 <li><%= link_to "Profile", current_user %></li>
                 <li><%= link_to "Settings", edit_user_path(current_user) %></li>
 
-                <% if has_role?('ROLE_ADMIN') %>
-                <li><%= link_to "Admin", admin_path %></li>
-                <% end %>
-
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Sign out", signout_path, method: "delete" %>

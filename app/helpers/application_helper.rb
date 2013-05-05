@@ -1,7 +1,7 @@
 module ApplicationHelper
 	# Returns the full title on a per-page basis.
 	def full_title(page_title)
-		base_title = "RhinoCMS"
+		base_title = SiteConfig.find_by_name('site_name') ? SiteConfig.find_by_name('site_name').value : "RhinoCMS"
 		if page_title.empty?
 			base_title
 		else
@@ -10,13 +10,19 @@ module ApplicationHelper
 	end
 
 	def top_menu
-		"test"
-		Page.all do |item|
-			"<li>#{item.name}</li>"
-		end
+		Page.where('active = true AND menu = true AND parent_id IS NULL')
 	end
 
-  
+	def meta_tags(page)
+		res = ''		
+		if page and page.page_field
+			page.page_field.where("ftype = 'meta'").each do |meta|
+				res += "<meta name=\"#{meta.name}\" content=\"#{meta.value}\" />\n"
+			end
+		end
+
+		return raw res		
+	end  
 
 
 end

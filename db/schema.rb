@@ -22,19 +22,29 @@ ActiveRecord::Schema.define(:version => 1) do
 
   create_table "page_contents", :force => true do |t|
     t.integer "page_id"
-    t.string  "name",    :limit => 100, :null => false
+    t.string  "name",     :limit => 100,                :null => false
     t.text    "content"
+    t.integer "position",                :default => 0, :null => false
   end
 
   add_index "page_contents", ["name"], :name => "index_page_contents_on_name"
   add_index "page_contents", ["page_id", "name"], :name => "index_page_contents_on_page_id_and_name", :unique => true
+
+  create_table "page_fields", :force => true do |t|
+    t.integer "page_id",                                :null => false
+    t.string  "name",     :limit => 120,                :null => false
+    t.text    "value"
+    t.string  "ftype",    :limit => 60
+    t.integer "position",                :default => 0, :null => false
+  end
+
+  add_index "page_fields", ["page_id", "name"], :name => "page_fields_page_id_and_name", :unique => true
 
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
     t.string   "name",                                                                           :null => false
     t.string   "slug",       :limit => 100,                                                      :null => false
     t.integer  "position",                                                 :default => 0,        :null => false
-    t.integer  "visible",                                                  :default => 1
     t.integer  "menu",                                                     :default => 1
     t.boolean  "active",                                                   :default => true
     t.string   "sm_p",       :limit => 7,                                  :default => "weekly", :null => false
@@ -59,8 +69,10 @@ ActiveRecord::Schema.define(:version => 1) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
-  add_foreign_key "page_contents", "pages", :name => "page_contents_page_id_fk"
+  add_foreign_key "page_contents", "pages", :name => "page_contents_page_id_fk", :dependent => :delete
 
-  add_foreign_key "pages", "pages", :name => "pages_parent_id_fk", :column => "parent_id"
+  add_foreign_key "page_fields", "pages", :name => "page_fields_page_id_fk", :dependent => :delete
+
+  add_foreign_key "pages", "pages", :name => "pages_parent_id_fk", :column => "parent_id", :dependent => :delete
 
 end

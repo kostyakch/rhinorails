@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
         store_location
 
         flash[:error] = t('_SIGN_IN')
-        redirect_to signin_url
+        redirect_to login_url
       end
     end   
     
@@ -32,14 +32,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def admin_only
-      # if !signed_in? or !has_role?('ROLE_ADMIN')
-      #   flash[:error] = t('_SIGN_IN')
-      #   redirect_to signin_url
-      # end
+    def admin_only      
       unless signed_in? && has_role?('ROLE_ADMIN')
-        flash[:error] = t('_SIGN_IN')
-        redirect_to signin_url
+        store_location
+        redirect_to login_url
       end       
     end 
 end
