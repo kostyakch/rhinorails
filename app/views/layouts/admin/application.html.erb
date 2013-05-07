@@ -31,6 +31,10 @@
 		<div class="row-fluid">
 			<%= debug(params) if Rails.env.development? %>
 		</div>
-	</div>	
+	</div>
+
+	<script type="text/javascript">
+		<%= yield(:javascript) %>
+	</script>
 </body>
 </html>

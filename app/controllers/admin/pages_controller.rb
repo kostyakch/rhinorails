@@ -10,7 +10,8 @@ class Admin::PagesController < ApplicationController
 	def new
     	@page = Page.new
     	@page.parent_id = params[:parent_id] if !params[:parent_id].blank?
-    	default_attr(@page)  	
+    	default_fields(@page)
+    	default_content(@page)
 	end
 
 	def create
@@ -18,31 +19,33 @@ class Admin::PagesController < ApplicationController
 		if @page.update_attributes(params[:page])
 
 			flash[:info] = t('_PAGE_SUCCESSFULLY_CREATED')
-			redirect_to admin_pages_path
+			if params[:continue].present? 
+				redirect_to edit_admin_page_path(@page)
+			else
+				redirect_to admin_pages_path
+			end			
 		else	
 			render 'new'
 		end
 	end
 
 	def edit
-		@page = Page.find(params[:id])
-		default_attr(@page)
-
-	    respond_to do |format|
-	      format.html # new.html.erb
-	      format.json { render json: @page }
-	    end  		
+		@page = Page.find(params[:id])	
+		#default_content(@page)
 	end
 
 	def update
 		@page = Page.find(params[:id])
-		update_page_content
-		update_page_field
-
 		if @page.update_attributes(params[:page])
+			update_page_field(@page, params[:page]) # Обновим данные о page_field
+			update_page_content(@page, params[:page])
 
 			flash[:info] = t('_PAGE_SUCCESSFULLY_UPDATED')
-			redirect_to admin_pages_path
+			if params[:continue].present? 
+				redirect_to edit_admin_page_path(@page) 
+			else
+				redirect_to admin_pages_path
+			end
 		else
 			render action: "edit"
 		end
@@ -63,26 +66,55 @@ class Admin::PagesController < ApplicationController
 	end
 
 	private
-		def default_attr(page)
-			if page.page_content.where("name = 'main_content'").empty?
-				page.page_content.build(name: "main_content")	
+		def default_content(page)
+			page.page_content.build(name: "main_content") if page.page_content.where("name = 'main_content'").empty?
+		end
+
+		def default_fields(page)	    	
+			page.page_field.build( name: "title", ftype: 'title', position: 0 )
+			page.page_field.build( name: "h1", ftype: 'title', position: 1 )
+			page.page_field.build( name: "description", ftype: 'meta', position: 2 )
+	    	page.page_field.build( name: "keywords", ftype: 'meta', position: 3 )
+		end
+
+		# Обновим page_field (добавим/удалим)
+		def update_page_field(page, params)
+			# Создадим массив существующих полей
+			originalFields = []
+			page.page_field.each { |f| originalFields << f }
+
+			# filter originalFields to contain params no longer present	
+			if params[:page_field_attributes].present?	
+				params[:page_field_attributes].each do |fk, fv|
+					originalFields.each do |of|
+						originalFields.delete(of) if of.name.to_s.downcase == fv[:name].to_s.downcase
+					end
+				end
 			end
-	    	
-	    	if page.page_field.where("name = 'description'").empty?
-		    	page.page_field.build( name: "description", ftype: 'meta', position: 0 )
-	    	end 
-	    	if page.page_field.where("name = 'keywords'").empty?
-		    	page.page_field.build( name: "keywords", ftype: 'meta', position: 1 )
-	    	end 			
+
+			originalFields.each { |f| f.destroy }
 		end
 
 		# Обновим контети страницы (добавим/удалим)
-		def update_page_content
-			
+		def update_page_content(page, params)
+			# Создадим массив существующих полей
+			originalTabs = []
+			page.page_content.each { |f| originalTabs << f }
+
+			# filter originalTabs to contain params no longer present	
+			if params[:page_content_attributes].present?	
+				params[:page_content_attributes].each do |fk, fv|
+					originalTabs.each do |of|
+						originalTabs.delete(of) if of.name.to_s.downcase == fv[:name].to_s.downcase
+					end
+				end
+			end
+
+			# remove the relationship between the param and the Content
+			# puts '======================'
+			# puts originalTabs.inspect
+			# puts '======================'
+			originalTabs.each { |f| f.destroy }			
 		end
 
-		# Обновим контети страницы (добавим/удалим)
-		def update_page_field
-			
-		end
 end

@@ -1,27 +1,38 @@
 <div class="control-group">
     <div class="controls">
         <div class="tabbable" style="margin-bottom: 18px;">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="tabs">
+            <% if f.object.page_content.any? %>
             <% i = 0 %>
-            <%= f.fields_for :page_content do |c| %>                    
+            <% f.object.page_content.each do |ob| %>
                 <li class="<% if i == 0 %>active<% end %>">
-                    <a href="#<%= "tab#{c.object.id}" %>" data-toggle="tab">
-                        <%=t c.object.name %>
+                    <a href="#<%= "tab#{ob.id}" %>" data-toggle="tab" rel="tab<%= ob.id %>">
+                        <%=t ob.name %> <i class="icon-remove-sign del_tab"></i>
                     </a>
                 </li>
                 <% i += 1 %>
             <% end %>
+            <% else %>
+                <li class="active">
+                    <a href="#" data-toggle="tab_0" rel="tab_0">
+                        У страницы нет контента. Его можно добавить и задать имя 'main_content'
+                    </a>
+                </li>            
+            <% end %>
+                <li style="float:right"><a href="#tab_add" id="add_content"><i class="icon-plus-sign"></i></a></li>
             </ul>
             <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
             <% i = 0 %>
             <%= f.fields_for :page_content do |c| %>
-                <%= c.hidden_field :name %>
                 <div class="tab-pane <% if i == 0 %>active <% end %>" id="<%= "tab#{c.object.id}" %>">
+                    <%= c.hidden_field :id %>
+                    <%= c.hidden_field :name %>
+
                     <%= c.text_area :content %>
                 </div>
-                <% i += 1 %>                    
+                <% i += 1 %>
             <% end %>
             </div>
-        </div>                  
+        </div>
     </div>
 </div>

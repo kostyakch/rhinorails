@@ -1,12 +1,12 @@
 <% provide(:title, 'Добавление раздела') %>
-
+<%= provide(:javascript, raw(field_javascript)) %>
+<%= provide(:javascript, raw(tab_javascript)) %> 
 
 <div class="row">
-  <div class="span10 offset1">
 	<%= form_for @page, :url => admin_pages_path do |f| %>
 	    <legend>Добавление раздела</legend>   
 
 	   	<%= render 'fields', f: f, pc: @page_content %>	   
 	<% end %>
-  </div>
 </div>
+

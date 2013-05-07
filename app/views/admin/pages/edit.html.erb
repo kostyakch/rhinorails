@@ -1,5 +1,6 @@
 <% provide(:title, "Редактирование: #{@page.name}") %>
-
+<%= provide(:javascript, raw(field_javascript)) %>
+<%= provide(:javascript, raw(tab_javascript)) %> 
 
 <div class="row">
 	<%= form_for @page, :url => admin_page_path do |f| %>
@@ -9,6 +10,5 @@
 	<% end %>
 </div>
 
-<script type="text/javascript">
-	<%= raw page_edit_javascripts %>
-</script>
+
+

@@ -161,6 +161,11 @@ input {
   height: auto !important;
 } 
 
+.form-horizontal .control-group {
+  margin-bottom: 5px;
+}
+
+
 #error_explanation {
   color: #f00;
   ul {

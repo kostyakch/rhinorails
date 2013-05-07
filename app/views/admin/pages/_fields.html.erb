@@ -4,14 +4,15 @@
     <div class="control-group">
         <%= f.label :name, class: 'control-label' %>
         <div class="controls">
-            <%= f.text_field :name %>
+            <%= f.text_field :name, class: 'span11' %>
         </div>
     </div>  
 
     <div class="control-group">
         <%= f.label :slug, class: 'control-label' %>
         <div class="controls">
-            <%= f.text_field :slug %>
+            <%= f.text_field :slug, class: 'span11' %>
+            <a href="#" class="add_field"><span class="icon-plus-sign"></span></a>
         </div>
     </div>  
    
@@ -51,7 +52,7 @@
     <div class="control-group">
         <div class="controls">
             <%= f.button t("_BTN_SAVE"), class: "btn btn-primary" %>
-            <%= f.button t('_BTN_SAVE_AND_CONTINUE'), class: 'btn btn-success', name: 'continue' %>
+            <%= f.button t('_BTN_SAVE_AND_CONTINUE'), class: 'btn btn-success', name: 'continue', value: 'continue' %>
             <%= link_to t("_BTN_CANCEL"), admin_pages_path, class: "btn" %>
         </div>
     </div>  

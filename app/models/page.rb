@@ -17,7 +17,10 @@
 #
 
 class Page < ActiveRecord::Base
+  before_validation :name_to_slug
+
   attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :page_content_attributes, :page_field_attributes
+  
 
   # Associations
   default_scope order: 'position'
@@ -38,7 +41,7 @@ class Page < ActiveRecord::Base
   validates :name, length: { maximum: 255 }
   validates :slug, length: { maximum: 100 }
 
-  VALID_SLUG_REGEX = %r{^([-_.A-Za-z0-9]*|/)$}
+  VALID_SLUG_REGEX = %r{^([-_/.A-Za-z0-9-А-Яа-я]*|/)$}
   validates :slug, uniqueness: { case_sensitive: false }, format: { with: VALID_SLUG_REGEX }
   validates_uniqueness_of :slug, :scope => :parent_id
 
@@ -52,11 +55,55 @@ class Page < ActiveRecord::Base
   # validates :password, presence: true, length: { minimum: 4 }
   # validates :password_confirmation, presence: true
 
+
+
+
+  protected
+
+    def name_to_slug
+      if !self.slug.present?
+        if self.parent_id.present?
+          parent = Page.find_by_id(self.parent_id)
+          self.slug = parent.slug + "/" + self.to_slug
+        else
+          self.slug = self.to_slug
+        end
+      end
+      self.slug = Russian.translit(self.slug).downcase
+    end
+
+    def to_slug(param=self.name)
+      # strip the string
+      ret = param.strip
+   
+      #blow away apostrophes
+      ret.gsub! /['`]/, ""
+   
+      # @ --> at, and & --> and
+      ret.gsub! /\s*@\s*/, " at "
+      ret.gsub! /\s*&\s*/, " and "
+   
+      # replace all non alphanumeric, periods with dash
+      ret.gsub! /\s*[^A-Za-z0-9-А-Яа-я\.]\s*/, '-'
+   
+      # replace underscore with dash
+      ret.gsub! /[-_]{2,}/, '-'
+   
+      # convert double underscores to single
+      ret.gsub! /-+/, "-"
+   
+      # strip off leading/trailing dash
+      ret.gsub! /\A[-\.]+|[-\.]+\z/, ""
+   
+      ret
+    end
+
   class << self
 
     def find_by_path(path)
       return self.find_by_slug(path, :conditions => ["active=?", true])
     end
+
 
   end
 

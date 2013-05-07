@@ -2,9 +2,9 @@
 	<div class="navbar-inner">
 		<a class="brand" href="/">Rhino CMS</a>
 		<ul class="nav">
-			<% menu.each do |m| %>
-				<li><%= link_to m.name, (m.slug == 'index' ? '/' : "/#{m.slug}") %></li>			
-			<% end %>
+		<% page_items.each do |p| %>
+			<%= render 'layouts/top_menu_items', p: p, level: 0 %>
+		<% end %> 
 		</ul>
 	</div>
 </div>
