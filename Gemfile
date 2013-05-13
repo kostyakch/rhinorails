@@ -11,11 +11,13 @@ gem 'activerecord-mysql-adapter'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'foreigner'
 gem 'will_paginate'
-gem 'bootstrap-will_paginate'
+gem 'acts_as_list'
 
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'bootstrap-sass', '~> 2.3.1.1'
+gem 'bootstrap-will_paginate'
+gem 'bootstrap-datepicker-rails'
 
 gem 'russian', '~> 0.6.0'
 

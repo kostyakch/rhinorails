@@ -1,0 +1,31 @@
+<tr class="content-t level_<%= level %>" id="cat_<%= p.id %>">
+	<td style="padding-left: <%= 10 + (level*25) %>px;">
+		<% if page_items(p).present? %>
+		<a class="toogle icon-chevron-down" href="#" onclick="return false;" style="margin-left: -18px;"></a>
+		<% end %>
+		<%= link_to p.name, edit_admin_structure_path(p), class: 'title' %> <i><sup><%= p.id %></sup></i>
+		<img class="loading" src="/assets/spinner.gif" style="display: none;">		
+	</td>
+	<td>
+		<% if p.active? %>Опубликовано<% else %><span class="label label-important">Скрыто</span><% end %>
+		<% if p.menu? %> / <i>меню</i><% end %>
+	</td>
+	<td>
+		<div class="btn-group">
+            <a class="btn dropdown-toggle btn-mini" data-toggle="dropdown" href="#">действия <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><%= link_to t('add subpage'), admin_new_children_structures_path(p) if p.ptype != 'article' %></li>
+                <li><%= link_to t('edit'), edit_admin_structure_path(p) %></li>
+                <li><%= link_to p.active? ? t('hide') : t('show'), admin_page_showhide_path(p) %></li>
+                <li class="divider"></li>
+                <li><%= link_to t('delete'), admin_structure_path(p), :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %></li>
+            </ul>
+        </div>
+	</td>
+</tr>
+
+<% if page_items(p).present? %>
+<% page_items(p).each do |children| %>
+	<%= render 'rows', p: children, level: level + 1 %>
+<% end %> 
+<% end %> 

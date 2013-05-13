@@ -1,4 +1,4 @@
-<% if page_items(p).any? %>
+<% if page_items(p).present? %>
 	<li class="dropdown">
 		<%= link_to raw("#{p.name} <b class=\"caret\"></b>"), (p.slug == 'index' ? '/' : "/#{p.slug}"), class: 'dropdown-toggle', :'data-toggle' => "dropdown" %>
 		
@@ -10,6 +10,6 @@
 	</li>
 <% else %>
 	<li>
-		<%= link_to p.name, (p.slug == 'index' ? '/' : "/#{p.slug}") %>
+		<%= link_to p.name, p.slug == 'index' ? '/' : page_path(p.slug) %>
 	</li>
 <% end %>

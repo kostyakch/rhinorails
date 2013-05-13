@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "position",                                                 :default => 0,        :null => false
     t.integer  "menu",                                                     :default => 1
     t.boolean  "active",                                                   :default => true
+    t.string   "ptype",      :limit => 20,                                 :default => "page",   :null => false
     t.string   "sm_p",       :limit => 7,                                  :default => "weekly", :null => false
     t.decimal  "st_pr",                     :precision => 10, :scale => 2, :default => 0.5,      :null => false
     t.datetime "created_at",                                                                     :null => false

@@ -1,0 +1,18 @@
+<tr class="content-t level_0" id="cat_<%= p.id %>">
+	<td style="padding-left: 10px;">
+		<% if page_items(p).present? %>
+		<a class="toogle icon-chevron-down" href="#" onclick="return false;" style="margin-left: -18px;"></a>
+		<% end %>
+		<%= link_to p.name, edit_admin_page_path(p, mode: 'show_sidebar'), class: 'title' %> <i><sup><%= p.id %></sup></i>
+		<img class="loading" src="/assets/spinner.gif" style="display: none;">		
+	</td>
+	<td>
+		<% if p.active? %>Опубликовано<% else %><span class="label label-important">Скрыто</span><% end %>
+		<% if p.menu? %> / <i>меню</i><% end %>
+	</td>
+	<td>
+		<%= link_to raw('<i class="halflings-icon edit halflings-icon"></i>'), edit_admin_page_path(p, mode: 'show_sidebar'), class: 'btn btn-success' %>
+		<%= link_to p.active? ? raw('<i class="icon-eye-close"></i>') : raw('<i class="icon-eye-open"></i>'), admin_page_showhide_path(p), class: 'btn btn-success' %>
+		<%= link_to raw('<i class="halflings-icon trash halflings-icon"></i>'), admin_page_path(p), class: 'btn btn-danger', :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %>
+	</td>
+</tr>

@@ -2,11 +2,20 @@
 <%= provide(:javascript, raw(field_javascript)) %>
 <%= provide(:javascript, raw(tab_javascript)) %> 
 
-<div class="row">
-	<%= form_for @page, :url => admin_pages_path do |f| %>
-	    <legend>Добавление раздела</legend>   
-
-	   	<%= render 'fields', f: f, pc: @page_content %>	   
-	<% end %>
+<% content_for :sidebar_l2 do %>
+<div id="sidebar-left2" class="span2">
+	<div class="nav-collapse sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
+			<% page_tree.each do |p| %>
+				<%= render 'rows', p: p, level: 0 %>
+			<% end %> 
+		</ul>
+	</div>
 </div>
+<% end %>
 
+<%= form_for @page, :url => admin_pages_path do |f| %>
+    <legend>Добавление раздела</legend>   
+
+   	<%= render 'fields', f: f %>	   
+<% end %>

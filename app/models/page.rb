@@ -19,12 +19,14 @@
 class Page < ActiveRecord::Base
   before_validation :name_to_slug
 
-  attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :page_content_attributes, :page_field_attributes
+  attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :ptype, :created_at, :page_content_attributes, :page_field_attributes
   
 
   # Associations
   default_scope order: 'position'
   #default_scope :parent_id, :dependent => :destroy
+
+  acts_as_list scope: :parent_id
 
   has_many :page_content, :order => 'position', :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_content, :allow_destroy => true
@@ -41,22 +43,18 @@ class Page < ActiveRecord::Base
   validates :name, length: { maximum: 255 }
   validates :slug, length: { maximum: 100 }
 
-  VALID_SLUG_REGEX = %r{^([-_/.A-Za-z0-9-А-Яа-я]*|/)$}
+  VALID_SLUG_REGEX = %r{^([-_/.A-Za-z0-9А-Яа-я]*|/)$}
   validates :slug, uniqueness: { case_sensitive: false }, format: { with: VALID_SLUG_REGEX }
   validates_uniqueness_of :slug, :scope => :parent_id
 
 
+  def content_by_name(name)
+    self.page_content.find_by_name(name)
+  end
 
-  # validates :name,  presence: true, length: { maximum: 50 }
-
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-
-  # validates :password, presence: true, length: { minimum: 4 }
-  # validates :password_confirmation, presence: true
-
-
-
+  def field_by_name(name)
+    self.page_field.find_by_name(name)
+  end
 
   protected
 
@@ -84,7 +82,7 @@ class Page < ActiveRecord::Base
       ret.gsub! /\s*&\s*/, " and "
    
       # replace all non alphanumeric, periods with dash
-      ret.gsub! /\s*[^A-Za-z0-9-А-Яа-я\.]\s*/, '-'
+      ret.gsub! /\s*[^A-Za-z0-9А-Яа-я\.]\s*/, '-'
    
       # replace underscore with dash
       ret.gsub! /[-_]{2,}/, '-'

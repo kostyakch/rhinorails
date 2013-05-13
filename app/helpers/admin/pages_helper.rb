@@ -1,12 +1,19 @@
 module Admin::PagesHelper
 	def page_items(parent = nil)
 		if parent.blank?
-			Page.paginate(page: params[:page]).where('parent_id IS NULL')	
+			Page.paginate(page: params[:page]).where("parent_id IS NULL")	
 		else
-			Page.paginate(page: params[:page]).where("parent_id = #{parent.id}")	
-		end
-		
-	end
+			Page.paginate(page: params[:page]).where("parent_id = #{parent.id}") if parent.ptype == 'page'
+		end		
+	end	
+
+	def page_tree(parent = nil)
+		if parent.blank?
+			Page.where("parent_id IS NULL")	
+		else
+			Page.where("parent_id = #{parent.id}") if parent.ptype == 'page'
+		end		
+	end	
 
 	def field_javascript
 		<<-CODE
@@ -103,4 +110,5 @@ module Admin::PagesHelper
 		})	
 		CODE
 	end
+
 end
