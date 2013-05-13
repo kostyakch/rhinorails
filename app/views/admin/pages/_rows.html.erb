@@ -2,7 +2,7 @@
 	<% if p.ptype == 'article' %>
 		<%= link_to p.name, admin_page_children_path(p) %>
 	<% else %>
-		<%= link_to p.name, edit_admin_page_path(p, mode: 'show_sidebar') %>
+		<%= link_to p.name, edit_admin_page_path(p) %>
 	<% end %>
 </li>
 
