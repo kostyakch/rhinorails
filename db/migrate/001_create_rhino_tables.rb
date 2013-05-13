@@ -11,10 +11,11 @@ class CreateRhinoTables < ActiveRecord::Migration
       t.foreign_key :pages, column: 'parent_id', options: 'ON DELETE CASCADE'
 
       t.string :name, :null => false
-      t.string :slug, :null => false, :limit => 100
+      t.string :slug, :null => false
       t.integer :position, :default => 0, :null => false
       t.integer :menu, :default => true
       t.boolean :active, :default => true
+      t.string  :ptype,  :limit => 20, :default => "page", :null => false
       t.string  :sm_p,  :limit => 7, :default => "weekly", :null => false
       t.decimal :st_pr, :precision => 10, :scale => 2, :default => 0.5, :null => false
 

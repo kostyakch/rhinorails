@@ -1,23 +1,13 @@
-<tr class="content-t level_<%= level %>" id="cat_<%= p.id %>">
-	<td class="title" style="padding-left: <%= 10 + (level*25) %>px;"><%= link_to p.name, edit_admin_page_path(p) %> <i><sup><%= p.id %></sup></i></td>
-	<td>
-		<% if p.active? %>Опубликовано<% else %><span class="label label-important">Скрыто</span><% end %>
-		<% if p.menu? %> / <i>меню</i><% end %>
-	</td>
-	<td>
-	    <div class="btn-group">
-	        <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">действия <span class="caret"></span></a>
-	        <ul class="dropdown-menu">
-	            <li><%= link_to raw('<i class="icon-file"></i> добавить подраздел'), admin_new_children_page_path(p) %></li>
-	            <li><a href=""><i class="icon-pencil"></i> редактировать</a></li>
-	            <li><%= link_to p.active? ? raw('<i class="icon-eye-close"></i> скрыть') : raw('<i class="icon-eye-open"></i> опубликовать'), admin_page_showhide_path(p) %></li>
-	            <li class="divider"></li>
-	            <li><%= link_to raw('<i class="icon-trash"></i> удалить'), admin_page_path(p), :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %></li>
-	        </ul>
-	    </div>	
-	</td>
-</tr>
+<li style="padding-left: <%= 10 + (level*25) %>px;">
+	<% if p.ptype == 'article' %>
+		<%= link_to p.name, admin_page_children_path(p) %>
+	<% else %>
+		<%= link_to p.name, edit_admin_page_path(p, mode: 'show_sidebar') %>
+	<% end %>
+</li>
 
-<% page_items(p).each do |children| %>
+<% if page_tree(p).present? %>
+<% page_tree(p).each do |children| %>
 	<%= render 'rows', p: children, level: level + 1 %>
 <% end %> 
+<% end %>

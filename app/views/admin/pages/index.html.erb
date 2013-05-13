@@ -1,29 +1,16 @@
 <% provide(:title, "Админка") %>
 
-<ul class="nav nav-tabs">
-	<li class="active">
-		<%= link_to 'Страницы', admin_pages_path %>
-	</li>
-	<li><a href="#">Галерея</a></li>
-</ul>
-
-<div style="padding: 6px 6px;" class="well">
-	<%= link_to 'Добавить', new_admin_page_path, class: 'btn btn-primary' %>
+<% content_for :sidebar_l2 do %>
+<div id="sidebar-left2" class="span2">
+	<div class="nav-collapse sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked">
+			<% @pages.each do |p| %>
+				<%= render 'rows', p: p, level: 0 %>
+			<% end %> 
+		</ul>				
+	</div>
 </div>
+<% end %>
 
-<%= will_paginate page_items %>
-<table class="table table-striped tree">
-	<thead>
-		<tr>
-			<th>Страница</th>
-			<th>Статус</th>
-			<th>Действия</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% page_items.each do |p| %>
-			<%= render 'rows', p: p, level: 0 %>
-		<% end %> 
-	</tbody>
-</table>
-<%= will_paginate page_items %>
+
+<h1>Выбирите раздел для редактирования</h1>

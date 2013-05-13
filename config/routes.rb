@@ -2,20 +2,24 @@ RhinoCMS::Application.routes.draw do
 
   # Admin URLs
   namespace :admin do
-    root :to => 'pages#index'
+    root :to => 'dashboard#index'
 
-    resources :pages
     match '/page/:id/show_hide' => 'pages#showhide', :as => :page_showhide
+    match '/page/:parent_id/list' => 'pages#children', :as => :page_children
     match '/page/:parent_id/new' => 'pages#new', :as => :new_children_page
+    match '/page/tree' => 'pages#tree', :as => :pages_tree
+    #resources :pages, :collection => { :sort => :post }
+    resources :pages
 
-    match '/page_fields/:page_id/new' => 'page_fields#new', :as => :new_field_to_page
+    match '/structures/:parent_id/new' => 'structures#new', :as => :new_children_structures
+    resources :structures
 
-    resources :page_contents
-    resources :page_fields
     resources :users
     resources :config
+    resources :dashboard
+    resources :gallery
   end
-  
+
 
   # Site URLs
   resources :users
@@ -26,7 +30,7 @@ RhinoCMS::Application.routes.draw do
   match '/logout', to: 'sessions#destroy', via: :delete
 
   root :to => 'pages#index'
-  match '*url' => 'pages#index', :as => :page
+  match '*url' => 'pages#internal', :as => :page
 
   
 

@@ -14,11 +14,7 @@ ru:
   _BTN_CANCEL: Отменить
   _BTN_SAVE_AND_CONTINUE: Применить
   _SIGN_IN: Пожалуйста авторизуйтесь.
-  main_content: Основной контент
-  description: Мета-Описание
-  keywords: Ключевые слова
-  h1: Заголовок страницы
-  title: Заголовок окна
+
   _DELETE_CONFIRM: "Вы уверены, что хотите удалить запись?"
 
   # Admin menu
@@ -34,6 +30,21 @@ ru:
   # User
   You sure?: Вы уверены?
   Edit profile: Редактировать профиль
+
+  # Pages
+  main_content: Основной контент
+  description: Мета-Описание
+  keywords: Ключевые слова
+  h1: Заголовок страницы
+  title: Заголовок окна
+  Page: страница
+  Article: статья
+  add subpage: добавить подраздел
+  edit: редактировать
+  show: отобразить
+  hide: скрыть
+  delete: удалить
+
 
   activerecord:
     models:
@@ -54,6 +65,8 @@ ru:
         position: Сортировка
         menu: Отображать в меню
         active: Активность
+        parent_id: Родительский раздел
+        ptype: Тип раздела
         
 
 

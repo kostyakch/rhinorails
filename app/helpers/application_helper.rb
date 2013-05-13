@@ -21,7 +21,7 @@ module ApplicationHelper
 			end
 		end
 
-		return raw res		
+		raw res		
 	end  
 
 

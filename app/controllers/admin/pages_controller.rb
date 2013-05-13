@@ -3,59 +3,85 @@ class Admin::PagesController < ApplicationController
 	before_filter :admin_only
 
 
-	def index
+	def index(parent = nil)
 		store_location
+		if parent.blank?
+			@pages = Page.paginate(page: params[:page]).where("parent_id IS NULL")	
+		else
+			@pages = Page.paginate(page: params[:page]).where("parent_id = #{parent.id}") if parent.ptype == 'page'
+		end			
+	end
+
+	def children
+		store_location
+
+		@parent = Page.find(params[:parent_id])
+		@pages = Page.where("parent_id = #{params[:parent_id]}")
 	end
 
 	def new
     	@page = Page.new
-    	@page.parent_id = params[:parent_id] if !params[:parent_id].blank?
+    	@pages_for_select = pages_for_select    	
+
+    	if params[:parent_id].present?
+	    	@page.parent_id = params[:parent_id]
+	       	@page.ptype = Page.find(@page.parent_id).ptype
+    	end
+
     	default_fields(@page)
     	default_content(@page)
 	end
 
 	def create
-		@page = Page.new
+		@page = Page.new		
+		@pages_for_select = pages_for_select
+
 		if @page.update_attributes(params[:page])
 
 			flash[:info] = t('_PAGE_SUCCESSFULLY_CREATED')
 			if params[:continue].present? 
-				redirect_to edit_admin_page_path(@page)
+				redirect_to edit_admin_structure_path(@page)
 			else
-				redirect_to admin_pages_path
+				redirect_back_or admin_pages_path
 			end			
 		else	
 			render 'new'
 		end
 	end
 
-	def edit
-		@page = Page.find(params[:id])	
-		#default_content(@page)
+	def edit		
+		@page = Page.find(params[:id])
+		@pages_for_select = pages_for_select params[:id]
 	end
 
 	def update
 		@page = Page.find(params[:id])
+
+		@pages_for_select = pages_for_select params[:id]
 		if @page.update_attributes(params[:page])
 			update_page_field(@page, params[:page]) # Обновим данные о page_field
-			update_page_content(@page, params[:page])
+			update_page_content(@page, params[:page])		
 
 			flash[:info] = t('_PAGE_SUCCESSFULLY_UPDATED')
 			if params[:continue].present? 
-				redirect_to edit_admin_page_path(@page) 
+				render action: "edit"
 			else
-				redirect_to admin_pages_path
+				redirect_back_or admin_pages_path
 			end
 		else
 			render action: "edit"
 		end
 	end
 
+	def tree
+		store_location
+	end
+	
 	def destroy
 		page = Page.find(params[:id]).destroy
 
 		flash[:info] = t('_PAGE_SUCCESSFULLY_DELITED', name: page.name)
-		redirect_to admin_pages_path
+		redirect_back_or admin_pages_path
 	end
 
 	def showhide
@@ -64,6 +90,14 @@ class Admin::PagesController < ApplicationController
 
 		redirect_back_or admin_pages_path
 	end
+
+	def sort
+		params[:page].each_with_index do |id, index|
+			Page.update_all(['position=?', index+1], ['id=?', id])
+		end
+		render :nothing => true
+	end
+
 
 	private
 		def default_content(page)
@@ -115,6 +149,14 @@ class Admin::PagesController < ApplicationController
 			# puts originalTabs.inspect
 			# puts '======================'
 			originalTabs.each { |f| f.destroy }			
+		end
+
+		def pages_for_select(id = nil)
+			if id.present?
+				Page.where("ptype != 'article' AND id != #{id}").order('name')
+			else
+				Page.where("ptype != 'article'").order('name')				
+			end			
 		end
 
 end

@@ -1,10 +1,10 @@
 <% provide(:title, @page.name) %>
 <% provide(:metatags, meta_tags(@page)) %>
 
-<% if field = @page.page_field.find_by_name('h1') %>
+<% if field = @page.field_by_name('h1') %>
 <h1><%= field.value %></h1>
 <% end %>
 
-<% if @page.page_content.first %>
-<%= raw @page.page_content.first.content %>
+<% if c = @page.content_by_name('main_content') %>
+<%= raw c.content %>
 <% end %>
