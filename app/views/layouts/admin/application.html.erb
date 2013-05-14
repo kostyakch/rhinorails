@@ -37,16 +37,18 @@
 					<li><a href="./file-manager.html"><i class="fa-icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
 					<li><a href="./icon.html"><i class="fa-icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
 					<li><a href="./login.html"><i class="fa-icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li> -->
-					<li class="<%= 'active' if request.fullpath == admin_users_path %>"><%= link_to raw('<i class="fa-icon-group"></i><span class="hidden-tablet"> Пользователи</span>'), admin_users_path %></li>
 					<li class="<%= 'active' if request.fullpath == admin_structures_path %>"><%= link_to raw('<i class="fa-icon-sitemap"></i><span class="hidden-tablet"> Структура сайта</span>'), admin_structures_path %></li>
-					<li class=""><a href="#"><i class="fa-icon-cogs"></i><span class="hidden-tablet"> Настройки</span></a></li>
+					<li class="<%= 'active' if request.fullpath == admin_users_path %>"><%= link_to raw('<i class="fa-icon-group"></i><span class="hidden-tablet"> Пользователи</span>'), admin_users_path %></li>
+					<li class="<%= 'active' if request.fullpath == admin_settings_path %>"><%= link_to raw('<i class="fa-icon-cogs"></i><span class="hidden-tablet"> Настройки</span>'), admin_settings_path %></li>
 				</ul>				
 			</div>
 		</div>
 		<!-- end: Main Menu -->
 		<%= yield :sidebar_l2 %>
 
-		<div id="content" class="<%= (yield :sidebar_l2).present? ? 'span9' : 'span11' %>" style="min-height: 509px;">       
+		<div id="content" class="<%= (yield :sidebar_l2).present? ? 'span9' : 'span11' %>" style="min-height: 509px;"> 
+			<%= render 'shared/flash_messages' %>  
+		
 			<div class="row-fluid"><%= yield %> </div>
 		</div>
 	</div>

@@ -8,14 +8,13 @@ RhinoCMS::Application.routes.draw do
     match '/page/:parent_id/list' => 'pages#children', :as => :page_children
     match '/page/:parent_id/new' => 'pages#new', :as => :new_children_page
     match '/page/tree' => 'pages#tree', :as => :pages_tree
-    #resources :pages, :collection => { :sort => :post }
     resources :pages
 
     match '/structures/:parent_id/new' => 'structures#new', :as => :new_children_structures
     resources :structures
 
     resources :users
-    resources :config
+    resources :settings
     resources :dashboard
     resources :gallery
   end
@@ -32,7 +31,14 @@ RhinoCMS::Application.routes.draw do
   root :to => 'pages#index'
   match '*url' => 'pages#internal', :as => :page
 
-  
+
+   #     admin_settings GET    /admin/settings(.:format)                  admin/settings#index
+   #                    POST   /admin/settings(.:format)                  admin/settings#create
+   #  new_admin_setting GET    /admin/settings/new(.:format)              admin/settings#new
+   # edit_admin_setting GET    /admin/settings/:id/edit(.:format)         admin/settings#edit
+   #      admin_setting GET    /admin/settings/:id(.:format)              admin/settings#show
+   #                    PUT    /admin/settings/:id(.:format)              admin/settings#update
+   #                    DELETE /admin/settings/:id(.:format)              admin/settings#destroy
 
   # resources :pages do
   #   collection do

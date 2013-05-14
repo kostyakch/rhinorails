@@ -1,7 +1,7 @@
 module ApplicationHelper
 	# Returns the full title on a per-page basis.
 	def full_title(page_title)
-		base_title = SiteConfig.find_by_name('site_name') ? SiteConfig.find_by_name('site_name').value : "RhinoCMS"
+		base_title = Setting.find_by_name('site_name') ? Setting.find_by_name('site_name').value : "RhinoCMS"
 		if page_title.empty?
 			base_title
 		else

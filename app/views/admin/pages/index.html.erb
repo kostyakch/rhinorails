@@ -13,4 +13,43 @@
 <% end %>
 
 
-<h1>Здесь будет небольшой дашборд для страниц сайта</h1>
+<div class="row-fluid sortable ui-sortable">	
+	<div class="box span12">
+		<div class="box-header">
+			<h2><i class="halflings-icon hand-top"></i><span class="break"></span>Quick Buttons</h2>
+		</div>
+		<div class="box-content">
+			
+			<a href="/admin/page/33/list" class="quick-button span2">
+				<i class="fa-icon-tasks"></i>
+				<p>Новостей</p>
+				<span class="notification">123</span>
+			</a>
+			<a class="quick-button span2">
+				<i class="fa-icon-book"></i>
+				<p>Статей</p>
+				<span class="notification red">68</span>
+			</a>
+			<a class="quick-button span2">
+				<i class="fa-icon-comments-alt"></i>
+				<p>Комментариев</p>
+				<span class="notification green">167</span>
+			</a>
+			<a class="quick-button span2">
+				<i class="fa-icon-picture"></i>
+				<p>Изображений</p>
+			</a>
+			<a href="<%= admin_users_path %>" class="quick-button span2">
+				<i class="fa-icon-group"></i>
+				<p>Пользователей</p>
+				<span class="notification"><%= User.count %></span>
+			</a>
+			<a class="quick-button span2">
+				<i class="fa-icon-barcode"></i>
+				<p>Товаров</p>
+			</a>
+			<div class="clearfix"></div>
+		</div>	
+	</div><!--/span-->
+	
+</div>

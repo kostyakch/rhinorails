@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 1) do
-
-  create_table "config", :force => true do |t|
-    t.string "name",  :limit => 120, :default => "", :null => false
-    t.string "value",                :default => "", :null => false
-  end
-
-  add_index "config", ["name", "value"], :name => "index_config_on_name_and_value", :unique => true
+ActiveRecord::Schema.define(:version => 20130514081446) do
 
   create_table "page_contents", :force => true do |t|
     t.integer "page_id"
@@ -42,19 +35,27 @@ ActiveRecord::Schema.define(:version => 1) do
 
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
-    t.string   "name",                                                                           :null => false
-    t.string   "slug",       :limit => 100,                                                      :null => false
-    t.integer  "position",                                                 :default => 0,        :null => false
-    t.integer  "menu",                                                     :default => 1
-    t.boolean  "active",                                                   :default => true
-    t.string   "ptype",      :limit => 20,                                 :default => "page",   :null => false
-    t.string   "sm_p",       :limit => 7,                                  :default => "weekly", :null => false
-    t.decimal  "st_pr",                     :precision => 10, :scale => 2, :default => 0.5,      :null => false
-    t.datetime "created_at",                                                                     :null => false
-    t.datetime "updated_at",                                                                     :null => false
+    t.string   "name",                                                                          :null => false
+    t.string   "slug",                                                                          :null => false
+    t.integer  "position",                                                :default => 0,        :null => false
+    t.integer  "menu",                                                    :default => 1
+    t.boolean  "active",                                                  :default => true
+    t.string   "ptype",      :limit => 20,                                :default => "page",   :null => false
+    t.string   "sm_p",       :limit => 7,                                 :default => "weekly", :null => false
+    t.decimal  "st_pr",                    :precision => 10, :scale => 2, :default => 0.5,      :null => false
+    t.datetime "created_at",                                                                    :null => false
+    t.datetime "updated_at",                                                                    :null => false
   end
 
   add_index "pages", ["parent_id", "slug"], :name => "index_pages_on_parent_id_and_slug", :unique => true
+
+  create_table "settings", :force => true do |t|
+    t.string "name",  :limit => 120, :default => "", :null => false
+    t.string "value",                :default => "", :null => false
+    t.text   "descr"
+  end
+
+  add_index "settings", ["name", "value"], :name => "index_config_on_name_and_value", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name",            :limit => 250

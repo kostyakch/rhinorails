@@ -6,6 +6,11 @@ ru:
   _PAGE_SUCCESSFULLY_UPDATED: Страница успешно обновлена.
   _PAGE_SUCCESSFULLY_CREATED: Страница успешно создана.
   _PAGE_SUCCESSFULLY_DELITED: "Страница \"%{name}\" успешно удалена."
+
+  _SUCCESSFULLY_CREATED: Запись создана.
+  _SUCCESSFULLY_UPDATED: "Запись \"%{name}\" успешно обновлена."
+  _SUCCESSFULLY_DELITED: "Запись \"%{name}\" успешно удалена."
+
   _EDIT_USER_SUCCESS: Данные пользователя изменены
   _WELCOME: Добро пожаловать в систему!
   _BTN_CREATE: Создать
@@ -45,6 +50,8 @@ ru:
   hide: скрыть
   delete: удалить
 
+  _SETTING_NAME_FORMAT: "может содержать только латинские буквы, цифры и символы - или _"
+
 
   activerecord:
     models:
@@ -68,7 +75,10 @@ ru:
         parent_id: Родительский раздел
         ptype: Тип раздела
         
-
+      setting:
+        name: Наименование
+        value: Значение
+        descr: Описание
 
 
     errors:
@@ -102,4 +112,8 @@ ru:
               invalid: "должен содержать только цифры, латинские бквы и символы '_-'"
               taken: должен быть уникальным. Попробуйте изменить Url.
 
-#ru.activerecord.errors.models.user.attributes.email.taken
+        setting:
+          attributes:            
+            name:
+              invalid: "может содержать только латинские буквы, цифры и символы - или _"
+

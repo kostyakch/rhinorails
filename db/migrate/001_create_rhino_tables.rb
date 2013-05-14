@@ -1,10 +1,10 @@
 class CreateRhinoTables < ActiveRecord::Migration
   def self.up
-    create_table :config do |t|
+    create_table :settings do |t|
       t.string :name, :limit  => 120, :default => "", :null => false
       t.string :value, :limit => 255, :default => "", :null => false
     end
-    add_index :config, [:name, :value], :unique => true 
+    add_index :settings, [:name, :value], :unique => true 
 
     create_table :pages do |t|
       t.integer :parent_id

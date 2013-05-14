@@ -1,7 +1,8 @@
 <% if object.errors.any? %>
-  <div id="error_explanation">
+<div class="alert alert-error">
+	<h4 class="alert-heading">Необходимо исправить <%= object.errors.full_messages.count %> <%= Russian.pluralize(object.errors.full_messages.count, 'ошибку', 'ошибки', 'ошибок') %>!</h4>
     <% object.errors.full_messages.each do |msg| %>
-      <div class="alert alert-error"><%= msg %></div>
+      <%= msg %><br>
     <% end %>
-  </div>
+</div>
 <% end %>
