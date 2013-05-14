@@ -1,3 +1,6 @@
+rhino-ruby.sublime-project
+rhino-ruby.sublime-workspace
+
 # Игнорирование конфига bundler
 /.bundle
 
