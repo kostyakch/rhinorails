@@ -1,0 +1,30 @@
+<% provide(:title, "Изображения галереи #{@gallery.name}" ) %>
+
+<% render 'admin/galleries/sidebar' %>
+
+<div class="row-fluid">
+	<div class="btn-overlay">
+
+	<%= form_for @image, :url => admin_gallery_images_path, :html => {:multipart => true} do |f| %>
+		<%= f.hidden_field :path_cache %>
+		<%= f.hidden_field :gallery_id, value: @gallery.id %>
+        <div class="uploader" id="uniform-fileInput">
+            <%= f.file_field :path, class: 'input-file uniform_on', :multiple => true %>
+            <span class="filename">No file selected</span>
+            <span class="action">Добавить изображения</span>
+        </div>	
+
+        <%= f.button t("_BTN_UPLOAD"), class: "btn btn-primary" %>	
+	<% end %>		
+	</div>
+</div>
+
+<h2>Изображения галереи "<%= @gallery.name %>"</h2><br>
+
+<% if @images.present? %>
+    <% @images.each do |image| %>
+        <%= image_tag(image.path.thumb.url, width: '160') %>
+        <%= link_to raw('<i class="halflings-icon edit"></i>'), edit_admin_gallery_image_path(image) %>
+        <%= link_to raw('<i class="halflings-icon trash"></i>'), admin_gallery_image_path(image), :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %>
+    <% end %>
+<% end %>

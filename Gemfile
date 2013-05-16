@@ -16,7 +16,10 @@ gem 'bootstrap-sass', '~> 2.3.1.1'
 gem 'bootstrap-will_paginate'
 gem 'bootstrap-datepicker-rails'
 
-gem 'russian', '~> 0.6.0'
+gem 'russian', '~> 0.6.0' #это библиотека для полноценной поддержки русского языка (форматирование даты и времени, плюрализация, транслит, локализация в целом)
+
+gem "rmagick"
+gem 'carrierwave' # This gem provides a simple and extremely flexible way to upload files from Ruby applications
 
 # Gems used only for assets and not required
 # in production environments by default.

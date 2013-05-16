@@ -1,0 +1,59 @@
+<% provide(:title, 'Список галерей') %>
+
+<% render 'admin/galleries/sidebar' %>
+
+<div class="row-fluid">  
+  <div class="box span12">
+
+    <div class="box-content">
+      <a href="<%= new_admin_gallery_path %>" class="quick-button offset2 span3">
+        <i class="fa-icon-tasks"></i>
+        <p>Создать галерею</p>
+        <span class="notification green"><%= Gallery.count %></span>
+      </a>
+
+      <a href="<%= new_admin_gallery_image_path %>" class="quick-button offset2 span3">
+        <i class="fa-icon-picture"></i>
+        <p>Добавить изображение</p>
+        <span class="notification blue"><%= GalleryImage.count %></span>
+      </a>
+
+
+      <div class="clearfix"></div>
+    </div>  
+  </div>
+</div>
+
+<div class="box-header" data-original-title="">
+  <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Галереи</h2>
+</div>
+<div class="box-content">
+  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+    <table class="table table-striped tree">
+      <thead>
+        <tr>
+          <th width="90%">Наименование</th>
+          <th>Действия</th>
+        </tr>
+      </thead>
+      <tbody>       
+        <% @galleries.each do |g| %>
+        <tr>
+          <td>
+            <b><%= link_to g.name, edit_admin_gallery_path(g) %></b>
+          </td>
+          <td class="center">
+            <%= link_to raw('<i class="halflings-icon edit"></i>'), edit_admin_gallery_path(g), class: 'btn btn-info' %>
+            <%= link_to raw('<i class="halflings-icon trash"></i>'), admin_gallery_path(g), class: 'btn btn-info', :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %>
+          </td>
+        </tr>
+        <% end %>       
+      </tbody>
+    </table>          
+    <div class="row-fluid">
+      <div class="span12 center">
+        <div class="dataTables_paginate paging_bootstrap pagination"><%= will_paginate page_items %></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,7 +16,12 @@ RhinoCMS::Application.routes.draw do
     resources :users
     resources :settings
     resources :dashboard
-    resources :gallery
+
+    resources :galleries
+
+    match '/gallery_images/:gallery_id/new' => 'gallery_images#new', :as => :new_image_gallery
+    match '/gallery_images/:gallery_id/uppload' => 'gallery_images#uppload', :as => :uppload_images
+    resources :gallery_images
   end
 
 
@@ -32,13 +37,22 @@ RhinoCMS::Application.routes.draw do
   match '*url' => 'pages#internal', :as => :page
 
 
-   #     admin_settings GET    /admin/settings(.:format)                  admin/settings#index
-   #                    POST   /admin/settings(.:format)                  admin/settings#create
-   #  new_admin_setting GET    /admin/settings/new(.:format)              admin/settings#new
-   # edit_admin_setting GET    /admin/settings/:id/edit(.:format)         admin/settings#edit
-   #      admin_setting GET    /admin/settings/:id(.:format)              admin/settings#show
-   #                    PUT    /admin/settings/:id(.:format)              admin/settings#update
-   #                    DELETE /admin/settings/:id(.:format)              admin/settings#destroy
+     #          admin_galleries GET    /admin/galleries(.:format)                          admin/galleries#index
+     #                          POST   /admin/galleries(.:format)                          admin/galleries#create
+     #        new_admin_gallery GET    /admin/galleries/new(.:format)                      admin/galleries#new
+     #       edit_admin_gallery GET    /admin/galleries/:id/edit(.:format)                 admin/galleries#edit
+     #            admin_gallery GET    /admin/galleries/:id(.:format)                      admin/galleries#show
+     #                          PUT    /admin/galleries/:id(.:format)                      admin/galleries#update
+     #                          DELETE /admin/galleries/:id(.:format)                      admin/galleries#destroy
+     #  admin_new_image_gallery        /admin/gallery_images/:gallery_id/new(.:format)     admin/gallery_images#new
+     #     admin_uppload_images        /admin/gallery_images/:gallery_id/uppload(.:format) admin/gallery_images#uppload
+     #     admin_gallery_images GET    /admin/gallery_images(.:format)                     admin/gallery_images#index
+     #                          POST   /admin/gallery_images(.:format)                     admin/gallery_images#create
+     #  new_admin_gallery_image GET    /admin/gallery_images/new(.:format)                 admin/gallery_images#new
+     # edit_admin_gallery_image GET    /admin/gallery_images/:id/edit(.:format)            admin/gallery_images#edit
+     #      admin_gallery_image GET    /admin/gallery_images/:id(.:format)                 admin/gallery_images#show
+     #                          PUT    /admin/gallery_images/:id(.:format)                 admin/gallery_images#update
+     #                          DELETE /admin/gallery_images/:id(.:format)                 admin/gallery_images#destroy
 
   # resources :pages do
   #   collection do

@@ -11,7 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514081446) do
+ActiveRecord::Schema.define(:version => 20130514105821) do
+
+  create_table "galleries", :force => true do |t|
+    t.integer  "page_id"
+    t.string   "url",        :limit => 150
+    t.string   "name",                                        :null => false
+    t.text     "descr"
+    t.boolean  "active",                    :default => true
+    t.integer  "position",                  :default => 0
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "galleries", ["name"], :name => "index_galleries_on_name", :unique => true
+  add_index "galleries", ["page_id"], :name => "galleries_page_id_fk"
+  add_index "galleries", ["url"], :name => "index_galleries_on_url", :unique => true
+
+  create_table "gallery_images", :force => true do |t|
+    t.integer  "gallery_id"
+    t.string   "path",       :limit => 150
+    t.text     "annotation"
+    t.boolean  "main",                      :default => false, :null => false
+    t.boolean  "active",                    :default => true,  :null => false
+    t.integer  "position",                  :default => 0,     :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "gallery_images", ["gallery_id", "path"], :name => "index_gallery_images_on_gallery_id_and_path", :unique => true
 
   create_table "page_contents", :force => true do |t|
     t.integer "page_id"
@@ -55,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20130514081446) do
     t.text   "descr"
   end
 
-  add_index "settings", ["name", "value"], :name => "index_config_on_name_and_value", :unique => true
+  add_index "settings", ["name", "value"], :name => "index_settings_on_name_and_value", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name",            :limit => 250
@@ -70,6 +98,10 @@ ActiveRecord::Schema.define(:version => 20130514081446) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
+  add_foreign_key "galleries", "pages", :name => "galleries_page_id_fk", :dependent => :delete
+
+  add_foreign_key "gallery_images", "galleries", :name => "gallery_images_gallery_id_fk", :dependent => :delete
 
   add_foreign_key "page_contents", "pages", :name => "page_contents_page_id_fk", :dependent => :delete
 

@@ -18,6 +18,7 @@ ru:
   _BTN_SAVE: Сохранить
   _BTN_CANCEL: Отменить
   _BTN_SAVE_AND_CONTINUE: Применить
+  _BTN_UPLOAD: Загрузить файлы на сервер
   _SIGN_IN: Пожалуйста авторизуйтесь.
 
   _DELETE_CONFIRM: "Вы уверены, что хотите удалить запись?"
@@ -51,6 +52,11 @@ ru:
   delete: удалить
 
   _SETTING_NAME_FORMAT: "может содержать только латинские буквы, цифры и символы - или _"
+
+  # images
+  _IMAGE_SUCCESSFULLY_UPDATED: Изображение обновлено.
+  _SUCCESSFULLY_UPLOADED: Изображения успешно загружены.
+  _ERROR_UPLOAD: Ошибка при загрузке изображений.
 
 
   activerecord:
