@@ -26,33 +26,16 @@ RhinoCMS::Application.routes.draw do
 
 
   # Site URLs
-  resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signup',  to: 'users#new'
+  match '/users',  to: 'users#create', :as => :users
   match '/login',  to: 'sessions#new'
   match '/logout', to: 'sessions#destroy', via: :delete
-
+ 
   root :to => 'pages#index'
   match '*url' => 'pages#internal', :as => :page
 
-
-     #          admin_galleries GET    /admin/galleries(.:format)                          admin/galleries#index
-     #                          POST   /admin/galleries(.:format)                          admin/galleries#create
-     #        new_admin_gallery GET    /admin/galleries/new(.:format)                      admin/galleries#new
-     #       edit_admin_gallery GET    /admin/galleries/:id/edit(.:format)                 admin/galleries#edit
-     #            admin_gallery GET    /admin/galleries/:id(.:format)                      admin/galleries#show
-     #                          PUT    /admin/galleries/:id(.:format)                      admin/galleries#update
-     #                          DELETE /admin/galleries/:id(.:format)                      admin/galleries#destroy
-     #  admin_new_image_gallery        /admin/gallery_images/:gallery_id/new(.:format)     admin/gallery_images#new
-     #     admin_uppload_images        /admin/gallery_images/:gallery_id/uppload(.:format) admin/gallery_images#uppload
-     #     admin_gallery_images GET    /admin/gallery_images(.:format)                     admin/gallery_images#index
-     #                          POST   /admin/gallery_images(.:format)                     admin/gallery_images#create
-     #  new_admin_gallery_image GET    /admin/gallery_images/new(.:format)                 admin/gallery_images#new
-     # edit_admin_gallery_image GET    /admin/gallery_images/:id/edit(.:format)            admin/gallery_images#edit
-     #      admin_gallery_image GET    /admin/gallery_images/:id(.:format)                 admin/gallery_images#show
-     #                          PUT    /admin/gallery_images/:id(.:format)                 admin/gallery_images#update
-     #                          DELETE /admin/gallery_images/:id(.:format)                 admin/gallery_images#destroy
 
   # resources :pages do
   #   collection do
