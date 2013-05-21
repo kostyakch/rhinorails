@@ -38,4 +38,13 @@ module SessionsHelper
   def has_role?(role)
     current_user.roles == role
   end
+
+  def setting_by_name(name, reload = false)
+    if !reload && session[:"setting_#{name}"].present?
+      session[:"setting_#{name}"]
+    else
+      setting = Setting.find_by_name(name)
+      session[:"setting_#{name}"] = setting.value if setting.value.present?
+    end
+  end  
 end

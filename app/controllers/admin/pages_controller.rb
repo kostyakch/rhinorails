@@ -8,7 +8,7 @@ class Admin::PagesController < ApplicationController
 		if parent.blank?
 			@pages = Page.paginate(page: params[:page]).where("parent_id IS NULL")	
 		else
-			@pages = Page.paginate(page: params[:page]).where("parent_id = #{parent.id}") if parent.ptype == 'page'
+			@pages = Page.paginate(page: params[:page]).where("parent_id = ?", parent.id) if parent.ptype == 'page'
 		end			
 	end
 
@@ -16,7 +16,7 @@ class Admin::PagesController < ApplicationController
 		store_location
 
 		@parent = Page.find(params[:parent_id])
-		@pages = Page.where("parent_id = #{params[:parent_id]}")
+		@pages = Page.where("parent_id = ?", params[:parent_id]).order('created_at DESC')
 	end
 
 	def new
@@ -145,15 +145,12 @@ class Admin::PagesController < ApplicationController
 			end
 
 			# remove the relationship between the param and the Content
-			# puts '======================'
-			# puts originalTabs.inspect
-			# puts '======================'
 			originalTabs.each { |f| f.destroy }			
 		end
 
 		def pages_for_select(id = nil)
 			if id.present?
-				Page.where("ptype != 'article' AND id != #{id}").order('name')
+				Page.where("ptype != 'article' AND id != ?", id).order('name')
 			else
 				Page.where("ptype != 'article'").order('name')				
 			end			

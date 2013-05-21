@@ -35,7 +35,8 @@ class Admin::SettingsController < ApplicationController
 		@setting = Setting.find(params[:id])
 
 		if @setting.update_attributes(params[:setting])	
-
+			setting_by_name(@setting.name, true)
+			
 			flash[:info] = t('_SUCCESSFULLY_UPDATED', name: @setting.name)
 			if params[:continue].present? 
 				render action: "edit"

@@ -26,7 +26,7 @@ class Page < ActiveRecord::Base
   default_scope order: 'position'
   #default_scope :parent_id, :dependent => :destroy
 
-  acts_as_list scope: :parent_id
+  acts_as_list scope: :parent_id #, :created_at]
 
   has_many :page_content, :order => 'position', :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_content, :allow_destroy => true
@@ -55,6 +55,17 @@ class Page < ActiveRecord::Base
   def field_by_name(name)
     self.page_field.find_by_name(name)
   end
+
+  # Сформируем заголовок страницы
+  def title
+    if self.field_by_name('title').present? and self.field_by_name('title').value.present?
+      self.field_by_name('title').value
+    else
+      self.name
+    end
+  end
+
+
 
   protected
 
@@ -101,6 +112,8 @@ class Page < ActiveRecord::Base
     def find_by_path(path)
       return self.find_by_slug(path, :conditions => ["active=?", true])
     end
+
+
 
 
   end

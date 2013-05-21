@@ -16,8 +16,9 @@ class PagesController < ApplicationController
       render :template => 'site/not_found', :status => 404
       return
     end
-
+    
     if !@page = Page.find_by_path(params[:url])
+    #if !@page = Page.where('url = ?', params[:url])
       render :template => 'site/not_found', :status => 404
       return
     end

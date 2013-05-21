@@ -1,9 +1,9 @@
 <div class="navbar">
 	<div class="navbar-inner">
-		<a class="brand" href="/">Rhino CMS</a>
+		<a class="brand" href="/"><%= setting_by_name 'site_name' %> </a>
 		<ul class="nav">
-		<% page_items.each do |p| %>
-			<%= render 'layouts/top_menu_items', p: p, level: 0 %>
+		<% top_menu_items.each do |item| %>
+			<%= render 'layouts/top_menu_item', item: item, level: 0 %>
 		<% end %> 
 		</ul>
 	</div>

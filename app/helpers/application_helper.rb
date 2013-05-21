@@ -1,7 +1,7 @@
 module ApplicationHelper
 	# Returns the full title on a per-page basis.
 	def full_title(page_title)
-		base_title = Setting.find_by_name('site_name') ? Setting.find_by_name('site_name').value : "RhinoCMS"
+		base_title = setting_by_name('site_name') ? setting_by_name('site_name') : 'Rhino Rails CMS'
 		if page_title.empty?
 			base_title
 		else
@@ -9,8 +9,12 @@ module ApplicationHelper
 		end
 	end
 
-	def top_menu
-		Page.where('active = true AND menu = true AND parent_id IS NULL')
+	def top_menu_items(parent = nil)
+		if parent.blank?
+			Page.where("active = true AND menu = true AND parent_id IS NULL")	
+		else
+			Page.where("active = true AND menu = true AND parent_id = #{parent.id}") if parent.ptype == 'page'
+		end		
 	end
 
 	def meta_tags(page)
