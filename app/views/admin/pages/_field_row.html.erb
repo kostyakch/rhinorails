@@ -1,4 +1,4 @@
-<div id="param-fields-list">
+<div id="param-fields-list" class="collapse">
 <%= f.fields_for :page_field do |c| %>
 <div id="field_<%= c.object.id %>">
 	<%= c.hidden_field :id %>
@@ -16,3 +16,11 @@
 </div>
 <% end %>
 </div>
+
+<% if f.object.page_field.any? %>
+<div class="control-group">
+	<div id="moreless" class="controls">
+		<a data-toggle="collapse" href="#param-fields-list">больше</a> <span class="icon-arrow-down"></span>
+	</div>
+</div>
+<% end %>

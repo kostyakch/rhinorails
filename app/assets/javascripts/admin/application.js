@@ -15,15 +15,17 @@
 
 //= require_tree .
 
-// require acme/jquery-1.7.2.min
-// require acme/jquery-ui-1.8.21.custom.min
 //= require bootstrap
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.ru.js
+//= require acme/jquery.cookie
+
+
+// require acme/jquery-1.7.2.min
+// require acme/jquery-ui-1.8.21.custom.min
 
 // require acme/modernizr
 
-// require acme/jquery.cookie
 // require acme/fullcalendar.min
 // require acme/jquery.dataTables.min
 // require acme/excanvas
