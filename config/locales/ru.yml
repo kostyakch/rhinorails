@@ -61,6 +61,15 @@ ru:
   _ERROR_UPLOAD: Ошибка при загрузке изображений.
 
 
+  created_at:
+      formats:
+        # Use the strftime parameters for formats.
+        # When no format has been given, it uses default.
+        # You can provide other formats here if you like!
+        default: "%d.%m.%Y"
+        short: "%b %d"
+        long: "%B %d, %Y"
+
   activerecord:
     models:
       user: Пользователь
@@ -77,7 +86,8 @@ ru:
       page:
         name: Наименование
         slug: Url страницы
-        position: Сортировка
+        position: Сорт.
+        created_at: Публиковать с        
         menu: Отображать в меню
         active: Активность
         parent_id: Родительский раздел

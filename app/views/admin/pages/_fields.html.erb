@@ -31,9 +31,13 @@
 
         <div class="span2">
             <%= f.label :created_at %>
-            <%= f.text_field :created_at, class: 'span12 created_at' %>
+            <div class="input-append date span11" id="dp3" data-date="12-02-2012" data-date-format="dd.mm.yyyy">
+                <%= f.text_field :created_at, class: 'span12' %>
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>            
+            
             <% content_for :javascript do %>
-                $('.created_at').datepicker({
+                $('.date').datepicker({
                     format: 'dd.mm.yyyy',
                     language: 'ru'
                 });
