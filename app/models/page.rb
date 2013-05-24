@@ -56,6 +56,14 @@ class Page < ActiveRecord::Base
     self.page_field.find_by_name(name)
   end
 
+  def children(active = true)
+    if active
+      Page.where('parent_id = ? AND active = true', self.id)
+    else
+      Page.where('parent_id = ?', self.id)
+    end
+  end
+
   # Сформируем заголовок страницы
   def title
     if self.field_by_name('title').present? and self.field_by_name('title').value.present?
