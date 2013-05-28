@@ -2,10 +2,12 @@
 <% provide(:metatags, meta_tags(@page)) %>
 
 <% if field = @page.field_by_name('h1') %>
-<h1><%= field.value %></h1>
+<h1><%= field %></h1>
 <% end %>
 
 <%= render 'news_list', p: @page %>
+
+<%= render 'messages/message_form', message: @message = Message.new if @page.field_by_name('feedback').present? %>
 
 <% if @page.page_content.first %>
 <%= raw @page.page_content.first.content %>

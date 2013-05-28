@@ -32,9 +32,13 @@ RhinoCMS::Application.routes.draw do
   match '/users',  to: 'users#create', :as => :users
   match '/login',  to: 'sessions#new'
   match '/logout', to: 'sessions#destroy', via: :delete
+
+  match '/messages', to: 'messages#create', via: :post
+  match '/messages/new', to: 'messages#new'
  
   root :to => 'pages#index'
   match '*url' => 'pages#internal', :as => :page
+
 
 
   # resources :pages do

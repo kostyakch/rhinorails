@@ -3,7 +3,7 @@
 	<p><%= link_to c.name, page_path(c.slug) %></p>
 
 	<% if preview = c.content_by_name('preview') %>
-		<p><%= preview.content %></p>
+		<p><%= preview.html_safe %></p>
 	<% end %>
 </div>	
 <% end %>

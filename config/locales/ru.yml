@@ -23,6 +23,9 @@ ru:
 
   _DELETE_CONFIRM: "Вы уверены, что хотите удалить запись?"
 
+  _SUBJECT_SEND_EMAIL: Сообщение с сайта...
+  _EMAIL_SUCCESS_SEND: "Ваше сообщение успешно отправлено, и будет рассмотрено в ближайшее время."
+
   # Admin menu
   Settings: Настройки
   Profile: Профиль пользователя
@@ -70,6 +73,11 @@ ru:
         short: "%b %d"
         long: "%B %d, %Y"
 
+  # message:
+  #   name: ФИО
+  #   email: E-mail
+  #   content: Сообщение
+        
   activerecord:
     models:
       user: Пользователь

@@ -49,11 +49,11 @@ class Page < ActiveRecord::Base
 
 
   def content_by_name(name)
-    self.page_content.find_by_name(name)
+    self.page_content.find_by_name(name).content if self.page_content.find_by_name(name).present?
   end
 
   def field_by_name(name)
-    self.page_field.find_by_name(name)
+    self.page_field.find_by_name(name).value if self.page_field.find_by_name(name).present?
   end
 
   def children(active = true)
@@ -66,8 +66,8 @@ class Page < ActiveRecord::Base
 
   # Сформируем заголовок страницы
   def title
-    if self.field_by_name('title').present? and self.field_by_name('title').value.present?
-      self.field_by_name('title').value
+    if self.field_by_name('title').present?
+      self.field_by_name('title')
     else
       self.name
     end

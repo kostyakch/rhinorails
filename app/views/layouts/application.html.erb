@@ -16,9 +16,7 @@
 
 	<div class="container content">
 		<div class="row-fluid">
-			<% flash.each do |key, value| %>
-				<%= content_tag(:div, value, class: "alert alert-#{key}") %>
-			<% end %>
+			<%= render 'shared/flash_messages' %> 
 
 			<%= yield %>	
 		</div>		
