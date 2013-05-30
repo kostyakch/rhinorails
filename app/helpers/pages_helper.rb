@@ -8,7 +8,18 @@ module PagesHelper
 		end		
 	end
 	
+	# 
 	def breadcrumbs(cur_page)
-		
+		page = Page.find_by_slug(cur_page.slug)
+		if page.present?
+			if page.parent_id.present?
+				[] << Page.find_by_id(page.parent_id) << page
+			else
+				[] << page
+			end
+		else
+			[]
+		end
 	end
+	
 end

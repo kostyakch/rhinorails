@@ -1,6 +1,8 @@
 <% provide(:title, @page.title) %>
 <% provide(:metatags, meta_tags(@page)) %>
 
+<%= render 'shared/breadcrumbs' %> 
+
 <% if field = @page.field_by_name('h1') %>
 <h1><%= field %></h1>
 <% end %>
