@@ -28,5 +28,11 @@ module ApplicationHelper
 		raw res		
 	end  
 
+	def render_partial_if_exists(partial)
+		render partial: partial
+		
+		rescue
+			t('_PARTIAL_ERROR', name: partial)
 
+	end
 end

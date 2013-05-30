@@ -44,7 +44,7 @@ module SessionsHelper
       session[:"setting_#{name}"]
     else
       setting = Setting.find_by_name(name)
-      session[:"setting_#{name}"] = setting.value if setting.value.present?
+      session[:"setting_#{name}"] = setting.value if setting.present?
     end
   end  
 end
