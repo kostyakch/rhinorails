@@ -147,8 +147,8 @@ var RLANG = {
 			air: false, // true or toolbar
 			wym: false,
 
-			convertLinks: true,
-			convertDivs: true,
+			convertLinks: false,
+			convertDivs: false,
 			protocol: 'http://', // for links http or https or ftp or false
 
 			autosave: false, // false or url

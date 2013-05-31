@@ -2,7 +2,7 @@
 
 <% render 'admin/galleries/sidebar' %>
 
-<div class="row-fluid">
+
 	<div class="btn-overlay">
 
 	<%= form_for @image, :url => admin_gallery_images_path, :html => {:multipart => true} do |f| %>
@@ -17,14 +17,20 @@
         <%= f.button t("_BTN_UPLOAD"), class: "btn btn-primary" %>	
 	<% end %>		
 	</div>
-</div>
+
 
 <h2>Изображения галереи "<%= @gallery.name %>"</h2><br>
 
+<div class="images">
 <% if @images.present? %>
     <% @images.each do |image| %>
-        <%= image_tag(image.path.thumb.url, width: '160') %>
-        <%= link_to raw('<i class="halflings-icon edit"></i>'), edit_admin_gallery_image_path(image) %>
-        <%= link_to raw('<i class="halflings-icon trash"></i>'), admin_gallery_image_path(image), :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %>
+        <div class="item">
+        <%= image_tag image.path.thumb.url %>
+            <div class="edit-bt">
+                <%= link_to raw('<i class="halflings-icon edit"></i>'), edit_admin_gallery_image_path(image) %>
+                <%= link_to raw('<i class="halflings-icon trash"></i>'), admin_gallery_image_path(image), :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %>
+            </div>
+        </div>
     <% end %>
 <% end %>
+</div>
