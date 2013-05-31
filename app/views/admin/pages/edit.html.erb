@@ -1,8 +1,4 @@
 <% provide(:title, "Редактирование: #{@page.name}") %>
-<%= provide(:javascript, raw(field_javascript)) %>
-<%= provide(:javascript, raw(tab_javascript)) %> 
-
-
 
 <% content_for :sidebar_l2 do %>
 <div id="sidebar-left2" class="span2">
@@ -16,12 +12,17 @@
 </div>
 <% end %>
 
+<% content_for :javascript do %>
+<script type="text/javascript">
+<!--
+	<%= raw(field_javascript) %>
+	<%= raw(tab_javascript) %>
+-->
+</script>	
+<% end %>
+
 <%= form_for @page, :url => admin_page_path do |f| %>
     <legend>Редактирование раздела: <%= @page.name %></legend>
 
    	<%= render 'fields', f: f %>	    
 <% end %>
-
-
-
-

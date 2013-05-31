@@ -3,14 +3,12 @@
         <div class="tabbable" style="margin-bottom: 18px;">
             <ul class="nav nav-tabs" id="tabs">
             <% if f.object.page_content.any? %>
-            <% i = 0 %>
-            <% f.object.page_content.each do |ob| %>
-                <li class="<% if i == 0 %>active<% end %>">
+            <% f.object.page_content.each_with_index do |ob, index| %>
+                <li class="<% if index == 0 %>active<% end %>">
                     <a href="#<%= "tab#{ob.id}" %>" data-toggle="tab" rel="tab<%= ob.id %>">
                         <%=t ob.name %> <i class="icon-remove-sign del_tab"></i>
                     </a>
-                </li>
-                <% i += 1 %>
+                </li>                 
             <% end %>
             <% else %>
                 <li class="active">
@@ -29,10 +27,20 @@
                     <%= c.hidden_field :name %>
 
                     <%= c.text_area :content, class: 'span12' %>
-                </div>
+                </div>              
                 <% i += 1 %>
             <% end %>
             </div>
         </div>
     </div>
 </div>
+
+<% content_for :javascript do %>
+    <%= stylesheet_link_tag    "redactor/redactor" %>
+    <%= javascript_include_tag "redactor/redactor" %>
+
+
+<script type="text/javascript">
+    $('textarea').redactor({ minHeight: 350, 'imageUpload': '/test'});
+</script>   
+<% end %>

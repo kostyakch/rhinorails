@@ -59,9 +59,7 @@
 
 <%= javascript_include_tag "admin/application" %>
 
-<script type="text/javascript">	
-	<%= raw yield(:javascript) %>
-</script>
+<%= raw yield(:javascript) %>
 
 <% if Rails.env.development? %>
 <div class="container">
