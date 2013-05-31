@@ -68,7 +68,7 @@ module Admin::PagesHelper
 	end
 
 	def tab_javascript
-		<<-CODE
+		<<-CODE		
 		$(function(){
 			// добавление таба дополнительного контента
 			var tabCount = $('#tabs li').length -1;
@@ -83,7 +83,9 @@ module Admin::PagesHelper
 								'<a href="#form_contents_add___name___name_tab" data-toggle="tab" rel="form_contents_add___name___name_tab">'+addContentName+' <i class="icon-remove-sign del_tab"></i></a>'+
 								'</li>';
 				var html_content = '<div class="tab-pane" id="form_contents_add___name___name_tab">'+
-								'<textarea cols="40" id="page_page_content_attributes___name___content" name="page[page_content_attributes][__name__][content]" rows="20"></textarea></div>';
+								'<textarea cols="40" id="page_page_content_attributes___name___content" name="page[page_content_attributes][__name__][content]" rows="20"></textarea>'+
+								'<script type="text/javascript">$("textarea").redactor({ minHeight: 350, "imageUpload": "/test"});</script>'+
+								'</div>';
 
 				html_tab     = html_tab.replace(/__name__/g, tabCount);
 				html_content = html_content.replace(/__name__/g, tabCount);
