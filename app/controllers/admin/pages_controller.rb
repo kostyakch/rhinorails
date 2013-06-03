@@ -16,7 +16,7 @@ class Admin::PagesController < ApplicationController
 		store_location
 
 		@parent = Page.find(params[:parent_id])
-		@pages = Page.where("parent_id = ?", params[:parent_id]).order('created_at DESC')
+		@pages = Page.where("parent_id = ?", params[:parent_id]).order('publish_date DESC')
 	end
 
 	def new

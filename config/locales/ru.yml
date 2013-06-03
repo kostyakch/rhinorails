@@ -95,7 +95,7 @@ ru:
         name: Наименование
         slug: Url страницы
         position: Сорт.
-        created_at: Публиковать с        
+        publish_date: Публиковать с        
         menu: Отображать в меню
         active: Активность
         parent_id: Родительский раздел

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514105821) do
+ActiveRecord::Schema.define(:version => 20130603074119) do
 
   create_table "galleries", :force => true do |t|
     t.integer  "page_id"
@@ -29,14 +29,12 @@ ActiveRecord::Schema.define(:version => 20130514105821) do
   add_index "galleries", ["url"], :name => "index_galleries_on_url", :unique => true
 
   create_table "gallery_images", :force => true do |t|
-    t.integer  "gallery_id"
-    t.string   "path",       :limit => 150
-    t.text     "annotation"
-    t.boolean  "main",                      :default => false, :null => false
-    t.boolean  "active",                    :default => true,  :null => false
-    t.integer  "position",                  :default => 0,     :null => false
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.integer "gallery_id"
+    t.string  "path",       :limit => 150
+    t.text    "annotation"
+    t.boolean "main",                      :default => false, :null => false
+    t.boolean "active",                    :default => true,  :null => false
+    t.integer "position",                  :default => 0,     :null => false
   end
 
   add_index "gallery_images", ["gallery_id", "path"], :name => "index_gallery_images_on_gallery_id_and_path", :unique => true
@@ -63,16 +61,17 @@ ActiveRecord::Schema.define(:version => 20130514105821) do
 
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
-    t.string   "name",                                                                          :null => false
-    t.string   "slug",                                                                          :null => false
-    t.integer  "position",                                                :default => 0,        :null => false
-    t.integer  "menu",                                                    :default => 1
-    t.boolean  "active",                                                  :default => true
-    t.string   "ptype",      :limit => 20,                                :default => "page",   :null => false
-    t.string   "sm_p",       :limit => 7,                                 :default => "weekly", :null => false
-    t.decimal  "st_pr",                    :precision => 10, :scale => 2, :default => 0.5,      :null => false
-    t.datetime "created_at",                                                                    :null => false
-    t.datetime "updated_at",                                                                    :null => false
+    t.string   "name",                                                                            :null => false
+    t.string   "slug",                                                                            :null => false
+    t.integer  "position",                                                  :default => 0,        :null => false
+    t.integer  "menu",                                                      :default => 1
+    t.boolean  "active",                                                    :default => true
+    t.string   "ptype",        :limit => 20,                                :default => "page",   :null => false
+    t.string   "sm_p",         :limit => 7,                                 :default => "weekly", :null => false
+    t.decimal  "st_pr",                      :precision => 10, :scale => 2, :default => 0.5,      :null => false
+    t.datetime "created_at",                                                                      :null => false
+    t.datetime "updated_at",                                                                      :null => false
+    t.date     "publish_date",                                                                    :null => false
   end
 
   add_index "pages", ["parent_id", "slug"], :name => "index_pages_on_parent_id_and_slug", :unique => true

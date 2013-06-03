@@ -1,7 +1,7 @@
 module PagesHelper
 	def article_list(parent, per_page = 20)
 		if parent.ptype == 'article'
-			Page.where("parent_id = ? AND active = true", parent.id).
+			Page.where("parent_id = ? AND active = ? AND publish_date <= ?", parent.id, true, Time.now).
 				paginate(:page => params[:page], :per_page => per_page)
 		else
 			[]

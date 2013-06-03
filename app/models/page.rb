@@ -18,15 +18,16 @@
 
 class Page < ActiveRecord::Base
   before_validation :name_to_slug
+  after_initialize :set_publish_date
 
-  attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :ptype, :created_at, :page_content_attributes, :page_field_attributes
+  attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :ptype, :publish_date, :page_content_attributes, :page_field_attributes
   
 
   # Associations
   default_scope order: 'position'
   #default_scope :parent_id, :dependent => :destroy
 
-  acts_as_list scope: :parent_id #, :created_at]
+  acts_as_list scope: [:parent_id, :publish_date]
 
   has_many :page_content, :order => 'position', :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_content, :allow_destroy => true
@@ -34,8 +35,6 @@ class Page < ActiveRecord::Base
   has_many :page_field, :order => 'position', :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_field, :allow_destroy => true
 
-  #has_many :fields, :class_name => 'PageField', :order => 'id', :dependent => :destroy
-  #accepts_nested_attributes_for :fields, :allow_destroy => true
 
   # Validations
   validates :name, :slug, :position, :menu, presence: true
@@ -73,9 +72,14 @@ class Page < ActiveRecord::Base
     end
   end
 
-
+  def parent
+    Page.find(self.parent_id) if self.parent_id.present?
+  end
 
   protected
+    def set_publish_date
+      self.publish_date = Time.now if !self.publish_date.present?
+    end
 
     def name_to_slug
       if !self.slug.present?
@@ -118,7 +122,7 @@ class Page < ActiveRecord::Base
   class << self
 
     def find_by_path(path)
-      return self.find_by_slug(path, :conditions => ["active=?", true])
+      return self.find_by_slug(path, :conditions => ["active=? and publish_date <= ?", true, Time.now])
     end
 
 
