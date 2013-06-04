@@ -1,0 +1,77 @@
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="form-horizontal">
+    <div class="control-group">
+        <%= f.label :title, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_field :title, class: 'span11' %>
+        </div>
+    </div>  
+
+    <div class="control-group">
+        <%= f.label :slug, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_field :slug, class: 'span11' %>
+        </div>
+    </div>      
+
+    <div class="row">
+        <div class="span2" style="margin-left: 210px;">
+            <%= f.label :publish_date %>
+            <div class="input-append pdate span11">
+                <%= f.text_field :publish_date, class: 'span12' %>
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>            
+            
+            <% content_for :javascript do %>
+            <script type="text/javascript">
+                $('#blog_publish_date').datepicker({
+                    format: 'dd.mm.yyyy',
+                    language: 'ru'
+                });
+            </script>
+            <% end %>
+        </div>
+        <div class="span1">
+            <%= f.label :active %>
+            <%= f.check_box :active %>
+        </div>
+
+        <div class="span2">
+            <%= f.label :has_comments %>
+            <%= f.check_box :has_comments %>
+        </div>
+    </div>
+    <br>
+    <div class="control-group">
+        <%= f.label :spost, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_area :spost, class: 'span11', rows: 4 %>
+        </div>
+    </div>      
+
+    <div class="control-group">
+        <%= f.label :post, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_area :post, class: 'span11' %>
+        </div>
+    </div>      
+
+    <div class="form-actions">
+        <div class="btn-overlay">
+            <%= f.button t("_BTN_SAVE"), class: "btn btn-primary" %>
+            <%= f.button t('_BTN_SAVE_AND_CONTINUE'), class: 'btn btn-success', name: 'continue', value: 'continue' %>
+            <%= link_to t("_BTN_CANCEL"), admin_blogs_path, class: "btn" %>
+        </div>
+    </div>
+</div>
+
+<% content_for :javascript do %>
+    <%= stylesheet_link_tag    "redactor/redactor" %>
+    <%= javascript_include_tag "redactor/redactor" %>
+
+
+<script type="text/javascript">
+    $('textarea').redactor({'imageUpload': '/test'});
+</script>   
+<% end %>

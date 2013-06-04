@@ -24,6 +24,7 @@
 					<li class="<%= 'active' if request.fullpath == admin_pages_path %>">
 						<%= link_to raw('<i class="fa-icon-tasks"></i><span class="hidden-tablet"> Контент</span>'), admin_pages_path %>
 					</li>
+					<li class="<%= 'active' if request.fullpath == admin_blogs_path %>"><%= link_to raw('<i class="fa-icon-book"></i><span class="hidden-tablet"> Блоги</span>'), admin_blogs_path %></li>
 					<li class="<%= 'active' if request.fullpath == admin_galleries_path %>"><%= link_to raw('<i class="fa-icon-picture"></i><span class="hidden-tablet"> Галерея</span>'), admin_galleries_path %></li>
 					<!-- <li><a href="./messages.html"><i class="fa-icon-envelope"></i><span class="hidden-tablet"> Messages</span></a></li>
 					<li><a href="./tasks.html"><i class="fa-icon-tasks"></i><span class="hidden-tablet"> Tasks</span></a></li>

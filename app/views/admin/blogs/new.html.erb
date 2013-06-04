@@ -1,0 +1,8 @@
+<% provide(:title, "Добавление блога") %>
+
+<%= form_for @blog, :url => admin_blogs_path do |f| %>
+	<legend>Добавление блога</legend>
+	<%= render 'fields', f: f %>
+<% end %>
+
+

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  spost: MyText
+  post: MyText
+  slug: MyString
+  status: 1
+  active: false
+  has_comments: false
+  num_comments: 1
+
+two:
+  title: MyString
+  spost: MyText
+  post: MyText
+  slug: MyString
+  status: 1
+  active: false
+  has_comments: false
+  num_comments: 1

@@ -19,6 +19,9 @@ RhinoCMS::Application.routes.draw do
 
     resources :galleries
 
+    resources :blogs
+    resources :blog_comments
+
     match '/gallery_images/:gallery_id/new' => 'gallery_images#new', :as => :new_image_gallery
     match '/gallery_images/:gallery_id/uppload' => 'gallery_images#uppload', :as => :uppload_images
     resources :gallery_images

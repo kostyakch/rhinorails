@@ -85,38 +85,13 @@ class Page < ActiveRecord::Base
       if !self.slug.present?
         if self.parent_id.present?
           parent = Page.find_by_id(self.parent_id)
-          self.slug = parent.slug + "/" + self.to_slug
+          self.slug = parent.slug + "/" + Utils.to_slug(self.name)
         else
-          self.slug = self.to_slug
+          self.slug = Utils.to_slug(self.name)
         end
+      else
+        self.slug = Utils.to_slug(self.slug)
       end
-      self.slug = Russian.translit(self.slug).downcase
-    end
-
-    def to_slug(param=self.name)
-      # strip the string
-      ret = param.strip
-   
-      #blow away apostrophes
-      ret.gsub! /['`]/, ""
-   
-      # @ --> at, and & --> and
-      ret.gsub! /\s*@\s*/, " at "
-      ret.gsub! /\s*&\s*/, " and "
-   
-      # replace all non alphanumeric, periods with dash
-      ret.gsub! /\s*[^A-Za-z0-9А-Яа-я\.]\s*/, '-'
-   
-      # replace underscore with dash
-      ret.gsub! /[-_]{2,}/, '-'
-   
-      # convert double underscores to single
-      ret.gsub! /-+/, "-"
-   
-      # strip off leading/trailing dash
-      ret.gsub! /\A[-\.]+|[-\.]+\z/, ""
-   
-      ret
     end
 
   class << self
