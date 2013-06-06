@@ -22,11 +22,14 @@ class CreateBlogs < ActiveRecord::Migration
       t.integer :user_id
       t.foreign_key :users, column: 'user_id', options: 'ON DELETE CASCADE'
 
+      t.integer :blog_id
+      t.foreign_key :blogs, column: 'blog_id'
+
       t.integer :parent_id
       t.foreign_key :blog_comments, column: 'parent_id', options: 'ON DELETE CASCADE'
 
       t.text :comment, :null => false
-      t.boolean :active, :default => true
+      t.boolean :approved, :default => false
 
       t.timestamps
     end

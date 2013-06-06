@@ -34,7 +34,7 @@ table.tree {
 
 #sidebar-left2{
 	background: #ffffff;
-	min-height: 509px;
+	_min-height: 509px;
 	margin-left: 0;
 
 	filter: none;
@@ -47,8 +47,9 @@ table.tree {
 	.sidebar-nav > ul {
 		margin: 0 15px;
 		li {border-bottom: 1px solid silver;
-			a {text-align: left;}
+			a {text-align: left; font-size: 12px;}
 		}
+		li:last-child {border-bottom: 0;}
 		
 	}
 }

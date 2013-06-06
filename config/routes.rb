@@ -2,7 +2,7 @@ RhinoCMS::Application.routes.draw do
 
   # Admin URLs
   namespace :admin do
-    root :to => 'dashboard#index'
+    root :to => 'pages#index'
 
     match '/page/:id/show_hide' => 'pages#showhide', :as => :page_showhide
     match '/page/:parent_id/list' => 'pages#children', :as => :page_children
@@ -38,7 +38,7 @@ RhinoCMS::Application.routes.draw do
 
   match '/messages', to: 'messages#create', via: :post
   match '/messages/new', to: 'messages#new'
- 
+
   root :to => 'pages#index'
   match '*url' => 'pages#internal', :as => :page
 

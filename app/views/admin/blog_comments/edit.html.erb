@@ -1,0 +1,7 @@
+<% provide(:title, "Редактирование коментария") %>
+
+<%= form_for @blog_comment, :url => admin_blog_comment_path do |f| %>
+	<legend>Редактирование коментария</legend>
+	<%= render 'fields', f: f %>
+<% end %>
+

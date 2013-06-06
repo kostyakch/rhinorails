@@ -1,0 +1,19 @@
+<tr>
+  <td class="level_<%= level %>">
+    <b><%= link_to item.comment, edit_admin_blog_comment_path(item) %></b>
+    <% if level == 0 %>
+    <br><small>Наименование блога: <%= link_to item.blog.title, edit_admin_blog_path(item.blog) %></small>
+    <% end %>
+  </td>
+  <td>
+    <% if item.approved? %><span class="label label-info">Одобрен</span><% else %><span class="label">Не одобрен</span><% end %>
+  </td>
+  <td class="center">
+    <%= link_to raw('<i class="halflings-icon edit"></i>'), edit_admin_blog_comment_path(item), class: 'btn btn-info' %>
+    <%= link_to raw('<i class="halflings-icon trash"></i>'), admin_blog_comment_path(item), class: 'btn btn-info', :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %>
+  </td>
+</tr>
+
+<% item.children.each do |children| %>
+  <%= render 'rows', item: children, level: level + 1 %>
+<% end %> 

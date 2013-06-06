@@ -28,8 +28,12 @@ class Admin::PagesController < ApplicationController
 	       	@page.ptype = Page.find(@page.parent_id).ptype
     	end
 
-    	default_fields(@page)
-    	default_content(@page)
+    	content_fields(@page)
+    	if @page.ptype.present? && @page.ptype == 'article'
+    		content_tabs(@page,  %w[main_content preview])
+    	else
+    		content_tabs(@page)
+    	end
 	end
 
 	def create
@@ -100,15 +104,26 @@ class Admin::PagesController < ApplicationController
 
 
 	private
-		def default_content(page)
-			page.page_content.build(name: "main_content") if page.page_content.where("name = 'main_content'").empty?
+		def content_tabs(page, names=%w[main_content])
+			names.each do |name|
+				page.page_content.build(name: name) if page.page_content.where("name = '#{name}'").empty?
+			end
 		end
 
-		def default_fields(page)	    	
-			page.page_field.build( name: "title", ftype: 'title', position: 0 )
-			page.page_field.build( name: "h1", ftype: 'title', position: 1 )
-			page.page_field.build( name: "description", ftype: 'meta', position: 2 )
-	    	page.page_field.build( name: "keywords", ftype: 'meta', position: 3 )
+		def content_fields(page, fields = 'default')
+			if fields == 'default'
+				fields =  [
+						{ :name => "title", :ftype => "title", :position => 0 },
+						{ :name => "h1", :ftype => "title", :position => 1 },
+						{ :name => "description", :ftype => "meta", :position => 2 },
+						{ :name => "keywords", :ftype => "meta", :position => 3 }
+				]
+			end
+
+			fields.each do |field|
+				field.assert_valid_keys(:name, :ftype, :position) # валидация
+				page.page_field.build(field)
+			end
 		end
 
 		# Обновим page_field (добавим/удалим)

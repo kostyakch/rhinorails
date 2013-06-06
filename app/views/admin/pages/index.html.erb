@@ -20,33 +20,35 @@
 		</div>
 		<div class="box-content">
 			
-			<a href="/admin/page/33/list" class="quick-button span2">
+			<a class="quick-button span2">
 				<i class="fa-icon-tasks"></i>
-				<p>Новостей</p>
-				<span class="notification">123</span>
+				<p>Новости</p>
+				<span class="notification"><%= Page.where("ptype='article'").count %></span>
 			</a>
-			<a class="quick-button span2">
+			<a href="<%= admin_blogs_path %>" class="quick-button span2">
 				<i class="fa-icon-book"></i>
-				<p>Статей</p>
-				<span class="notification red">68</span>
+				<p>Блоги</p>
+				<span class="notification red"><%= Blog.count %></span>
 			</a>
-			<a class="quick-button span2">
+			<a href="<%= admin_blog_comments_path %>" class="quick-button span2">
 				<i class="fa-icon-comments-alt"></i>
-				<p>Комментариев</p>
-				<span class="notification green">167</span>
+				<p>Комментарии</p>
+				<span class="notification green"><%= BlogComment.count %></span>
 			</a>
-			<a class="quick-button span2">
+			<a href="<%= admin_galleries_path %>" class="quick-button span2">
 				<i class="fa-icon-picture"></i>
-				<p>Изображений</p>
+				<p>Изображения</p>
+				<span class="notification green"><%= GalleryImage.count %></span>
 			</a>
 			<a href="<%= admin_users_path %>" class="quick-button span2">
 				<i class="fa-icon-group"></i>
-				<p>Пользователей</p>
+				<p>Пользователи</p>
 				<span class="notification"><%= User.count %></span>
 			</a>
-			<a class="quick-button span2">
-				<i class="fa-icon-barcode"></i>
-				<p>Товаров</p>
+			<a href="<%= admin_settings_path %>" class="quick-button span2">
+				<i class="fa-icon-cogs"></i>
+				<p>Настройки</p>
+				<span class="notification yellow"><%= Setting.count %></span>
 			</a>
 			<div class="clearfix"></div>
 		</div>	

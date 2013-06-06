@@ -20,8 +20,8 @@
 		<div id="sidebar-left" class="span1">
 			<div class="nav-collapse sidebar-nav">
 				<ul class="nav nav-tabs nav-stacked main-menu">
-					<li class="<%= 'active' if request.fullpath == admin_root_path %>"><%= link_to raw('<i class="fa-icon-dashboard"></i><span class="hidden-tablet"> Dashboard</span>'), admin_root_path %></li>	
-					<li class="<%= 'active' if request.fullpath == admin_pages_path %>">
+					<!-- <li class="<%= 'active' if request.fullpath == admin_root_path %>"><%= link_to raw('<i class="fa-icon-dashboard"></i><span class="hidden-tablet"> Dashboard</span>'), admin_root_path %></li>	 -->
+					<li class="<%= 'active' if request.fullpath == admin_pages_path or request.fullpath == admin_root_path %>">
 						<%= link_to raw('<i class="fa-icon-tasks"></i><span class="hidden-tablet"> Контент</span>'), admin_pages_path %>
 					</li>
 					<li class="<%= 'active' if request.fullpath == admin_blogs_path %>"><%= link_to raw('<i class="fa-icon-book"></i><span class="hidden-tablet"> Блоги</span>'), admin_blogs_path %></li>

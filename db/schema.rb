@@ -15,13 +15,15 @@ ActiveRecord::Schema.define(:version => 20130603154508) do
 
   create_table "blog_comments", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "blog_id"
     t.integer  "parent_id"
-    t.text     "comment",                      :null => false
-    t.boolean  "active",     :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.text     "comment",                       :null => false
+    t.boolean  "approved",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
+  add_index "blog_comments", ["blog_id"], :name => "blog_comments_blog_id_fk"
   add_index "blog_comments", ["parent_id"], :name => "blog_comments_parent_id_fk"
   add_index "blog_comments", ["user_id"], :name => "blog_comments_user_id_fk"
 
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20130603154508) do
     t.boolean  "active",       :default => true
     t.boolean  "has_comments", :default => true
     t.integer  "num_comments", :default => 0
+    t.date     "publish_date",                   :null => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
@@ -128,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20130603154508) do
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
   add_foreign_key "blog_comments", "blog_comments", :name => "blog_comments_parent_id_fk", :column => "parent_id", :dependent => :delete
+  add_foreign_key "blog_comments", "blogs", :name => "blog_comments_blog_id_fk"
   add_foreign_key "blog_comments", "users", :name => "blog_comments_user_id_fk", :dependent => :delete
 
   add_foreign_key "blogs", "users", :name => "blogs_user_id_fk", :dependent => :delete

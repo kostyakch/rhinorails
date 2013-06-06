@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-
+//= require_self
 //= require_tree .
 
 //= require bootstrap
@@ -49,3 +49,12 @@
 // require acme/counter
 // require acme/retina
 // require acme/custom
+
+
+$(function(){
+	if($('#content').height() > $('#sidebar-left2').height()) {
+		$('#sidebar-left2').height( $('#content').height() + 40);
+	} else {
+		$('#content').height( $('#sidebar-left2').height() - 40);
+	}	
+})
