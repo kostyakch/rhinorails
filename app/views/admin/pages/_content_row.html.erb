@@ -41,6 +41,11 @@
 
 
 <script type="text/javascript">
-    $('textarea').redactor({ minHeight: 350, 'imageUpload': '/test'});
+    $('textarea').redactor({ 
+        minHeight: 350, 
+        'imageUpload': '<%= admin_assets_upload_image_path %>',
+        'imageGetJson': '<%= admin_assets_image_list_path %>',
+        'fileUpload': '<%= admin_assets_upload_file_path %>'
+    });
 </script>   
 <% end %>

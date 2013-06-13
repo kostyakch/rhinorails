@@ -22,6 +22,11 @@ RhinoCMS::Application.routes.draw do
     resources :blogs
     resources :blog_comments
 
+    #upload files
+    match 'assets/upload_image' => 'assets#upload_image'#, via: :js
+    match 'assets/upload_file' => 'assets#upload_file' 
+    match 'assets/image_list' => 'assets#image_list'
+
     match '/gallery_images/:gallery_id/new' => 'gallery_images#new', :as => :new_image_gallery
     match '/gallery_images/:gallery_id/uppload' => 'gallery_images#uppload', :as => :uppload_images
     resources :gallery_images
@@ -41,7 +46,6 @@ RhinoCMS::Application.routes.draw do
 
   root :to => 'pages#index'
   match '*url' => 'pages#internal', :as => :page
-
 
 
   # resources :pages do
