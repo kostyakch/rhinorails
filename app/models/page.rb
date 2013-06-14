@@ -85,12 +85,12 @@ class Page < ActiveRecord::Base
       if !self.slug.present?
         if self.parent_id.present?
           parent = Page.find_by_id(self.parent_id)
-          self.slug = parent.slug + "/" + Utils.to_slug(self.name)
+          self.slug = parent.slug + "/" + Rhino::Utils.to_slug(self.name)
         else
-          self.slug = Utils.to_slug(self.name)
+          self.slug = Rhino::Utils.to_slug(self.name)
         end
       else
-        self.slug = Utils.to_slug(self.slug)
+        self.slug = Rhino::Utils.to_slug(self.slug)
       end
     end
 

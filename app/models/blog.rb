@@ -21,9 +21,9 @@ class Blog < ActiveRecord::Base
 
     def title_to_slug
       if !self.slug.present?
-        self.slug = Utils.to_slug(self.title)
+        self.slug = Rhino::Utils.to_slug(self.title)
       else
-        self.slug = Utils.to_slug(self.slug)
+        self.slug = Rhino::Utils.to_slug(self.slug)
       end         
     end 
 end
