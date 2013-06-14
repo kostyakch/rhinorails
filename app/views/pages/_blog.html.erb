@@ -1,0 +1,7 @@
+<% @blogs = blog_list.each do |blog| %>
+	<h2><%= link_to blog.title, blog_show_path(blog.slug) %></h2>
+
+	<%= blog.spost.html_safe %>
+<% end %>
+
+<%= will_paginate @blogs %>

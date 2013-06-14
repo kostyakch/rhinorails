@@ -1,0 +1,7 @@
+<ul>
+	<li><%= item.comment %></li>
+
+	<% item.children.each do |children| %>
+	  <%= render 'comments', item: children %>
+	<% end %> 
+</ul>

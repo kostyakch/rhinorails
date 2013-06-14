@@ -1,0 +1,13 @@
+<h1><%= @blog.title %></h1>
+<%= @blog.post.html_safe %>
+
+
+<% @blog_comments.each do |item| %>
+<%= render 'comments', item: item %>
+<% end %> 
+
+<% if @blog.has_comments? %>
+	<%= form_for @blog_comment, :url => blog_comments_path do |f| %>
+		<%= render 'blog_comments/rows', f: f %>
+	<% end %>
+<% end %>

@@ -11,8 +11,12 @@
 
 <%= render 'messages/message_form', message: @message = Message.new if @page.field_by_name('feedback').present? %>
 
-<% if @page.page_content.first %>
-<%= raw @page.page_content.first.content %>
+<% if template = @page.field_by_name('template') %>
+	<%= render_partial_if_exists template %>
+<% else %>
+	<% if content = @page.content_by_name('main_content') %>
+		<%= content.html_safe %>
+	<% end %>
 <% end %>
 
 

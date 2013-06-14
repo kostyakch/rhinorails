@@ -2,7 +2,7 @@ class Blog < ActiveRecord::Base
 	before_validation :title_to_slug
 	after_initialize :set_publish_date
 
-	attr_accessible :active, :has_comments, :num_comments, :post, :slug, :spost, :status, :title, :publish_date
+	attr_accessible :title, :spost, :post, :slug, :active, :has_comments, :num_comments, :status, :publish_date
 
 	default_scope order: 'publish_date DESC'
 

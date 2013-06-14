@@ -10,6 +10,7 @@ ru:
   _SUCCESSFULLY_CREATED: Запись создана.
   _SUCCESSFULLY_UPDATED: "Запись \"%{name}\" успешно обновлена."
   _SUCCESSFULLY_DELITED: "Запись \"%{name}\" успешно удалена."
+  _PARTIAL_ERROR: Ошибка подключения шаблона.
 
   _EDIT_USER_SUCCESS: Данные пользователя изменены
   _WELCOME: Добро пожаловать в систему!
@@ -63,6 +64,9 @@ ru:
   _SUCCESSFULLY_UPLOADED: Изображения успешно загружены.
   _ERROR_UPLOAD: Ошибка при загрузке изображений.
 
+  #blog
+  _BLOG_COMMENT_SUCCESSFULLY_CREATED: Ваш комментарий добавлен.
+  _BLOG_COMMENT_SUCCESSFULLY_WAITING_FOR_MODERATION: Ваш комментарий добавлен и ждет модерации.
 
   created_at:
       formats:

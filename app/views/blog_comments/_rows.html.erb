@@ -1,0 +1,19 @@
+<%= f.hidden_field :blog_id, value: @blog.id %>
+
+<legend>Комментировать</legend>
+<%= render 'shared/error_messages', object: f.object %>
+
+<div class="form-horizontal"> 
+	<div class="control-group">
+        <%= f.label :comment, class: 'control-label' %>
+        <div class="controls">
+            <%= f.text_area :comment, class: 'span11', rows: 4 %>
+        </div>
+    </div>      
+
+    <div class="form-actions">
+        <div class="btn-overlay">
+            <%= f.button t("_BTN_SAVE"), class: "btn btn-primary" %>
+        </div>
+    </div>
+</div>

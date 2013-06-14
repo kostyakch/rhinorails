@@ -61,5 +61,10 @@ module RhinoCMS
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+
+    ############## Rhino configuration ###############
+    # Approved user comments for blog
+    config.blogcomments_approved = false
   end
 end

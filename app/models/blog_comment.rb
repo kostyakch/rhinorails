@@ -1,5 +1,5 @@
 class BlogComment < ActiveRecord::Base
-	attr_accessible :comment, :approved
+	attr_accessible :comment, :approved, :blog_id
 
 	belongs_to :blog, :inverse_of => :blog_comment	
 	accepts_nested_attributes_for :blog

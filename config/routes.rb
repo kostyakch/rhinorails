@@ -1,5 +1,11 @@
 RhinoCMS::Application.routes.draw do
 
+  get "blog_comments/show"
+
+  get "blog_comments/new"
+
+  get "blog_comments/create"
+
   # Admin URLs
   namespace :admin do
     root :to => 'pages#index'
@@ -43,6 +49,9 @@ RhinoCMS::Application.routes.draw do
 
   match '/messages', to: 'messages#create', via: :post
   match '/messages/new', to: 'messages#new'
+
+  match '/blogs/:slug', to: 'blogs#show', as: :blog_show
+  resources :blog_comments, only: [:new, :create]
 
   root :to => 'pages#index'
   match '*url' => 'pages#internal', :as => :page
