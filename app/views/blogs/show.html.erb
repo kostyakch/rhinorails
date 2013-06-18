@@ -8,6 +8,7 @@
 
 <% if @blog.has_comments? %>
 	<%= form_for @blog_comment, :url => blog_comments_path do |f| %>
+
 		<%= render 'blog_comments/rows', f: f %>
 	<% end %>
 <% end %>

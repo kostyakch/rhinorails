@@ -1,7 +1,15 @@
+<%# if item.approved %>
 <ul>
-	<li><%= item.comment %></li>
+	<li>
+		<input type="hidden" name="comment_id" value="<%= item.id %>">
+		<b><%= item.user.name %>:</b> <span class="date"><%= l item.created_at, :format => :long %></span> <a href="#" class="reply">ответить</a><br>
+		<%= item.comment %>
+		<hr>
+	</li>
 
-	<% item.children.each do |children| %>
+	<% comment_list(item).each do |children| %>
+
 	  <%= render 'comments', item: children %>
 	<% end %> 
 </ul>
+<%# end %> 
