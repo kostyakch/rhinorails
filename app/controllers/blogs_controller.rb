@@ -11,6 +11,7 @@ class BlogsController < ApplicationController
 				.paginate(page: params[:page])
 
 			@blog_comment = BlogComment.new
+			@user = User.new
 		end		
 	end
 end

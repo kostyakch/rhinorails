@@ -110,6 +110,11 @@ ru:
         value: Значение
         descr: Описание
 
+      blog_comment:
+        name: Имя
+        email: E-mail
+        comment: Комментарий
+
 
     errors:
       models:
