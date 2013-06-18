@@ -31,8 +31,8 @@ module ApplicationHelper
 	def render_partial_if_exists(partial)
 		render partial: partial
 		
-		# rescue
-		# 	t('_PARTIAL_ERROR', name: partial)
+		rescue
+			t('_PARTIAL_ERROR', name: partial)
 
 	end
 end
