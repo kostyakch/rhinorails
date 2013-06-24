@@ -36,7 +36,13 @@ module SessionsHelper
   end
 
   def has_role?(role)
-    current_user.roles == role
+    res = false
+    current_user.roles.split(',').each do |r|
+      res = (r == role)
+      break if res
+    end
+
+    return res
   end
 
   def setting_by_name(name, reload = false)

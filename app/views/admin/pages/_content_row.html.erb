@@ -6,7 +6,7 @@
             <% f.object.page_content.each_with_index do |ob, index| %>
                 <li class="<% if index == 0 %>active<% end %>">
                     <a href="#<%= "tab#{ob.id}" %>" data-toggle="tab" rel="tab<%= ob.id %>">
-                        <%=t ob.name %> <i class="icon-remove-sign del_tab"></i>
+                        <%=t ob.name %> <% if !disabled_page?(@page) %><i class="icon-remove-sign del_tab"></i><% end %>
                     </a>
                 </li>                 
             <% end %>

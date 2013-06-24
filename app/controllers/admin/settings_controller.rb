@@ -1,6 +1,8 @@
 class Admin::SettingsController < ApplicationController
 	layout 'admin/application'
-	before_filter :admin_only
+
+	before_filter :signed_in_user
+	before_filter { access_only_roles %w[ROLE_ADMIN] }
 
 	def index
 		store_location

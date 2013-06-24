@@ -26,6 +26,7 @@ ru:
 
   _SUBJECT_SEND_EMAIL: Сообщение с сайта...
   _EMAIL_SUCCESS_SEND: "Ваше сообщение успешно отправлено, и будет рассмотрено в ближайшее время."
+  No permissions to perform this operation: "Нет разрешений на выполнение этой операции."
 
   # Admin menu
   Settings: Настройки

@@ -3,7 +3,8 @@ class Admin::UsersController < ApplicationController
 
   #before_filter :signed_in_user, only: [:index, :edit, :update]
   #before_filter :correct_user, only: [:edit, :update]
-  before_filter :admin_only
+  before_filter :signed_in_user
+  before_filter { access_only_roles %w[ROLE_ADMIN] }
 
 
   def index

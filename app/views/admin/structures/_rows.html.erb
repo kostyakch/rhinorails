@@ -17,8 +17,10 @@
                 <li><%= link_to t('add subpage'), admin_new_children_structures_path(p) if p.ptype != 'article' %></li>
                 <li><%= link_to t('edit'), edit_admin_structure_path(p) %></li>
                 <li><%= link_to p.active? ? t('hide') : t('show'), admin_page_showhide_path(p) %></li>
+                <% if !disabled_page?(p) %>
                 <li class="divider"></li>
                 <li><%= link_to t('delete'), admin_structure_path(p), :method => :delete, :data => { :confirm => t('_DELETE_CONFIRM') } %></li>
+                <% end %>
             </ul>
         </div>
 	</td>

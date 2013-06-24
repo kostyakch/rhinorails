@@ -8,9 +8,13 @@
 	<div class="control-group">	
 		<label class="control-label" for="page_page_fields_name"><%=t c.object.name %></label>
 	    <div class="controls">
+	    	<% if disabled_page?(@page) %>
+	    	<%= c.text_field :value, class: 'span11', readonly: 'readonly' %>
+	    	<% else %>
 	        <%= c.text_field :value, class: 'span11' %>
 	        <a href="#" class="add_field"><span class="icon-plus-sign"></span></a>
 			<a href="#" class="del_field"><span class="icon-remove-sign"></span></a>			
+	        <% end %>
 	    </div>
 	</div> 
 </div>

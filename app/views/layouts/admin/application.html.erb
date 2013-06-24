@@ -38,9 +38,11 @@
 					<li><a href="./file-manager.html"><i class="fa-icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
 					<li><a href="./icon.html"><i class="fa-icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
 					<li><a href="./login.html"><i class="fa-icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li> -->
+					<% if has_role?('ROLE_ADMIN') %>
 					<li class="<%= 'active' if request.fullpath == admin_structures_path %>"><%= link_to raw('<i class="fa-icon-sitemap"></i><span class="hidden-tablet"> Структура сайта</span>'), admin_structures_path %></li>
 					<li class="<%= 'active' if request.fullpath == admin_users_path %>"><%= link_to raw('<i class="fa-icon-group"></i><span class="hidden-tablet"> Пользователи</span>'), admin_users_path %></li>
 					<li class="<%= 'active' if request.fullpath == admin_settings_path %>"><%= link_to raw('<i class="fa-icon-cogs"></i><span class="hidden-tablet"> Настройки</span>'), admin_settings_path %></li>
+					<% end %>
 				</ul>				
 			</div>
 		</div>

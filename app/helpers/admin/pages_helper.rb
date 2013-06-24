@@ -15,6 +15,12 @@ module Admin::PagesHelper
 		end		
 	end	
 
+	def disabled_page?(page)
+		if page.present? 
+			setting_by_name('disabled_pages').split(',').include? page.id.to_s
+		end
+	end
+
 	def field_javascript
 		<<-CODE
 		$(function(){
