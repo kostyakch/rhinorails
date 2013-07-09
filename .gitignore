@@ -1,5 +1,6 @@
-rhino-ruby.sublime-project
-rhino-ruby.sublime-workspace
+*.sublime-*
+
+Gemfile.lock
 
 # Игнорирование конфига bundler
 /.bundle

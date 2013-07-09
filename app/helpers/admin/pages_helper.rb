@@ -17,7 +17,7 @@ module Admin::PagesHelper
 
 	def disabled_page?(page)
 		if page.present? 
-			setting_by_name('disabled_pages').split(',').include? page.id.to_s
+			setting_by_name('disabled_pages').split(',').include? page.id.to_s if setting_by_name('disabled_pages').present?
 		end
 	end
 
