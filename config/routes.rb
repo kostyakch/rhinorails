@@ -1,11 +1,5 @@
 RhinoCMS::Application.routes.draw do
 
-  get "blog_comments/show"
-
-  get "blog_comments/new"
-
-  get "blog_comments/create"
-
   # Admin URLs
   namespace :admin do
     root :to => 'pages#index'

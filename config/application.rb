@@ -66,5 +66,8 @@ module RhinoCMS
     ############## Rhino configuration ###############
     # Approved user comments for blog
     config.blogcomments_approved = false
+
+    # Redirect to www. if true
+    config.redirect_to_www = false
   end
 end

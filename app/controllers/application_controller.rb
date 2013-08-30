@@ -1,12 +1,11 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
 
-	# before_filter :set_locale
+  before_filter :check_uri if Rails.configuration.redirect_to_www
 	 
 	# def set_locale
 	#   I18n.locale = params[:locale] || I18n.default_locale
 	# end  
-
 
 
   # Force signout to prevent CSRF attacks
@@ -14,6 +13,11 @@ class ApplicationController < ActionController::Base
     sign_out
     super
   end
+  
+  def check_uri
+    redirect_to request.protocol + "www." + request.host_with_port + request.fullpath if !/^www/.match(request.host)
+  end
+
   	
   private    
     def signed_in_user
