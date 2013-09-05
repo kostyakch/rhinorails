@@ -4,7 +4,7 @@
 <div id="sidebar-left2" class="span2">
 	<div class="nav-collapse sidebar-nav">
 		<ul class="nav nav-tabs nav-stacked">
-			<% @pages.each do |p| %>
+			<% page_tree.each do |p| %>
 				<%= render 'rows', p: p, level: 0 %>
 			<% end %> 
 		</ul>				

@@ -1,0 +1,29 @@
+<div id="sidebar-left" class="span1">
+	<div class="nav-collapse sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked main-menu">
+			<% if has_role?('ROLE_ADMIN') || has_role?('ROLE_EDITOR') %>
+			<li class="<%= 'active' if controller.controller_name == 'pages' %>">
+				<%= link_to raw('<i class="fa-icon-tasks"></i><span class="hidden-tablet"> Контент</span>'), admin_pages_path %>
+			</li>
+			<li class="<%= 'active' if controller.controller_name == 'blogs' or controller.controller_name == 'blog_comments' %>">
+				<%= link_to raw('<i class="fa-icon-book"></i><span class="hidden-tablet"> Блоги</span>'), admin_blogs_path %>
+			</li>
+			<li class="<%= 'active' if controller.controller_name == 'galleries' or controller.controller_name == 'gallery_images' %>">
+				<%= link_to raw('<i class="fa-icon-picture"></i><span class="hidden-tablet"> Галерея</span>'), admin_galleries_path %>
+			</li>
+			<% end %>
+
+			<% if has_role?('ROLE_ADMIN') %>
+			<li class="<%= 'active' if controller.controller_name == 'structures' %>">
+				<%= link_to raw('<i class="fa-icon-sitemap"></i><span class="hidden-tablet"> Структура сайта</span>'), admin_structures_path %>
+			</li>
+			<li class="<%= 'active' if controller.controller_name == 'users' %>">
+				<%= link_to raw('<i class="fa-icon-group"></i><span class="hidden-tablet"> Пользователи</span>'), admin_users_path %>
+			</li>
+			<li class="<%= 'active' if controller.controller_name == 'settings' %>">
+				<%= link_to raw('<i class="fa-icon-cogs"></i><span class="hidden-tablet"> Настройки</span>'), admin_settings_path %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
