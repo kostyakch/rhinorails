@@ -1,0 +1,5 @@
+<% if @page_comment.errors.any? %>
+$("#errors").html('<%= escape_javascript(render("shared/error_messages", object: @page_comment, :formats => [:html])) %>');
+<% else %>
+$("form").html('<%= escape_javascript(render("success_message", :formats => [:html])) %>');
+<% end %>

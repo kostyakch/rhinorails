@@ -8,7 +8,7 @@ class PageCommentsController < ApplicationController
 	def create
 		params[:page_comment][:approved] = Rails.configuration.blogcomments_approved
 		@page_comment = PageComment.new(params[:page_comment])
-		@blog = Page.find_by_id(params[:page_comment][:blog_id])
+		@page = Page.find_by_id(params[:page_comment][:page_id])
 
 		# Попытаемся найти пользователя по емаил
 		@user = User.find_by_email(params[:user][:email])
@@ -18,13 +18,20 @@ class PageCommentsController < ApplicationController
 			@user = User.new(params[:user])
 			@user.password = 10.times.map{ 20 + Random.rand(11) } # рандомный пароль
 			@user.password_confirmation = @user.password
-			@user.save
+			#@user.save
 		end
 		
-		if !@user.id.present? 
+		if @user.save
+			redirect_to page_path(@page.slug)
+			return
+		else
 			render action: "new"
 			return
 		end
+		# if !@user.id.present? 
+		# 	render action: "new"
+		# 	return
+		# end
 
 		@page_comment.user = @user
 		if @page_comment.save

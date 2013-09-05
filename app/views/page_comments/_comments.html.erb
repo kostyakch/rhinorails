@@ -1,0 +1,20 @@
+<ul>
+	<li class="<%= class_name %>">
+		<input type="hidden" name="comment_id" value="<%= item.id %>">
+		<div>
+			<figure class="comment-avatar">
+				<%= gravatar_for item.user, { size: 60 } %>
+			</figure>
+			<div class="comment-details">
+				<h5><a href="#"><%= item.user.name %></a></h5>
+				<div class="comment-meta">
+					<a href=""><%= l item.created_at, :format => :long %></a><span class="meta-sep">·</span> <a href="#" class="reply">ответить</a>
+				</div>
+				<p><%= item.comment %></p>
+			</div>
+		</div>
+		<% comment_list(item).each do |children| %>
+			<%= render 'page_comments/comments', item: children, class_name: 'children-comment' %>
+		<% end %> 		
+	</li>
+</ul>

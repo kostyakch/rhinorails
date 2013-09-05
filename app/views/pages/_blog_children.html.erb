@@ -1,0 +1,30 @@
+<div class="blog-post">
+
+    <h1><%= @page.field_by_name('h1') %></h1>
+
+    <%= @page.content_by_name('full').html_safe %>	        
+
+
+	<div class="post-meta"><a href="#">Admin</a>, 24 July 2013 on <a href="#">Branding</a> with <a href="#">3 comments</a></div>
+
+	<br><br><br>
+	<a name="comments"></a>
+	<% if @page.comment_count > 0 %>
+		<h3 class="comment-title">Комментарии</h3>
+
+		<div class="comment-list">
+			<% comment_list.each do |item| %>
+				<%= render 'page_comments/comments', item: item, class_name: 'parent-comment' %>
+			<% end %> 
+		</div>	
+	<% end %>
+	<br><br>
+
+	<div class="comment-form">			
+		<%= form_for @page_comment = PageComment.new, :url => page_comments_path do |f| %>
+		<%#= form_for @page_comment = PageComment.new, remote: true, format: :js, id: 'page_comment_form' do |f| %>
+			<%= render 'page_comments/rows', f: f %>
+		<% end %>
+	</div>
+</div>        
+

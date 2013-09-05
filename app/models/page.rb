@@ -21,7 +21,7 @@ class Page < ActiveRecord::Base
   after_initialize :set_publish_date
 
   attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :ptype, :publish_date, :page_content_attributes, :page_field_attributes
-  
+  #attr_accessible :page_user
 
   # Associations
   default_scope order: 'position'
@@ -36,7 +36,9 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :page_field, :allow_destroy => true
 
   has_many :page_comment, :order => 'id', :autosave => true, :dependent => :destroy
-  accepts_nested_attributes_for :page_comment, :allow_destroy => true  
+  accepts_nested_attributes_for :page_comment, :allow_destroy => true 
+
+  belongs_to :user 
 
   # Validations
   validates :name, :slug, :position, :menu, presence: true
@@ -50,11 +52,19 @@ class Page < ActiveRecord::Base
 
 
   def content_by_name(name)
-    self.page_content.find_by_name(name).content if self.page_content.find_by_name(name).present?
+    if self.page_content.find_by_name(name).present?
+      self.page_content.find_by_name(name).content 
+    else
+      ''
+    end
   end
 
   def field_by_name(name)
-    self.page_field.find_by_name(name).value if self.page_field.find_by_name(name).present?
+    if self.page_field.find_by_name(name).present?
+      self.page_field.find_by_name(name).value 
+    else
+      ''
+    end
   end
 
   def children(active = true)
@@ -77,6 +87,10 @@ class Page < ActiveRecord::Base
   def parent
     Page.find(self.parent_id) if self.parent_id.present?
   end
+
+  def comment_count
+    PageComment.where('page_id = ? AND approved = true', self.id).count
+  end  
 
   protected
     def set_publish_date

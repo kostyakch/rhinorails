@@ -48,7 +48,7 @@ class Admin::PagesController < ApplicationController
 						{ :name => "image_big", :ftype => "image", :position => 5 },
 				]
 	    		content_fields(@page, fields)
-	    		content_tabs(@page,  %w[shotr full])
+	    		content_tabs(@page,  %w[short full])
 	    	end    		
     	end
 	end

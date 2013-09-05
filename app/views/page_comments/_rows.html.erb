@@ -1,0 +1,55 @@
+<%= f.hidden_field :page_id, value: @page.id %>
+<%= f.hidden_field :parent_id %>
+
+
+
+<div class="comment-form">
+    <div id="errors"></div>
+    <h3 class="comment-title">Оставить коммент <small style="display:none;"><a href="#" class="cancel_reply">отменить "ответить"</a></small></h3>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <%= f.fields_for f.object.user do |u| %>
+    <%#= fields_for @user = User.new do |u| %>
+        <%#= render 'shared/error_messages', object: u.object %>
+
+        <p>
+            <%= u.label :name %>
+            <%= u.text_field :name %>
+        </p>        
+        
+        <p>
+            <%= u.label :email %>
+            <%= u.text_field :email %>
+            <span class="help"> - не будет отображаться на сайте</span>
+        </p>         
+    <% end %> 
+
+        <p>
+            <%= f.text_area :comment, rows: 8, cols: 45 %>
+        </p>      
+
+        <p class="form-submit">
+            <%= f.button t("_BTN_SAVE") %>
+        </p>
+</div>
+
+
+
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+    // Добавляет значение parent_id для комментирования комментария
+    $('.reply').click(function(){
+        $('#page_comment_parent_id').val( $(this).parents('li').first().find("[name='comment_id']").val() );
+        $('.cancel_reply').parent().show();
+        return false;
+    });
+
+    // Удаляет значение parent_id для комментирования комментария
+    $(".cancel_reply").click(function(){
+        $('.cancel_reply').parent().hide();
+        $('#page_comment_parent_id').val('');
+        return false;
+    });
+</script>   
+<% end %>

@@ -10,7 +10,7 @@ class Admin::PageCommentsController < ApplicationController
   end
 
   def edit
-    @page_comment = PageComment.find(params[:id])
+    @page_comment = PageComment.find(params[:id])    
   end
 
   def update

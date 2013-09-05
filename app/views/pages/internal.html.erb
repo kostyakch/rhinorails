@@ -3,21 +3,21 @@
 
 <%= render 'shared/breadcrumbs' %> 
 
-<% if field = @page.field_by_name('h1') %>
-<h1><%= field %></h1>
-<% end %>
-
-<%= render 'news_list', p: @page %>
+<%#= render 'news_list', p: @page %>
 
 <%= render 'messages/message_form', message: @message = Message.new if @page.field_by_name('feedback').present? %>
 
-<% if template = @page.field_by_name('template') %>
-	<%= render_partial_if_exists template %>
+
+<% if @page.field_by_name('template').present? || (@page.parent.present? && @page.parent.field_by_name('template').present? ) %>
+    
+    <%= render_partial_if_exists @page.field_by_name('template') if @page.field_by_name('template').present? %>
+    <%= render_partial_if_exists @page.parent.field_by_name('template') + '_children' if @page.parent.present? && @page.parent.field_by_name('template').present? %>
+
 <% else %>
-	<% if content = @page.content_by_name('main_content') %>
-		<%= content.html_safe %>
-	<% end %>
+	<h1><%= @page.field_by_name('h1') %></h1>
+	<%= content.html_safe %>
 <% end %>
+
 
 
 
