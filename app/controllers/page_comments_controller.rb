@@ -1,14 +1,14 @@
-class BlogCommentsController < ApplicationController
+class PageCommentsController < ApplicationController
 
 	def new
-		@blog_comment = BlogComment.new
+		@page_comment = PageComment.new
 		@user = User.new
 	end
 
 	def create
-		params[:blog_comment][:approved] = Rails.configuration.blogcomments_approved
-		@blog_comment = BlogComment.new(params[:blog_comment])
-		@blog = Blog.find_by_id(params[:blog_comment][:blog_id])
+		params[:page_comment][:approved] = Rails.configuration.blogcomments_approved
+		@page_comment = PageComment.new(params[:page_comment])
+		@blog = Page.find_by_id(params[:page_comment][:blog_id])
 
 		# Попытаемся найти пользователя по емаил
 		@user = User.find_by_email(params[:user][:email])
@@ -26,14 +26,14 @@ class BlogCommentsController < ApplicationController
 			return
 		end
 
-		@blog_comment.user = @user
-		if @blog_comment.save
+		@page_comment.user = @user
+		if @page_comment.save
 			if Rails.configuration.blogcomments_approved
 				flash[:info] = t('_BLOG_COMMENT_SUCCESSFULLY_CREATED')
 			else
 				flash[:info] = t('_BLOG_COMMENT_SUCCESSFULLY_WAITING_FOR_MODERATION')
 			end
-			redirect_back_or blog_show_path(@blog_comment.blog.slug)
+			redirect_back_or blog_show_path(@page_comment.blog.slug)
 		else
 			render action: "new"
 		end

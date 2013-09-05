@@ -1,25 +1,5 @@
 <% provide(:title, "Список блогов") %>
 
-<div class="row-fluid">  
-  <div class="box span12">
-
-    <div class="box-content">
-      <a href="<%= new_admin_blog_path %>" class="quick-button offset2 span3">
-        <i class="fa-icon-tasks"></i>
-        <p>Новый блог</p>
-      </a>
-
-      <a href="<%= admin_blog_comments_path %>" class="quick-button offset2 span3">
-        <i class="fa-icon-picture"></i>
-        <p>Комментарии</p>
-        <span class="notification blue"><%= BlogComment.count %></span>
-      </a>
-
-      <div class="clearfix"></div>
-    </div>  
-  </div>
-</div>
-
 <div class="box-header" data-original-title="">
   <h2><i class="halflings-icon align-justify"></i><span class="break"></span>Комментарии</h2>
 </div>
@@ -34,7 +14,7 @@
         </tr>
       </thead>
       <tbody>       
-        <% @blog_comments.each do |item| %>
+        <% @page_comments.each do |item| %>
         <%= render 'rows', item: item, level: 0 %>
         <% end %>       
       </tbody>

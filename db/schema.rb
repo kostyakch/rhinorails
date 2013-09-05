@@ -11,39 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603154508) do
-
-  create_table "blog_comments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "blog_id"
-    t.integer  "parent_id"
-    t.text     "comment",                       :null => false
-    t.boolean  "approved",   :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-  end
-
-  add_index "blog_comments", ["blog_id"], :name => "blog_comments_blog_id_fk"
-  add_index "blog_comments", ["parent_id"], :name => "blog_comments_parent_id_fk"
-  add_index "blog_comments", ["user_id"], :name => "blog_comments_user_id_fk"
-
-  create_table "blogs", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "title",                          :null => false
-    t.text     "spost",                          :null => false
-    t.text     "post",                           :null => false
-    t.string   "slug",                           :null => false
-    t.integer  "status",       :default => 1
-    t.boolean  "active",       :default => true
-    t.boolean  "has_comments", :default => true
-    t.integer  "num_comments", :default => 0
-    t.date     "publish_date",                   :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-  end
-
-  add_index "blogs", ["slug"], :name => "index_blogs_on_slug", :unique => true
-  add_index "blogs", ["user_id"], :name => "blogs_user_id_fk"
+ActiveRecord::Schema.define(:version => 20130905105112) do
 
   create_table "galleries", :force => true do |t|
     t.integer  "page_id"
@@ -70,6 +38,20 @@ ActiveRecord::Schema.define(:version => 20130603154508) do
   end
 
   add_index "gallery_images", ["gallery_id", "path"], :name => "index_gallery_images_on_gallery_id_and_path", :unique => true
+
+  create_table "page_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "page_id"
+    t.integer  "parent_id"
+    t.text     "comment",                       :null => false
+    t.boolean  "approved",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "page_comments", ["page_id"], :name => "page_comments_page_id_fk"
+  add_index "page_comments", ["parent_id"], :name => "page_comments_parent_id_fk"
+  add_index "page_comments", ["user_id"], :name => "page_comments_user_id_fk"
 
   create_table "page_contents", :force => true do |t|
     t.integer "page_id"
@@ -130,15 +112,13 @@ ActiveRecord::Schema.define(:version => 20130603154508) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
-  add_foreign_key "blog_comments", "blog_comments", :name => "blog_comments_parent_id_fk", :column => "parent_id", :dependent => :delete
-  add_foreign_key "blog_comments", "blogs", :name => "blog_comments_blog_id_fk"
-  add_foreign_key "blog_comments", "users", :name => "blog_comments_user_id_fk", :dependent => :delete
-
-  add_foreign_key "blogs", "users", :name => "blogs_user_id_fk", :dependent => :delete
-
   add_foreign_key "galleries", "pages", :name => "galleries_page_id_fk", :dependent => :delete
 
   add_foreign_key "gallery_images", "galleries", :name => "gallery_images_gallery_id_fk", :dependent => :delete
+
+  add_foreign_key "page_comments", "page_comments", :name => "page_comments_parent_id_fk", :column => "parent_id", :dependent => :delete
+  add_foreign_key "page_comments", "pages", :name => "page_comments_page_id_fk"
+  add_foreign_key "page_comments", "users", :name => "page_comments_user_id_fk", :dependent => :delete
 
   add_foreign_key "page_contents", "pages", :name => "page_contents_page_id_fk", :dependent => :delete
 

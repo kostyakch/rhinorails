@@ -30,11 +30,26 @@ class Admin::PagesController < ApplicationController
 	       	@page.ptype = Page.find(@page.parent_id).ptype
     	end
 
-    	content_fields(@page)
-    	if @page.ptype.present? && @page.ptype == 'article'
-    		content_tabs(@page,  %w[main_content preview])
-    	else
+    	if !@page.ptype.present?
+    		content_fields(@page)
     		content_tabs(@page)
+    	else
+	    	case @page.ptype
+	    	when 'article'
+	    		content_fields(@page)
+	    		content_tabs(@page,  %w[main_content preview])
+	    	when 'blog'
+	    		fields =  [
+						{ :name => "title", :ftype => "title", :position => 0 },
+						{ :name => "h1", :ftype => "title", :position => 1 },
+						{ :name => "description", :ftype => "meta", :position => 2 },
+						{ :name => "keywords", :ftype => "meta", :position => 3 },
+						{ :name => "image_small", :ftype => "image", :position => 4 },
+						{ :name => "image_big", :ftype => "image", :position => 5 },
+				]
+	    		content_fields(@page, fields)
+	    		content_tabs(@page,  %w[shotr full])
+	    	end    		
     	end
 	end
 

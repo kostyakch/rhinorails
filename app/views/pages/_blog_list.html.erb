@@ -1,0 +1,10 @@
+<% article_list(p).each do |c| %>
+<div>
+	<p><%= link_to c.name, page_path(c.slug) %></p>
+
+	<% if short = c.content_by_name('short') %>
+		<p><%= short.html_safe %></p>
+	<% end %>
+</div>	
+<% end %>
+

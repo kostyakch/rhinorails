@@ -22,18 +22,18 @@
 			
 			<a class="quick-button span2">
 				<i class="fa-icon-tasks"></i>
-				<p>Новости</p>
-				<span class="notification"><%= Page.where("ptype='article'").count %></span>
+				<p>Новости/Статьи</p>
+				<span class="notification"><%= Page.where("ptype='article'").count-1 %></span>
 			</a>
-			<a href="<%= admin_blogs_path %>" class="quick-button span2">
+			<a href="" class="quick-button span2">
 				<i class="fa-icon-book"></i>
 				<p>Блоги</p>
-				<span class="notification red"><%= Blog.count %></span>
+				<span class="notification red"><%= Page.where("ptype='blog'").count-1 %></span>
 			</a>
-			<a href="<%= admin_blog_comments_path %>" class="quick-button span2">
+			<a href="<%= admin_page_comments_path %>" class="quick-button span2">
 				<i class="fa-icon-comments-alt"></i>
 				<p>Комментарии</p>
-				<span class="notification green"><%= BlogComment.count %></span>
+				<span class="notification green"><%= PageComment.count %></span>
 			</a>
 			<a href="<%= admin_galleries_path %>" class="quick-button span2">
 				<i class="fa-icon-picture"></i>

@@ -5,8 +5,8 @@
 			<li class="<%= 'active' if controller.controller_name == 'pages' %>">
 				<%= link_to raw('<i class="fa-icon-tasks"></i><span class="hidden-tablet"> Контент</span>'), admin_pages_path %>
 			</li>
-			<li class="<%= 'active' if controller.controller_name == 'blogs' or controller.controller_name == 'blog_comments' %>">
-				<%= link_to raw('<i class="fa-icon-book"></i><span class="hidden-tablet"> Блоги</span>'), admin_blogs_path %>
+			<li class="<%= 'active' if controller.controller_name == 'page_comments' %>">
+				<%= link_to raw('<i class="fa-icon-comments"></i><span class="hidden-tablet"> Комментарии</span>'), admin_page_comments_path %>
 			</li>
 			<li class="<%= 'active' if controller.controller_name == 'galleries' or controller.controller_name == 'gallery_images' %>">
 				<%= link_to raw('<i class="fa-icon-picture"></i><span class="hidden-tablet"> Галерея</span>'), admin_galleries_path %>

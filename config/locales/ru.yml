@@ -6,6 +6,7 @@ ru:
   _PAGE_SUCCESSFULLY_UPDATED: Страница успешно обновлена.
   _PAGE_SUCCESSFULLY_CREATED: Страница успешно создана.
   _PAGE_SUCCESSFULLY_DELITED: "Страница \"%{name}\" успешно удалена."
+  _PAGE_COMMENT_SUCCESSFULLY_DELITED: Комментарий успешно удален.
 
   _SUCCESSFULLY_CREATED: Запись создана.
   _SUCCESSFULLY_UPDATED: "Запись \"%{name}\" успешно обновлена."
@@ -50,6 +51,9 @@ ru:
   title: Заголовок окна
   Page: страница
   Article: статья
+  Blog: блог
+  shotr: Краткий текст (shotr)
+  full: Полный текст (full)
   add subpage: добавить подраздел
   edit: редактировать
   show: отобразить

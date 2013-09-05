@@ -35,6 +35,8 @@ class Page < ActiveRecord::Base
   has_many :page_field, :order => 'position', :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_field, :allow_destroy => true
 
+  has_many :page_comment, :order => 'id', :autosave => true, :dependent => :destroy
+  accepts_nested_attributes_for :page_comment, :allow_destroy => true  
 
   # Validations
   validates :name, :slug, :position, :menu, presence: true

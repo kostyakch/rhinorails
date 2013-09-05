@@ -1,7 +1,0 @@
-<% provide(:title, "Редактирование: #{@blog.title}") %>
-
-<%= form_for @blog, :url => admin_blog_path do |f| %>
-	<legend>Редактирование блога: <%= @blog.title %></legend>
-	<%= render 'fields', f: f %>
-<% end %>
-
