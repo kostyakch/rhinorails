@@ -1,4 +1,5 @@
 <h1>Комментарий для: <%= @page.name %> </h1>
 <%= form_for @page_comment, :url => page_comments_path do |f| %>
+<%#= form_for @page_comment, remote: true, format: :js do |f| %>
 	<%= render 'page_comments/rows', f: f %>
 <% end %>

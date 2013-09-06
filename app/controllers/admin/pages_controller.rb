@@ -44,8 +44,9 @@ class Admin::PagesController < ApplicationController
 						{ :name => "h1", :ftype => "title", :position => 1 },
 						{ :name => "description", :ftype => "meta", :position => 2 },
 						{ :name => "keywords", :ftype => "meta", :position => 3 },
-						{ :name => "image_small", :ftype => "image", :position => 4 },
-						{ :name => "image_big", :ftype => "image", :position => 5 },
+						{ :name => "comment", :ftype => "bool", :position => 4, :value => 'no' },
+						{ :name => "image_small", :ftype => "image", :position => 5 },
+						{ :name => "image_big", :ftype => "image", :position => 6 },
 				]
 	    		content_fields(@page, fields)
 	    		content_tabs(@page,  %w[short full])
@@ -138,7 +139,7 @@ class Admin::PagesController < ApplicationController
 			end
 
 			fields.each do |field|
-				field.assert_valid_keys(:name, :ftype, :position) # валидация
+				field.assert_valid_keys(:name, :ftype, :position, :value) # валидация
 				page.page_field.build(field)
 			end
 		end

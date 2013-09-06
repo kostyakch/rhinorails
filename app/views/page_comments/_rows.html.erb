@@ -8,29 +8,25 @@
     <h3 class="comment-title">Оставить коммент <small style="display:none;"><a href="#" class="cancel_reply">отменить "ответить"</a></small></h3>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.fields_for f.object.user do |u| %>
-    <%#= fields_for @user = User.new do |u| %>
-        <%#= render 'shared/error_messages', object: u.object %>
-
+    <%= f.fields_for :user do |u| %>
         <p>
             <%= u.label :name %>
             <%= u.text_field :name %>
         </p>        
-        
         <p>
             <%= u.label :email %>
             <%= u.text_field :email %>
             <span class="help"> - не будет отображаться на сайте</span>
-        </p>         
+        </p>
     <% end %> 
 
-        <p>
-            <%= f.text_area :comment, rows: 8, cols: 45 %>
-        </p>      
+    <p>
+        <%= f.text_area :comment, rows: 8, cols: 45 %>
+    </p>      
 
-        <p class="form-submit">
-            <%= f.button t("_BTN_SAVE") %>
-        </p>
+    <p class="form-submit">
+        <%= f.button t("_BTN_SAVE") %>
+    </p>
 </div>
 
 

@@ -13,8 +13,9 @@
 				<p><%= item.comment %></p>
 			</div>
 		</div>
+		<hr>
 		<% comment_list(item).each do |children| %>
 			<%= render 'page_comments/comments', item: children, class_name: 'children-comment' %>
-		<% end %> 		
+		<% end %> 
 	</li>
 </ul>

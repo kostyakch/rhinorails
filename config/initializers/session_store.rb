@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-RhinoCMS::Application.config.session_store :cookie_store, key: '_RhinoCMS_session'
+RhinoCMS::Application.config.session_store :cookie_store, key: '_RhinoArtCMS_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information

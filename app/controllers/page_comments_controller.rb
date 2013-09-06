@@ -2,47 +2,43 @@ class PageCommentsController < ApplicationController
 
 	def new
 		@page_comment = PageComment.new
-		@user = User.new
+		@page_comment.user = User.new
 	end
 
 	def create
-		params[:page_comment][:approved] = Rails.configuration.blogcomments_approved
+		@page = Page.find(params[:page_comment][:page_id])
+		
+		params[:page_comment][:approved] = Rails.configuration.comments_approved
+		params[:page_comment][:user_attributes][:id] = nil
 		@page_comment = PageComment.new(params[:page_comment])
-		@page = Page.find_by_id(params[:page_comment][:page_id])
+		
 
 		# Попытаемся найти пользователя по емаил
-		@user = User.find_by_email(params[:user][:email])
-		if @user.present?
-			@user.update_attributes(params[:user])			
-		else
-			@user = User.new(params[:user])
-			@user.password = 10.times.map{ 20 + Random.rand(11) } # рандомный пароль
-			@user.password_confirmation = @user.password
-			#@user.save
-		end
-		
-		if @user.save
-			redirect_to page_path(@page.slug)
-			return
-		else
-			render action: "new"
-			return
-		end
-		# if !@user.id.present? 
-		# 	render action: "new"
-		# 	return
-		# end
+		user = User.find_by_email(params[:page_comment][:user_attributes][:email].downcase)
+		if user
+			# Нашли пользователя в БД. Нужно удалить user_attributes, чтобы не обновлять пользователя
+			params[:page_comment].delete(:user_attributes)
+			@page_comment = PageComment.new(params[:page_comment])
 
-		@page_comment.user = @user
-		if @page_comment.save
-			if Rails.configuration.blogcomments_approved
-				flash[:info] = t('_BLOG_COMMENT_SUCCESSFULLY_CREATED')
-			else
-				flash[:info] = t('_BLOG_COMMENT_SUCCESSFULLY_WAITING_FOR_MODERATION')
-			end
-			redirect_back_or blog_show_path(@page_comment.blog.slug)
+			@page_comment.user_id = user.id
 		else
-			render action: "new"
+			password = 10.times.map{ 20 + Random.rand(11) }
+			@page_comment.user.password = @page_comment.user.password_confirmation = password			
 		end
+
+		@info = t('_BLOG_COMMENT_SUCCESSFULLY_WAITING_FOR_MODERATION')
+		@info = t('_BLOG_COMMENT_SUCCESSFULLY_CREATED') if Rails.configuration.comments_approved
+	    respond_to do |format|
+			if @page_comment.save
+				format.html { 
+					flash[:info] = @info
+					redirect_to page_path(@page.slug) 
+				}
+				format.js { }
+			else
+				format.html { render action: "new" }
+				format.js { }
+			end
+	    end
 	end
 end

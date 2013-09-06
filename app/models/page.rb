@@ -38,7 +38,8 @@ class Page < ActiveRecord::Base
   has_many :page_comment, :order => 'id', :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_comment, :allow_destroy => true 
 
-  belongs_to :user 
+  belongs_to :user#, polymorphic: true
+  accepts_nested_attributes_for :user #, :allow_destroy => true
 
   # Validations
   validates :name, :slug, :position, :menu, presence: true
