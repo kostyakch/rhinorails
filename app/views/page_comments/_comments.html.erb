@@ -8,7 +8,7 @@
 			<div class="comment-details">
 				<h5><a href="#"><%= item.user.name %></a></h5>
 				<div class="comment-meta">
-					<a href=""><%= l item.created_at, :format => :long %></a><span class="meta-sep">·</span> <a href="#" class="reply">ответить</a>
+					<a href=""><%= l item.created_at, :format => :short %></a><span class="meta-sep">·</span> <a href="#" class="reply">ответить</a>
 				</div>
 				<p><%= item.comment %></p>
 			</div>

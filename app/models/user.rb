@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, length: { :in => 3..50 }#, :on => :create
   validates :password_confirmation, presence: true#, :on => :create
 
+  def name_email
+    "#{self.name } (#{self.email})"    
+  end
   private
 
     def create_remember_token

@@ -21,7 +21,7 @@ class Page < ActiveRecord::Base
   after_initialize :set_publish_date
 
   attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :ptype, :publish_date, :page_content_attributes, :page_field_attributes
-  #attr_accessible :page_user
+  attr_accessible :user_id
 
   # Associations
   default_scope order: 'position'

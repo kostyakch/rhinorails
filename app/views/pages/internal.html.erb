@@ -3,7 +3,7 @@
 
 <%= render 'shared/breadcrumbs' %> 
 
-<%#= render 'news_list', p: @page %>
+<%= render 'news_list', p: @page %>
 
 <%= render 'messages/message_form', message: @message = Message.new if @page.field_by_name('feedback').present? %>
 

@@ -1,7 +1,21 @@
 <% articles = article_list(@page).each do |a| %>
+<% comment = Russian::p(a.comment_count, 'коммент', 'коммента', 'комментов') %>
+<div class="post">
 	<h2><%= link_to a.title, page_path(a.slug) %></h2>
-
 	<%= a.content_by_name('short').html_safe %>
+
+	<p><%= link_to 'Подробнее...', page_path(a.slug) %></p>
+
+	<div class="meta">
+		<%= gravatar_for a.user, { size: 60 } if a.user %>
+		<%= link_to a.user.name, '/user/articles' if a.user %> <%= l a.created_at, :format => :long %>
+		<% if a.comment_count > 0 %>  
+			(<%= link_to "#{a.comment_count} #{comment}", "#{page_path(a.slug)}#comments" %>)			
+		<% end %>
+	</div>
+
+	
+</div>	
 <% end %>
 
 <%= will_paginate articles %>

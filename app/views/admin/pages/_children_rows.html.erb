@@ -3,7 +3,7 @@
 		<% if page_items(p).present? %>
 		<a class="toogle icon-chevron-down" href="#" onclick="return false;" style="margin-left: -18px;"></a>
 		<% end %>
-		<%= link_to p.name, edit_admin_page_path(p, mode: 'show_sidebar'), class: 'title' %> <i><sup><%= p.id %></sup></i>
+		<%= link_to p.name, edit_admin_page_path(p), class: 'title' %> <i><sup><%= p.id %></sup></i>
 		<img class="loading" src="/assets/spinner.gif" style="display: none;">		
 	</td>
 	<td>

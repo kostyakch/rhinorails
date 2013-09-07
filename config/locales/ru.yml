@@ -52,7 +52,7 @@ ru:
   Page: страница
   Article: статья
   Blog: блог
-  shotr: Краткий текст (shotr)
+  short: Краткий текст (short)
   full: Полный текст (full)
   add subpage: добавить подраздел
   edit: редактировать
@@ -75,12 +75,15 @@ ru:
 
   created_at:
       formats:
-        # Use the strftime parameters for formats.
-        # When no format has been given, it uses default.
-        # You can provide other formats here if you like!
         default: "%d.%m.%Y"
         short: "%b %d"
         long: "%B %d, %Y"
+
+  time:
+    formats:
+      default: "%d.%m.%Y"
+      long: "%d %B %Y"
+      short: "%d.%m.%Y %H:%M"
 
   # message:
   #   name: ФИО
@@ -109,6 +112,7 @@ ru:
         active: Активность
         parent_id: Родительский раздел
         ptype: Тип раздела
+        user: Автор
         
       setting:
         name: Наименование

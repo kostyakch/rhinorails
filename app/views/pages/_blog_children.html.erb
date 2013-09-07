@@ -4,9 +4,10 @@
 
     <%= @page.content_by_name('full').html_safe %>	        
 
-
-	<div class="post-meta"><a href="#">Admin</a>, 24 July 2013 on <a href="#">Branding</a> with <a href="#">3 comments</a></div>
-
+	<div class="meta">
+		<%= gravatar_for @page.user, { size: 60 } if @page.user %>
+		<%= link_to @page.user.name, '/user/articles' if @page.user %> <%= l @page.created_at, :format => :long %>
+	</div>
 	<br><br><br>
 	
 	<a name="comments"></a>

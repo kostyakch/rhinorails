@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905105112) do
+ActiveRecord::Schema.define(:version => 20130907102021) do
 
   create_table "galleries", :force => true do |t|
     t.integer  "page_id"
@@ -86,9 +86,11 @@ ActiveRecord::Schema.define(:version => 20130905105112) do
     t.datetime "created_at",                                                                      :null => false
     t.datetime "updated_at",                                                                      :null => false
     t.date     "publish_date",                                                                    :null => false
+    t.integer  "user_id"
   end
 
   add_index "pages", ["parent_id", "slug"], :name => "index_pages_on_parent_id_and_slug", :unique => true
+  add_index "pages", ["user_id"], :name => "pages_user_id_fk"
 
   create_table "settings", :force => true do |t|
     t.string "name",  :limit => 120, :default => "", :null => false
@@ -125,5 +127,6 @@ ActiveRecord::Schema.define(:version => 20130905105112) do
   add_foreign_key "page_fields", "pages", :name => "page_fields_page_id_fk", :dependent => :delete
 
   add_foreign_key "pages", "pages", :name => "pages_parent_id_fk", :column => "parent_id", :dependent => :delete
+  add_foreign_key "pages", "users", :name => "pages_user_id_fk"
 
 end
