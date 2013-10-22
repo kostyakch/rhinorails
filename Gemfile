@@ -22,13 +22,10 @@ gem 'carrierwave' # This gem provides a simple and extremely flexible way to upl
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'coffee-rails'
+gem 'coffee-rails'
+gem 'uglifier', '1.2.3'
 
-  gem 'uglifier', '1.2.3'
-end
-
-
+gem 'sitemap'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

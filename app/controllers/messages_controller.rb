@@ -6,13 +6,16 @@ class MessagesController < ApplicationController
   def create
 	@message = Message.new(params[:message])
 
-	if @message.valid?
-		UserMailer.send_email(@message).deliver
-
-		flash[:info] = t('_EMAIL_SUCCESS_SEND')
-		redirect_to root_url  
-	else
-		render 'new'
-	end
+    respond_to do |format|
+		if @message.valid?
+			UserMailer.send_email(@message).deliver
+			
+			format.html { redirect_to root_url, flash[:info] = t('_EMAIL_SUCCESS_SEND') }
+			format.js { }
+		else
+			format.html { render 'new' }
+			format.js { }
+		end
+    end
   end
 end

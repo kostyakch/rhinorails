@@ -1,8 +1,11 @@
+#encoding: utf-8
 class Admin::PagesController < ApplicationController
 	layout 'admin/application'
 
 	before_filter :signed_in_user
 	before_filter { access_only_roles %w[ROLE_ADMIN ROLE_EDITOR] }
+
+	cache_sweeper :page_sweeper, :only => [:create, :update, :destroy, :showhide, :sort]
 
 
 	def index(parent = nil)
@@ -45,11 +48,12 @@ class Admin::PagesController < ApplicationController
 						{ :name => "description", :ftype => "meta", :position => 2 },
 						{ :name => "keywords", :ftype => "meta", :position => 3 },
 						{ :name => "comment", :ftype => "bool", :position => 4, :value => 'no' },
-						{ :name => "image_small", :ftype => "image", :position => 5 },
-						{ :name => "image_big", :ftype => "image", :position => 6 },
 				]
 	    		content_fields(@page, fields)
 	    		content_tabs(@page,  %w[short full])
+	    	else
+	    		content_fields(@page)
+	    		content_tabs(@page)
 	    	end    		
     	end
 	end
@@ -84,7 +88,7 @@ class Admin::PagesController < ApplicationController
 			update_page_field(@page, params[:page]) # Обновим данные о page_field
 			update_page_content(@page, params[:page])		
 
-			flash[:info] = t('_PAGE_SUCCESSFULLY_UPDATED')
+			flash.now[:info] = t('_PAGE_SUCCESSFULLY_UPDATED')
 			if params[:continue].present? 
 				render action: "edit"
 			else

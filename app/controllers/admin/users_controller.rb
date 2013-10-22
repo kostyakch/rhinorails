@@ -8,6 +8,7 @@ class Admin::UsersController < ApplicationController
 
 
   def index
+    store_location
     @users = User.paginate(page: params[:page])
   end
 
@@ -17,6 +18,7 @@ class Admin::UsersController < ApplicationController
 
   def new
   	@user = User.new
+    @user.customer = Customer.new
   end
 
 	def create
@@ -31,15 +33,17 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])    
+    @user = User.find(params[:id])   
+    @user.customer = Customer.find_by_user_id(@user)   
   end
 
   def update
     @user = User.find(params[:id])
+
     if @user.update_attributes(params[:user])
       
       flash[:success] = t("_EDIT_USER_SUCCESS")
-      redirect_to admin_users_path
+      redirect_back_or admin_users_path
     else
       render 'edit'
     end

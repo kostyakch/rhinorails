@@ -23,7 +23,7 @@ class Admin::GalleryImagesController < ApplicationController
 
   def create
     res = false
-    # пакетная загрузка изображений
+
     if params[:gallery_image][:path].present?
       params[:gallery_image][:path].each do |f|      
         @image = GalleryImage.new(:gallery_id => params[:gallery_image][:gallery_id], :path => f)

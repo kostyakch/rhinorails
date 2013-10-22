@@ -1,3 +1,4 @@
+#encoding: utf-8
 module Admin::PagesHelper
 	def page_items(parent = nil)
 		if parent.blank?
@@ -11,7 +12,7 @@ module Admin::PagesHelper
 		if parent.blank?
 			Page.where("parent_id IS NULL")	
 		else
-			Page.where("parent_id = #{parent.id}") if parent.ptype == 'page'
+			Page.where('parent_id = ?', parent.id) if parent.ptype == 'page'
 		end		
 	end	
 
