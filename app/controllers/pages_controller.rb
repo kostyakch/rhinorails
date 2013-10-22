@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-
+  caches_page :index, :internal
+  
   def index
     if params[:url] == 'index'
       render :template => 'site/not_found', :status => 404
@@ -18,7 +19,6 @@ class PagesController < ApplicationController
     end
     
     if !@page = Page.find_by_path(params[:url])
-    #if !@page = Page.where('url = ?', params[:url])
       render :template => 'site/not_found', :status => 404
       return
     end

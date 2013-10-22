@@ -20,7 +20,7 @@ module ApplicationHelper
 	def meta_tags(page)
 		res = ''		
 		if page and page.page_field
-			page.page_field.where("ftype = 'meta'").each do |meta|
+			page.page_field.where("ftype = 'meta' and ftype is not null").each do |meta|
 				res += "<meta name=\"#{meta.name}\" content=\"#{meta.value}\" />\n"
 			end
 		end

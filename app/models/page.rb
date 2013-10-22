@@ -114,7 +114,7 @@ class Page < ActiveRecord::Base
   class << self
 
     def find_by_path(path)
-      return self.find_by_slug(path, :conditions => ["active=? and publish_date <= ?", true, Time.now])
+      return self.find_by_slug(path, :conditions => ['active=? and publish_date <= ?', true, Time.now])
     end
 
 
