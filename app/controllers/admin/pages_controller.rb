@@ -1,11 +1,13 @@
 #encoding: utf-8
 class Admin::PagesController < ApplicationController
 	layout 'admin/application'
+	
+	before_action :set_admin_page, only: [:edit, :update, :destroy]
 
 	before_filter :signed_in_user
 	before_filter { access_only_roles %w[ROLE_ADMIN ROLE_EDITOR] }
 
-	cache_sweeper :page_sweeper, :only => [:create, :update, :destroy, :showhide, :sort]
+	#cache_sweeper :page_sweeper, :only => [:create, :update, :destroy, :showhide, :sort]
 
 
 	def index(parent = nil)
@@ -62,7 +64,7 @@ class Admin::PagesController < ApplicationController
 		@page = Page.new		
 		@pages_for_select = pages_for_select
 
-		if @page.update_attributes(params[:page])
+		if @page.update_attributes(admin_pages_params)
 
 			flash[:info] = t('_PAGE_SUCCESSFULLY_CREATED')
 			if params[:continue].present? 
@@ -76,15 +78,12 @@ class Admin::PagesController < ApplicationController
 	end
 
 	def edit		
-		@page = Page.find(params[:id])
 		@pages_for_select = pages_for_select params[:id]
 	end
 
 	def update
-		@page = Page.find(params[:id])
-
 		@pages_for_select = pages_for_select params[:id]
-		if @page.update_attributes(params[:page])
+		if @page.update(admin_pages_params)
 			update_page_field(@page, params[:page]) # Обновим данные о page_field
 			update_page_content(@page, params[:page])		
 
@@ -103,10 +102,11 @@ class Admin::PagesController < ApplicationController
 		store_location
 	end
 	
-	def destroy
-		page = Page.find(params[:id]).destroy
+	def destroy		
+		page_name = @page.name
+		@page.destroy
 
-		flash[:info] = t('_PAGE_SUCCESSFULLY_DELITED', name: page.name)
+		flash[:info] = t('_PAGE_SUCCESSFULLY_DELITED', name: page_name)
 		redirect_back_or admin_pages_path
 	end
 
@@ -126,6 +126,16 @@ class Admin::PagesController < ApplicationController
 
 
 	private
+        # Use callbacks to share common setup or constraints between actions.
+        def set_admin_page
+            @page = Page.find(params[:id])
+        end
+
+        # Never trust parameters from the scary internet, only allow the white list through.
+        def admin_pages_params
+            params.require(:page).permit!
+        end
+
 		def content_tabs(page, names=%w[main_content])
 			names.each do |name|
 				page.page_content.build(name: name) if page.page_content.where("name = '#{name}'").empty?

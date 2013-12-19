@@ -10,7 +10,7 @@ class PageCommentsController < ApplicationController
 		
 		params[:page_comment][:approved] = Rails.configuration.comments_approved
 		params[:page_comment][:user_attributes][:id] = nil
-		@page_comment = PageComment.new(params[:page_comment])
+		@page_comment = PageComment.new(page_comment_params)
 		
 
 		# Попытаемся найти пользователя по емаил
@@ -41,4 +41,15 @@ class PageCommentsController < ApplicationController
 			end
 	    end
 	end
+
+    private
+        # Use callbacks to share common setup or constraints between actions.
+        def set_page_comment
+           
+        end
+
+        # Never trust parameters from the scary internet, only allow the white list through.
+        def page_comment_params
+            params.require(:page_comment).permit!#(:name, :position, :active, questions_attributes: [:name])
+        end	
 end

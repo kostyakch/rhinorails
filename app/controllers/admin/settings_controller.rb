@@ -1,5 +1,6 @@
 class Admin::SettingsController < ApplicationController
 	layout 'admin/application'
+	before_action :set_admin_setting, only: [:edit, :update, :destroy]
 
 	before_filter :signed_in_user
 	before_filter { access_only_roles %w[ROLE_ADMIN] }
@@ -14,9 +15,7 @@ class Admin::SettingsController < ApplicationController
 	end
 
 	def create
-		@setting = Setting.new		
-
-		if @setting.update_attributes(params[:setting])
+		if @setting = Setting.new(admin_setting_params)
 
 			flash[:info] = t('_SUCCESSFULLY_CREATED')
 			if params[:continue].present? 
@@ -29,14 +28,11 @@ class Admin::SettingsController < ApplicationController
 		end
 	end
 
-	def edit
-		@setting = Setting.find(params[:id])
+	def edit		
 	end
 
 	def update
-		@setting = Setting.find(params[:id])
-
-		if @setting.update_attributes(params[:setting])	
+		if @setting.update(admin_setting_params)	
 			setting_by_name(@setting.name, true)
 			
 			flash[:info] = t('_SUCCESSFULLY_UPDATED', name: @setting.name)
@@ -51,9 +47,21 @@ class Admin::SettingsController < ApplicationController
 	end
 
 	def destroy
-		setting = Setting.find(params[:id]).destroy
+		setting_name = @setting.name
+		@setting.destroy
 
-		flash[:info] = t('_SUCCESSFULLY_DELITED', name: setting.name)
+		flash[:info] = t('_SUCCESSFULLY_DELITED', name: setting_name)
 		redirect_back_or admin_settings_path		
 	end
+
+    private
+        # Use callbacks to share common setup or constraints between actions.
+        def set_admin_setting
+            @setting = Setting.find(params[:id])
+        end
+
+        # Never trust parameters from the scary internet, only allow the white list through.
+        def admin_setting_params
+            params.require(:setting).permit(:name, :value, :descr)
+        end 	
 end

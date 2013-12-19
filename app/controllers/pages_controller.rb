@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  caches_page :index, :internal
+  #caches_page :index, :internal
   
   def index
     if params[:url] == 'index'

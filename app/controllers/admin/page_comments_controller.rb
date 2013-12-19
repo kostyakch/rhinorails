@@ -1,6 +1,8 @@
 class Admin::PageCommentsController < ApplicationController
   layout 'admin/application'
 
+  before_action :set_admin_page_comment, only: [:edit, :update, :destroy]
+
   before_filter :signed_in_user
   before_filter { access_only_roles %w[ROLE_ADMIN ROLE_EDITOR] }
 
@@ -10,13 +12,10 @@ class Admin::PageCommentsController < ApplicationController
   end
 
   def edit
-    @page_comment = PageComment.find(params[:id])    
   end
 
   def update
-    @page_comment = PageComment.find(params[:id])
-
-    if @page_comment.update_attributes(params[:page_comment])
+    if @page_comment.update(admin_page_comment_params)
       flash[:info] = t('_PAGE_SUCCESSFULLY_UPDATED')
       if params[:continue].present? 
         render action: "edit"
@@ -29,9 +28,21 @@ class Admin::PageCommentsController < ApplicationController
   end  
 
   def destroy
-    page_comment = PageComment.find(params[:id]).destroy
+    @page_comment.destroy
 
     flash[:info] = t('_PAGE_COMMENT_SUCCESSFULLY_DELITED')
     redirect_back_or admin_page_comments_path
   end
+
+    private
+        # Use callbacks to share common setup or constraints between actions.
+        def set_admin_page_comment
+            @page_comment = PageComment.find(params[:id])    
+        end
+
+        # Never trust parameters from the scary internet, only allow the white list through.
+        def admin_page_comment_params
+            params.require(:page_comment).permit(:comment, :approved)
+        end
+
 end

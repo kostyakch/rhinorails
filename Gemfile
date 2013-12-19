@@ -1,29 +1,29 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '4.0.2'
 
 gem 'mysql2'
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '3.0.1'
+gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'foreigner'
 gem 'will_paginate'
 gem 'acts_as_list'
 
 gem 'jquery-rails'
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 2.3.1.1'
 gem 'bootstrap-will_paginate'
 gem 'bootstrap-datepicker-rails'
 
-gem 'russian', '~> 0.6.0' #это библиотека для полноценной поддержки русского языка (форматирование даты и времени, плюрализация, транслит, локализация в целом)
+gem 'russian', '~> 0.6.0'
 
 gem "rmagick"
 gem 'carrierwave' # This gem provides a simple and extremely flexible way to upload files from Ruby applications
 
 # Gems used only for assets and not required
 # in production environments by default.
-gem 'coffee-rails'
-gem 'uglifier', '1.2.3'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'uglifier', '>= 1.3.0'
 
 gem 'sitemap'
 # To use Jbuilder templates for JSON
@@ -36,8 +36,8 @@ gem 'sitemap'
 # gem 'capistrano'
 
 group :development do
-  gem 'annotate', '2.5.0'
-  gem 'faker', '1.0'
+  gem 'annotate'#, '2.5.0'
+  gem 'faker'#, '1.0'
 
   # To use debugger
   # gem 'debugger'  

@@ -20,22 +20,21 @@ class Page < ActiveRecord::Base
   before_validation :name_to_slug
   after_initialize :set_publish_date
 
-  attr_accessible :parent_id, :name, :slug, :position, :menu, :active, :ptype, :publish_date, :page_content_attributes, :page_field_attributes
-  attr_accessible :user_id
-
   # Associations
-  default_scope order: 'position'
-  #default_scope :parent_id, :dependent => :destroy
+  #default_scope order: 'position'
+  default_scope { order 'position' }
 
   acts_as_list scope: [:parent_id, :publish_date]
 
-  has_many :page_content, :order => 'position', :autosave => true, :dependent => :destroy
+  #has_many :page_content, :order => 'position', :autosave => true, :dependent => :destroy  
+  has_many :page_content, -> { order 'position' }, :autosave => true, :dependent => :destroy  
   accepts_nested_attributes_for :page_content, :allow_destroy => true
 
-  has_many :page_field, :order => 'position', :autosave => true, :dependent => :destroy
+  #has_many :page_field, :order => 'position', :autosave => true, :dependent => :destroy
+  has_many :page_field, -> { order 'position' }, :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_field, :allow_destroy => true
 
-  has_many :page_comment, :order => 'id', :autosave => true, :dependent => :destroy
+  has_many :page_comment,  -> { order 'id' }, :autosave => true, :dependent => :destroy
   accepts_nested_attributes_for :page_comment, :allow_destroy => true 
 
   belongs_to :user#, polymorphic: true
@@ -47,7 +46,8 @@ class Page < ActiveRecord::Base
   validates :name, length: { maximum: 255 }
   validates :slug, length: { maximum: 100 }
 
-  VALID_SLUG_REGEX = %r{^([-_/.A-Za-z0-9А-Яа-я]*|/)$}
+  #VALID_SLUG_REGEX = %r{^([-_/.A-Za-z0-9А-Яа-я]*|/)$}
+  VALID_SLUG_REGEX = /\A[-_.\/A-Za-z0-9А-Яа-я]+\z/i
   validates :slug, uniqueness: { case_sensitive: false }, format: { with: VALID_SLUG_REGEX }
   validates_uniqueness_of :slug, :scope => :parent_id
 

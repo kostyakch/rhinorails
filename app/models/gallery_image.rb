@@ -1,5 +1,5 @@
 class GalleryImage < ActiveRecord::Base
-  attr_accessible :active, :annotation, :main, :path, :position, :gallery_id, :path_cache, :images_attributes
+  #attr_accessible :active, :annotation, :main, :path, :position, :gallery_id, :path_cache, :images_attributes
 
   belongs_to :gallery, :inverse_of => :gallery_image
   acts_as_list scope: :gallery_id

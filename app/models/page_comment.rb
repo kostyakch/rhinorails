@@ -1,5 +1,5 @@
 class PageComment < ActiveRecord::Base
-	attr_accessible :comment, :approved, :page_id, :parent_id, :user_attributes
+	#attr_accessible :comment, :approved, :page_id, :parent_id, :user_attributes
 
 	belongs_to :page, :inverse_of => :page_comment	
 	accepts_nested_attributes_for :page

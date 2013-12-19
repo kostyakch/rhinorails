@@ -1,7 +1,7 @@
 class Setting < ActiveRecord::Base
 	before_save :name_downcase
 
-	attr_accessible :name, :value, :descr
+	#attr_accessible :name, :value, :descr
 
 	default_scope order: 'name'
 
