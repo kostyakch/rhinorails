@@ -1,4 +1,4 @@
-<% provide(:title, "Список статей") %>
+<% provide(:title, t(:_NEWS_ARTICLES)) %>
 
 <% content_for :sidebar_l2 do %>
 <div id="sidebar-left2" class="span2">
@@ -24,16 +24,16 @@
 	<div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
 		<div class="row-fluid">
 			<div class="btn-overlay">
-				<%= link_to raw('<i class="halflings-icon plus"></i> Создать'), admin_new_children_page_path(@parent), class: 'btn btn-primary' %>
+				<%= link_to "<i class=\"halflings-icon plus\"></i> #{ t(:_NEW) }".html_safe, admin_new_children_page_path(@parent), class: 'btn btn-primary' %>
 			</div>
 		</div>
 
 		<table class="table table-striped tree">
 			<thead>
 				<tr>
-					<th width="60%">Страница</th>
-					<th width="20%">Статус</th>
-					<th>Действия</th>
+					<th width="60%"><%= t :_PAGES %></th>
+					<th width="20%"><%= t :_STATUS %></th>
+					<th><%= t :_ACTIONS %></th>
 				</tr>
 			</thead>
 			<tbody>

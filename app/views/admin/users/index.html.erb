@@ -1,13 +1,13 @@
-<% provide(:title, 'All users') %>
+<% provide(:title, "All #{t(:_USERS)}") %>
 
 <ul class="nav nav-tabs">
 	<li class="active">
-		<%= link_to 'Пользователи', admin_users_path %>
+		<%= link_to t(:_USERS), admin_users_path %>
 	</li>
 </ul>
 
 <div style="padding: 6px 6px;" class="well">
-	<%= link_to 'Добавить', new_admin_user_path, class: 'btn btn-primary' %>
+	<%= link_to t(:_BTN_CREATE), new_admin_user_path, class: 'btn btn-primary' %>
 </div>
 
 <%= will_paginate %>

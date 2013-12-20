@@ -1,4 +1,5 @@
-<% article_list(p).each do |c| %>
+<h1><%= @page.field_by_name('h1') %></h1>
+<% article_list(@page).each do |c| %>
 <div>
 	<p><%= link_to c.name, page_path(c.slug) %></p>
 

@@ -1,7 +1,7 @@
-<% provide(:title, 'Добавление раздела') %>
+<% provide(:title, t(:_NEW_PAGE)) %>
 
 <%= form_for @page, :url => admin_structures_path do |f| %>
-    <legend>Добавление раздела</legend>   
+    <legend><%= t(:_NEW_PAGE) %> </legend>   
 
    	<%= render 'fields', f: f %>	   
 <% end %>

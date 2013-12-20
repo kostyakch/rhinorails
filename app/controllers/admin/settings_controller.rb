@@ -15,7 +15,8 @@ class Admin::SettingsController < ApplicationController
 	end
 
 	def create
-		if @setting = Setting.new(admin_setting_params)
+		@setting = Setting.new(admin_setting_params)
+		if @setting.save
 
 			flash[:info] = t('_SUCCESSFULLY_CREATED')
 			if params[:continue].present? 
@@ -62,6 +63,6 @@ class Admin::SettingsController < ApplicationController
 
         # Never trust parameters from the scary internet, only allow the white list through.
         def admin_setting_params
-            params.require(:setting).permit(:name, :value, :descr)
+            params.require(:setting).permit! #(:name, :value, :descr)
         end 	
 end

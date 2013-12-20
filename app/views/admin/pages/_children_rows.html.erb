@@ -7,8 +7,8 @@
 		<img class="loading" src="/assets/spinner.gif" style="display: none;">		
 	</td>
 	<td>
-		<% if p.active? %>Опубликовано<% else %><span class="label label-important">Скрыто</span><% end %>
-		<% if p.menu? %> / <i>меню</i><% end %>
+		<%= (p.active?) ? "#{ t(:_BTN_PUBLIC) }" : "<span class=\"label label-important\">#{ t(:_BTN_HIDDEN) }</span>".html_safe %>
+		<%#= " / <i>#{ t(:_BTN_MENU) }</i>".html_safe if p.menu? %>
 	</td>
 	<td>
 		<%= link_to raw('<i class="halflings-icon edit halflings-icon"></i>'), edit_admin_page_path(p, mode: 'show_sidebar'), class: 'btn btn-success' %>

@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
 
     def new
         @user = User.new
-        @user.customer = Customer.new
+        #@user.customer = Customer.new
     end
 
     def create

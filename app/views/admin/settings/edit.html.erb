@@ -1,7 +1,7 @@
-<% provide(:title, 'Редактирование параметра настройки') %>
+<% provide(:title, t(:_EDIT)) %>
 
 <%= form_for @setting, :url => admin_setting_path do |c| %>
-    <legend>Редактирование параметра</legend>   
+    <legend><%= t(:_EDIT) %> </legend>   
 
    	<%= render 'fields', f: c %>	   
 <% end %>

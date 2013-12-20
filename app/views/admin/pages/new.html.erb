@@ -1,4 +1,4 @@
-<% provide(:title, 'Добавление раздела') %>
+<% provide(:title, t(:_NEW_PAGE)) %>
 
 <% content_for :sidebar_l2 do %>
 <div id="sidebar-left2" class="span2">
@@ -13,7 +13,7 @@
 <% end %>
 
 <%= form_for @page, :url => admin_pages_path do |f| %>
-    <legend>Добавление раздела</legend>   
+    <legend><%= t(:_NEW_PAGE) %></legend>   
 
    	<%= render 'fields', f: f %>	   
 <% end %>

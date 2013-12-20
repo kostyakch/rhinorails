@@ -1,4 +1,4 @@
-<% provide(:title, "Редактирование: #{@page.name}") %>
+<% provide(:title, "#{t(:_EDIT)}: #{@page.name}") %>
 
 <% content_for :sidebar_l2 do %>
 <div id="sidebar-left2" class="span2">
@@ -22,7 +22,7 @@
 <% end %>
 
 <%= form_for @page, :url => admin_page_path do |f| %>
-    <legend>Редактирование раздела: <%= @page.name %></legend>
+    <legend><%= "#{t(:_EDIT)}: #{@page.name}" %></legend>
 
    	<%= render 'fields', f: f %>	    
 <% end %>

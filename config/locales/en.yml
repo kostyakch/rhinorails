@@ -2,10 +2,190 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"  
-  _PAGE_SUCCESSFULLY_UPDATED: Page content was successfully updated.
+  locale: Рус
+  _PAGE_SUCCESSFULLY_UPDATED: Page has been updated successfully.
+  _PAGE_SUCCESSFULLY_CREATED: Page created successfully.
+  _PAGE_SUCCESSFULLY_DELITED: "Page has been \"%{name}\" deleted."
+  _PAGE_COMMENT_SUCCESSFULLY_DELITED: Comment has been deleted.
 
+  _SUCCESSFULLY_CREATED: Record created.
+  _SUCCESSFULLY_UPDATED: "Record \"%{name}\" updated successfully."
+  _SUCCESSFULLY_DELITED: "Record \"%{name}\" has been deleted."
+  _PARTIAL_ERROR: Ошибка подключения шаблона.
+
+  _EDIT_USER_SUCCESS: Данные пользователя изменены
+  _WELCOME: Добро пожаловать в систему!
+  _BTN_CREATE: New
+  _BTN_EDIT: Save
+  _BTN_SAVE: Save
+  _BTN_CANCEL: Cancel
+  _BTN_SAVE_AND_CONTINUE: Apply
+  _BTN_UPLOAD: Загрузить файлы на сервер
+  _BTN_PUBLIC: Public
+  _BTN_HIDDEN: Hidden
+  _BTN_MENU: Menu
+  _SIGN_IN: "Sign in, please."
+  _NO_MAIN_CONTENT: "No content tab. You may set manually."
+
+  _DELETE_CONFIRM: "Вы уверены, что хотите удалить запись?"
+
+  _SUBJECT_SEND_EMAIL: Сообщение с сайта...
+  _EMAIL_SUCCESS_SEND: "Ваше сообщение успешно отправлено, и будет рассмотрено в ближайшее время."
+  No permissions to perform this operation: "No permissions to perform this operation"
+
+  _CONTENT: Content
+  _SITE_STRUCTURE: Site structure
+  _USERS: Users
+  _SETTINGS: Settings
+  _SYSTEM_SETTINGS: System settings
+  _PARAMETER_NAME: Parameter name
+  _PARAMETER_VALUE: Value
+  _ACTIONS: Actions
+  _EDIT: Edit
+  _STATUS: Status
+  _NEW_PAGE: New page
+  _NEW_USER: New user
+  _NEW_SETTING: New setting
+
+  # Titles
+  _PAGES: Pages
+  _GALLERY: Gallery
+
+  # Dashboard
+  _NEWS_ARTICLES: News/Articles
+  _BLOGS: Blogs
+  _CONTENTS: Comments
+  _IMAGES: Images
+
+
+  # Admin menu
+  Settings: Настройки
+  Profile: Профиль пользователя
+  Sign in: "Sign in"
+  Sign out: "Sign out"
+  Users: Пользователи
+  Help: Справка
+  Content: Контент
+  _ERROR_AUTHENTICATE: Не возможно авторизоваться. Попробуйте еще раз.
+
+  # User
+  You sure?: You sure?
+  Edit profile: Edit profile
+
+  # Pages
+  main_content: Content
+  description: Mata description
+  keywords: Meta keywords
+  h1: Page title (h1)
+  title: Window title
+  Page: page
+  Article: article
+  Blog: blog
+
+  short: Short text
+  full: Full text
+  add subpage: add subpage
+  edit: edit
+  show: show
+  hide: hide
+  delete: delete
+  _MORE: more
+  _LESS: less
+
+  _SETTING_NAME_FORMAT: "может содержать только латинские буквы, цифры и символы - или _"
+
+  # images
+  _IMAGE_SUCCESSFULLY_UPDATED: Изображение обновлено.
+  _SUCCESSFULLY_UPLOADED: Изображения успешно загружены.
+  _ERROR_UPLOAD: Ошибка при загрузке изображений.
+
+  #blog
+  _BLOG_COMMENT_SUCCESSFULLY_CREATED: Ваш комментарий добавлен.
+  _BLOG_COMMENT_SUCCESSFULLY_WAITING_FOR_MODERATION: Ваш комментарий добавлен и ждет модерации.
+
+  created_at:
+      formats:
+        default: "%d.%m.%Y"
+        short: "%b %d"
+        long: "%B %d, %Y"
+
+  time:
+    formats:
+      default: "%d.%m.%Y"
+      long: "%d %B %Y"
+      short: "%d.%m.%Y %H:%M"
+
+  # message:
+  #   name: ФИО
+  #   email: E-mail
+  #   content: Сообщение
+        
   activerecord:
+    models:
+      user: User name
     attributes:
       user:
-        password_digest: "Password"
+        name: "User name"
+        active: Active
+        roles: Roles
+        #password: Password
+        # password_confirmation: Подтверждение пароля
+        # password_digest: Подтверждение пароля
+        # Confirmation: Подтверждение пароля
+
+      page:
+        name: Page name
+        slug: Page Url
+        position: Position      
+        menu: Show in menu
+        parent_id: Parent
+        ptype: Type
+        user: Author
+        
+      setting:
+        name: Parameter name
+        value: Value
+        descr: Description
+
+      blog_comment:
+        name: Имя
+        email: E-mail
+        comment: Комментарий
+
+
+    errors:
+      models:
+        user:
+          attributes:            
+            name:
+              blank: "не должно быть пустым"
+              too_short: 'сликом короткое. Должно быть не меньше %{count} символов'
+            password_confirmation:
+              blank: "не может быть пустым"
+            password_digest:
+              blank: "не может быть пустым"
+            password:
+              confirmation: "и подтверждение не совпадает"
+              blank:  "не может быть пустым"
+              too_short: "слишком короткий. Должен быть не меньше %{count} символов."
+            email:
+              blank: "не может быть пустым"
+              invalid: "имеет не правильный формат"
+              taken: " - уже присутствует в системе"
+
+        page:
+          attributes:            
+            name:
+              blank: "не должно быть пустым"
+              too_short: 'сликом короткое. Должно быть не меньше %{count} символов'
+            slug:
+              blank:  "не может быть пустым"
+              too_short: "слишком короткий. Должен быть не меньше %{count} символов."
+              invalid: "должен содержать только цифры, латинские бквы и символы '_-'"
+              taken: должен быть уникальным. Попробуйте изменить Url.
+
+        setting:
+          attributes:            
+            name:
+              invalid: "может содержать только латинские буквы, цифры и символы - или _"
+

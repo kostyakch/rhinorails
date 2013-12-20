@@ -1,12 +1,11 @@
 <% provide(:title, @page.title) %>
 <% provide(:metatags, meta_tags(@page)) %>
 
-<%= render 'shared/breadcrumbs' %> 
+<%#= render 'shared/breadcrumbs' %> 
 
-<%= render 'news_list', p: @page %>
+<%#= render 'news_list', p: @page %>
 
 <%= render 'messages/message_form', message: @message = Message.new if @page.field_by_name('feedback').present? %>
-
 
 <% if @page.field_by_name('template').present? || (@page.parent.present? && @page.parent.field_by_name('template').present? ) %>
     
@@ -15,7 +14,7 @@
 
 <% else %>
 	<h1><%= @page.field_by_name('h1') %></h1>
-	<%= content.html_safe %>
+	<%= @page.content_by_name('content').html_safe %>
 <% end %>
 
 

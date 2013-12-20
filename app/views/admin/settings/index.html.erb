@@ -1,7 +1,7 @@
-<% provide(:title, 'Параметры системы') %>
+<% provide(:title, "#{t(:_SYSTEM_SETTINGS)}") %>
 
 <div class="box-header" data-original-title="">
-	<h2><i class="halflings-icon align-justify"></i><span class="break"></span>Параметры системы</h2>
+	<h2><i class="halflings-icon align-justify"></i><span class="break"></span><%= t(:_SYSTEM_SETTINGS) %></h2>
 	<div class="box-icon">
 		<a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
 		<a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
@@ -12,16 +12,16 @@
 	<div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
 		<div class="row-fluid">
 			<div class="btn-overlay">
-				<%= link_to raw('<i class="halflings-icon plus"></i> Создать'), new_admin_setting_path, class: 'btn btn-primary' %>
+				<%= link_to "<i class=\"halflings-icon plus\"></i> #{t(:_BTN_CREATE)}".html_safe, new_admin_setting_path, class: 'btn btn-primary' %>
 			</div>
 		</div>
 
 		<table class="table table-striped tree">
 			<thead>
 				<tr>
-					<th width="60%">Параметр</th>
-					<th width="20%">Значение</th>
-					<th>Действия</th>
+					<th width="60%"><%= t(:_PARAMETER_NAME) %></th>
+					<th width="20%"><%= t(:_PARAMETER_VALUE) %></th>
+					<th><%= t(:_ACTIONS) %></th>
 				</tr>
 			</thead>
 			<tbody>				
