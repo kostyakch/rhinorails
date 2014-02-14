@@ -18,16 +18,45 @@ ru:
   _BTN_CREATE: Создать
   _BTN_EDIT: Сохранить
   _BTN_SAVE: Сохранить
+  _BTN_SUBMIT: Submit
   _BTN_CANCEL: Отменить
   _BTN_SAVE_AND_CONTINUE: Применить
   _BTN_UPLOAD: Загрузить файлы на сервер
+  _BTN_PUBLIC: Public
+  _BTN_HIDDEN: Hidden
+  _BTN_MENU: Menu  
   _SIGN_IN: Пожалуйста авторизуйтесь.
+  _NO_MAIN_CONTENT: "No content tab. You may set manually."
 
   _DELETE_CONFIRM: "Вы уверены, что хотите удалить запись?"
 
   _SUBJECT_SEND_EMAIL: Сообщение с сайта...
   _EMAIL_SUCCESS_SEND: "Ваше сообщение успешно отправлено, и будет рассмотрено в ближайшее время."
   No permissions to perform this operation: "Нет разрешений на выполнение этой операции."
+
+  _CONTENT: Комментарий
+  _SITE_STRUCTURE: Site structure
+  _USERS: Users
+  _SETTINGS: Settings
+  _SYSTEM_SETTINGS: System settings
+  _PARAMETER_NAME: Наименование параметра
+  _PARAMETER_VALUE: Значение параметра
+  _ACTIONS: Действия
+  _EDIT: Редактировать
+  _STATUS: Статус
+  _NEW_PAGE: New page
+  _NEW_USER: New user
+  _NEW_SETTING: New setting
+
+    # Titles
+  _PAGES: Pages
+  _GALLERY: Gallery
+
+  # Dashboard
+  _NEWS_ARTICLES: News/Articles
+  _BLOGS: Blogs
+  _COMMENT: Комментарий
+  _IMAGES: Images
 
   # Admin menu
   Settings: Настройки
@@ -72,6 +101,20 @@ ru:
   #blog
   _BLOG_COMMENT_SUCCESSFULLY_CREATED: Ваш комментарий добавлен.
   _BLOG_COMMENT_SUCCESSFULLY_WAITING_FOR_MODERATION: Ваш комментарий добавлен и ждет модерации.
+  add_blog: Add blog
+  edit_blog: Edit blog  
+
+  # gallery
+  galleries: Galleries
+  creating_gallery: Creating gallery
+  edit_gallery: Edit gallery
+  add_image: Add image
+  edit_image: Edit image
+  gallery_images: "Gallery images %{name}"
+
+  # comment
+  add_comment: Add comment
+  edit_comment: Edit comment
 
   created_at:
       formats:
