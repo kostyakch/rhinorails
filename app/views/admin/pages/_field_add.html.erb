@@ -1,0 +1,30 @@
+<a href="#mdFieldAdd" role="button" data-toggle="modal"><span class="icon-plus-sign"></span></a>
+
+<div id="mdFieldAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3 id="myModalLabel">Заголовок</h3>
+	</div>
+
+	<div class="modal-body">
+		<div class="control-group">	
+			<label class="control-label" for="page_page_fields_name">Имя поля</label>
+		    <div class="controls">		    	
+		    	<!--%= text_field("field", "name") %-->
+		    	<input id="field_name" name="field_name"></input>
+		    </div>
+
+			<label class="control-label" for="page_page_fields_name">Выберите тип поля</label>    	
+	    	<div class="controls">
+	    		<%= select("field", "type", [[t('Title'), 'title'], [t('Meta'), 'meta'], [t('Bool'), 'bool'], [t('Text'), 'text'], [t('Textarea'), 'textarea'], [t('Image'), 'image']]) %>
+	    	</div>
+		</div> 
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal">Закрыть</button>
+		<button id="btFieldAdd" class="btn" data-dismiss="modal" onclick="btFieldAdd_click()">Сохранить</button>
+	</div>
+</div>
+
+

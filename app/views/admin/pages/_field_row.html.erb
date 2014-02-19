@@ -12,7 +12,8 @@
 	    	<%= c.text_field :value, class: 'span11', readonly: 'readonly' %>
 	    	<% else %>
 	        <%= c.text_field :value, class: 'span11' %>
-	        <a href="#" class="add_field"><span class="icon-plus-sign"></span></a>
+	        <!--a href="#" class="add_field"><span class="icon-plus-sign"></span></a-->
+	        <%= render 'field_add' %>
 			<a href="#" class="del_field"><span class="icon-remove-sign"></span></a>			
 	        <% end %>
 	    </div>
