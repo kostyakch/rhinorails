@@ -58,12 +58,13 @@ class Admin::PagesController < ApplicationController
 	    		content_tabs(@page)
 	    	end    		
     	end
+
 	end
 
 	def create
 		@page = Page.new		
 		@pages_for_select = pages_for_select
-
+debugger
 		if @page.update_attributes(admin_pages_params)
 
 			flash[:info] = t('_PAGE_SUCCESSFULLY_CREATED')
@@ -71,10 +72,13 @@ class Admin::PagesController < ApplicationController
 				redirect_to edit_admin_structure_path(@page)
 			else
 				redirect_back_or admin_pages_path
-			end			
+			end	
+			debugger		
 		else	
 			render 'new'
+			debugger
 		end
+		debugger
 	end
 
 	def edit		
@@ -124,6 +128,28 @@ class Admin::PagesController < ApplicationController
 		render :nothing => true
 	end
 
+	#Метод добавления нового поля к странице Page
+	def field_page_add
+		
+
+		@count_page = params[:count_page]
+		
+		@field_name = params[:field_name]
+		@field_type = params[:field_type]
+
+		field_new = [{ :name => @field_name, :ftype => @field_type, :position => @count_page }]
+
+		@page.page_field.build(field_new)
+
+		@field = @page.page_field.last
+
+		#debugger
+
+		respond_to do |format|
+	    	format.js
+	    end
+		
+	end
 
 	private
         # Use callbacks to share common setup or constraints between actions.

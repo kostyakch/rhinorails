@@ -40,7 +40,7 @@ group :development do
   gem 'faker'#, '1.0'
 
   # To use debugger
-  # gem 'debugger'  
+   gem 'debugger'  
 end
 
 gem "devise"

@@ -8,6 +8,7 @@ RhinoCMS::Application.routes.draw do
     match '/page/:parent_id/list' => 'pages#children', :as => :page_children, via: [:get]
     match '/page/:parent_id/new' => 'pages#new', :as => :new_children_page, via: [:get]
     match '/page/tree' => 'pages#tree', :as => :pages_tree, via: [:get]
+    match '/page/field_page_add' => 'pages#field_page_add', :as => :pages_field_add, via: [:get]
     resources :pages
 
     match '/structures/:parent_id/new' => 'structures#new', :as => :new_children_structures, via: [:get]
