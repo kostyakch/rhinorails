@@ -37,7 +37,7 @@
 
 
 <div id="mdFieldAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
+	<%= form_tag remote: true do %>
 
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -65,6 +65,6 @@
 		        </div>
 		    </div> 
 		</div>
-
+	<% end %>
 </div>
 
