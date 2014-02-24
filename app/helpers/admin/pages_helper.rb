@@ -31,45 +31,6 @@ module Admin::PagesHelper
 				row.remove();
 				return false;
 			});	
-
-			// Добавление параметра
-			var paramsCount = $('#param-fields-list .controls').length;
-			$('.add_field').click(function(){
-				var parName = prompt ("Введите наименование параметра","");
-				if(parName == null || parName == '' || parName.length < 2) {
-					alert('Наименование не заполнето или содержит мешьше 2-х символов');
-					return false;
-				}
-				var html_position = '<input id="page_page_field_attributes___name___position" name="page[page_field_attributes][__name__][position]" type="hidden" value="'+paramsCount+'">';
-				var html_ftype = '<input id="page_page_field_attributes___name___ftype" name="page[page_field_attributes][__name__][ftype]" type="hidden" value="meta">';
-				var html_name = '<input id="page_page_field_attributes___name___name" name="page[page_field_attributes][__name__][name]" type="hidden" value="'+parName+'">';
-
-				var html_value = '<input class="span11" id="page_page_field_attributes___name___value" name="page[page_field_attributes][__name__][value]" size="30" type="text" value=""> <a href="#" class="del_field"><span class="icon-remove-sign"></span></a>';
-				var html_label = '<label class="control-label" for="page_page_fields___name_">'+parName+'</label>';
-
-				var newTypeWidget = html_ftype.replace(/__name__/g, paramsCount);
-				var newPositionWidget = html_position.replace(/__name__/g, paramsCount);
-				var newNameWidget = html_name.replace(/__name__/g, paramsCount);
-
-				var newValieWidget = html_value.replace(/__name__/g, paramsCount);
-				var newLabelWidget = html_label.replace(/__name__/g, paramsCount);
-				paramsCount++;
-
-				var newFildData = $('<div id="field_"></div>').append(newTypeWidget);
-				newFildData.append(newPositionWidget);
-				newFildData.append(newNameWidget);
-
-				var newPlaceVal = $('<div class="controls"></div>').html(newValieWidget);
-
-				var newPlaceName = $('<div class="control-group"></div>');				
-				$(newPlaceName).append(newLabelWidget);
-				$(newPlaceName).append(newPlaceVal);
-				
-				newFildData.append(newPlaceName);
-				$('#param-fields-list').append(newFildData);
-
-				return false;
-			});
 		})
 		CODE
 	end

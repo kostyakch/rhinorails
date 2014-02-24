@@ -118,6 +118,9 @@ en:
   add_comment: Add comment
   edit_comment: Edit comment
 
+  
+  
+  
   created_at:
       formats:
         default: "%d.%m.%Y"

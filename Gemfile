@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
 
-gem 'mysql2'
+gem 'mysql2', '0.3.14'
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'foreigner'
@@ -40,7 +40,7 @@ group :development do
   gem 'faker'#, '1.0'
 
   # To use debugger
-   gem 'debugger'  
+  #gem 'debugger'  
 end
 
 gem "devise"

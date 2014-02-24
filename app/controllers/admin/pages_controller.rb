@@ -64,7 +64,7 @@ class Admin::PagesController < ApplicationController
 	def create
 		@page = Page.new		
 		@pages_for_select = pages_for_select
-debugger
+
 		if @page.update_attributes(admin_pages_params)
 
 			flash[:info] = t('_PAGE_SUCCESSFULLY_CREATED')
@@ -72,13 +72,10 @@ debugger
 				redirect_to edit_admin_structure_path(@page)
 			else
 				redirect_back_or admin_pages_path
-			end	
-			debugger		
+			end			
 		else	
 			render 'new'
-			debugger
 		end
-		debugger
 	end
 
 	def edit		
@@ -88,7 +85,7 @@ debugger
 	def update
 		@pages_for_select = pages_for_select params[:id]
 		if @page.update(admin_pages_params)
-			update_page_field(@page, params[:page]) # Обновим данные о page_field
+			#update_page_field(@page, params[:page]) # Обновим данные о page_field
 			update_page_content(@page, params[:page])		
 
 			flash.now[:info] = t('_PAGE_SUCCESSFULLY_UPDATED')

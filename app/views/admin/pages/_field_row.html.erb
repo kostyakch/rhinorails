@@ -1,6 +1,8 @@
 <div id="param-fields-list" class="collapse">
-	<%= f.fields_for :page_field do |c| %>
-	<div id="field_<%= c.object.id %>">
+	<%= f.fields_for :page_field do |c| %>	
+	<% index = rand(100..300) %>
+	
+	<div id="field_<%= c.object.id.to_i == 0 ? index : c.object.id %>">
 		<%= c.hidden_field :id %>
 		<%= c.hidden_field :position %>
 		<%= c.hidden_field :name %>
@@ -12,21 +14,22 @@
 		    	<%= c.text_field :value, class: 'span11', readonly: 'readonly' %>
 		    	<% else %>
 		        <%= c.text_field :value, class: 'span11' %>
-		        <a href="#mdFieldAdd" data-toggle="modal"><span class="icon-plus-sign"></span></a>
-				<a href="#" class="del_field"><span class="icon-remove-sign"></span></a>		
 
+				<%= link_to '<span class="icon-plus-sign"></span>'.html_safe, '#mdFieldAdd', data: {toggle: "modal"} %>
+				<%= link_to '<span class="icon-remove-sign"></span>'.html_safe, 
+					admin_page_field_path(c.object.id.to_i == 0 ? index : c.object.id),             
+					method: 'delete', 
+					remote: true, 
+					data: { confirm: t('_DELETE_CONFIRM') } %>
 		        <% end %>
 		    </div>
 		</div> 
-	</div>
-	<% end %>
+	</div>	
+	<% end %> 
 
-
-    <div id="ajax_field_add">
-   
-	</div> 
-
+	<div id="ajax_field_add"></div>
 </div>
+
 <% if f.object.page_field.any? %>
 <div class="control-group">
 	<div id="moreless" class="controls">
@@ -34,37 +37,3 @@
 	</div>
 </div>
 <% end %>
-
-
-<div id="mdFieldAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<%= form_tag remote: true do %>
-
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3 id="myModalLabel">Заголовок</h3>
-		</div>
-
-		<div class="modal-body">
-			<div class="control-group">	
-				<label class="control-label">Имя поля</label>
-			    <div class="controls">		    	
-			    	<%= text_field_tag :field_name %>			    	
-			    </div>
-
-				<label class="control-label">Тип поля</label>    	
-		    	<div class="controls">
-		    		<%= select_tag(:field_type, options_for_select([[t('Title'), 'title'], [t('Meta'), 'meta'], [t('Bool'), 'bool'], [t('Text'), 'text'], [t('Textarea'), 'textarea'], [t('Image'), 'image']], 1)) %>
-		    	</div>
-			</div> 
-		</div>
-
-		<div class="modal-footer">
-			<div class="control-group">	        
-		        <div class="controls">
-		            <%= link_to t("_BTN_SAVE"), admin_pages_field_add_path(count_page: @page.page_field.length) %>
-		        </div>
-		    </div> 
-		</div>
-	<% end %>
-</div>
-

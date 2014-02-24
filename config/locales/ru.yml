@@ -91,15 +91,7 @@ ru:
   _MORE: больше
   _LESS: меньше
 
-  # Page filds
-  Title: Заголовок
-  Meta: Мета
-  Bool: Локический
-  Text: Текстовый
-  Textarea: Текстовый блок
-  Image: Картинка
-
-
+  
   _SETTING_NAME_FORMAT: "может содержать только латинские буквы, цифры и символы - или _"
 
   # images
@@ -165,6 +157,11 @@ ru:
         parent_id: Родительский раздел
         ptype: Тип раздела
         user: Автор
+
+      page_field:
+        name: Наименование
+        value: Значение
+        ftype: Тип
         
       setting:
         name: Наименование

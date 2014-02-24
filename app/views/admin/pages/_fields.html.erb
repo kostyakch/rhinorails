@@ -16,12 +16,12 @@
         <%= f.label :slug, class: 'control-label' %>
         <div class="controls">
             <%= f.text_field :slug, class: 'span11' %>
-            <a href="#" class="add_field"><span class="icon-plus-sign"></span></a>
+            <%= link_to '<span class="icon-plus-sign"></span>'.html_safe, '#mdFieldAdd', data: {toggle: "modal"} %>
         </div>
     </div>  
    
     <!-- Page fields -->
-    <%= render 'field_row', f: f %>     
+    <%= render 'field_row', f: f %>    
 
     <div class="row">
         <div class="span1" style="margin-left: 210px;">

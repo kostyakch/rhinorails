@@ -1,5 +1,8 @@
 RhinoCMS::Application.routes.draw do
 
+  get "page_fields/new"
+  get "page_fields/create"
+  get "page_fields/destroy"
   # Admin URLs
   namespace :admin do
     root :to => 'pages#index'
@@ -21,6 +24,7 @@ RhinoCMS::Application.routes.draw do
     resources :galleries
 
     resources :page_comments
+    resources :page_fields, only: [:new, :create, :destroy], via: :js
 
     #upload files
     match 'assets/upload_image' => 'assets#upload_image', via: [:get]#, via: :js
@@ -49,3 +53,4 @@ RhinoCMS::Application.routes.draw do
   root :to => 'pages#index'
   match '*url' => 'pages#internal', :as => :page, via: [:get]
 end
+
