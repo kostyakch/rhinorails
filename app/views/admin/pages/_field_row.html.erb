@@ -7,23 +7,26 @@
 		<%= c.hidden_field :position %>
 		<%= c.hidden_field :name %>
 		<%= c.hidden_field :ftype %>
-		<div class="control-group">	
-			<label class="control-label" for="page_page_fields_name"><%=t c.object.name %></label>
-		    <div class="controls">
-		    	<% if disabled_page?(@page) %>
-		    	<%= c.text_field :value, class: 'span11', readonly: 'readonly' %>
-		    	<% else %>
-		        <%= c.text_field :value, class: 'span11' %>
+		
+		<%= render partial: "admin/page_fields/row", locals: {field: c.object, index: index}%>
 
-				<%= link_to '<span class="icon-plus-sign"></span>'.html_safe, '#mdFieldAdd', data: {toggle: "modal"} %>
-				<%= link_to '<span class="icon-remove-sign"></span>'.html_safe, 
+		<!--div class="control-group">	
+			<label class="control-label" for="page_page_fields_name"><%=t c.object.name %></label>
+		    <div class="controls"-->
+		    	<!--% if disabled_page?(@page) %-->
+		    	<!--%= c.text_field :value, class: 'span11', readonly: 'readonly' %-->
+		    	<!--% else %-->
+		        <!--%= c.text_field :value, class: 'span11' %-->
+
+				<!--%= link_to '<span class="icon-plus-sign"></span>'.html_safe, '#mdFieldAdd', data: {toggle: "modal"} %-->
+				<!--%= link_to '<span class="icon-remove-sign"></span>'.html_safe, 
 					admin_page_field_path(c.object.id.to_i == 0 ? index : c.object.id),             
 					method: 'delete', 
 					remote: true, 
-					data: { confirm: t('_DELETE_CONFIRM') } %>
-		        <% end %>
-		    </div>
-		</div> 
+					data: { confirm: t('_DELETE_CONFIRM') } %-->
+		        <!--% end %-->
+		    <!--/div>
+		</div--> 
 	</div>	
 	<% end %> 
 
@@ -37,3 +40,5 @@
 	</div>
 </div>
 <% end %>
+
+

@@ -34,6 +34,6 @@ class Admin::PageFieldsController < ApplicationController
     private
         # Never trust parameters from the scary internet, only allow the white list through.
         def admin_page_params
-            params.require(:page_field).permit! #(:active, :descr, :name, :url)
+            params.require(:page_field).permit!
         end 	
 end

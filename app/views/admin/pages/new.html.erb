@@ -1,5 +1,4 @@
 <% provide(:title, t(:_NEW_PAGE)) %>
-
 <% content_for :sidebar_l2 do %>
 <div id="sidebar-left2" class="span2">
 	<div class="nav-collapse sidebar-nav">
@@ -11,6 +10,7 @@
 	</div>
 </div>
 <% end %>
+
 
 <%= form_for @page, :url => admin_pages_path do |f| %>
     <legend><%= t(:_NEW_PAGE) %></legend>   

@@ -1,0 +1,8 @@
+<% index = rand(100..300) %>
+<div id="field_<%= index %>">
+	<%= hidden_field_tag "page[page_field_attributes][#{index}][id]", @field.id %>
+	<%= hidden_field_tag "page[page_field_attributes][#{index}][name]", @field.name %>
+	<%= hidden_field_tag "page[page_field_attributes][#{index}][ftype]", @field.ftype %>
+
+	<%= render partial: "row", locals: {field: @field, index: index}%>
+</div>
