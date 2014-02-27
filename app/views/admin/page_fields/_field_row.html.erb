@@ -9,23 +9,16 @@
 	<div class="control-group">
 		<label class="control-label" for="page_page_fields_name"><%=t @field.name %></label>
 	    <div class="controls">
-			<% if (@field.ftype == "text") %>
+	    	<% case @field.ftype %>
+			<% when 'textarea' %>
+	    		<%= text_area_tag "page[page_field_attributes][#{index}][value]", @field.value, rows: 3, class: "span11" %>
+	    	<% when 'image' %>
 				<%= text_field_tag("page[page_field_attributes][#{index}][value]", @field.value, class: "span11") %>
-			<% else%>		
-				<% if (@field.ftype == "textarea") %>
-					<%= text_area_tag "page[page_field_attributes][#{index}][value]", @field.value, rows: 10, cols: 25, class: "span11" %>
-				<% else%>
-					<% if (@field.ftype == "image") %>
-			            <div class="uploader" id="uniform-fileInput">
-			                <%= file_field_tag "page[page_field_attributes][#{index}][value]", class: "input-file uniform_on" %>
-			                <span class="filename">No file selected</span>
-			                <span class="action">Добавить изображения</span>
-			            </div>   
-			    	<% else%>
-						<%= text_field_tag "page[page_field_attributes][#{index}][value]", @field.value, class: "span11" %>
-					<% end %>
-				<% end %>
-			<% end %>  	
+				<span class="input-group-btn"><%= link_to 'Img', '#', class: "btn" %></span>
+	    	<% else %>
+	    		<%= text_field_tag("page[page_field_attributes][#{index}][value]", @field.value, class: "span11") %>
+	    	<% end %> 
+
 			<%= link_to '<span class="icon-plus-sign"></span>'.html_safe, '#mdFieldAdd', data: {toggle: "modal"} %>
 			<%= link_to '<span class="icon-remove-sign"></span>'.html_safe, 
 				admin_page_field_path(@field.id.to_i == 0 ? index : @field.id),             
