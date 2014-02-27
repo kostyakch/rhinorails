@@ -12,7 +12,7 @@ class CreateRhinoTables < ActiveRecord::Migration
 
       t.string :name, :null => false
       t.string :slug, :null => false
-      t.integer :position, :default => 0, :null => false
+      t.integer :position, :null => false
       t.integer :menu, :default => true
       t.boolean :active, :default => true
       t.string  :ptype,  :limit => 20, :default => "page", :null => false
@@ -30,7 +30,7 @@ class CreateRhinoTables < ActiveRecord::Migration
 
       t.string :name, :limit => 100, :null => false
       t.text :content
-      t.integer :position, :default => 0, :null => false
+      t.integer :position, :null => false
     end
     add_index :page_contents, :name
     add_index :page_contents, [:page_id, :name], :unique => true
@@ -43,7 +43,7 @@ class CreateRhinoTables < ActiveRecord::Migration
       t.string :name, :limit  => 120, :null => false
       t.text :value
       t.string :ftype, :limit => 60
-      t.integer :position, :default => 0, :null => false
+      t.integer :position, :null => false
     end
     add_index :page_fields, [:page_id, :name], :unique => true, name: 'page_fields_page_id_and_name'
 

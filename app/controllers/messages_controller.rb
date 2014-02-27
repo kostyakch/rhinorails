@@ -20,11 +20,6 @@ class MessagesController < ApplicationController
 	end
 
     private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_page_comment
-           
-        end
-
         # Never trust parameters from the scary internet, only allow the white list through.
         def page_comment_params
             params.require(:page_comment).permit!#(:name, :position, :active, questions_attributes: [:name])

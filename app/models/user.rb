@@ -8,9 +8,9 @@
 #  active          :boolean          default(TRUE), not null
 #  roles           :string(255)      default("ROLE_USER"), not null
 #  password_digest :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
 #  remember_token  :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
 #
 
 class User < ActiveRecord::Base
@@ -30,10 +30,21 @@ class User < ActiveRecord::Base
   def name_email
     "#{self.name } (#{self.email})"    
   end
+
+  def has_role?(role)
+    res = false
+    self.roles.split(',').each do |r|
+      res = (r == role)
+      break if res
+    end
+
+    return res
+  end
+
   private
 
     def create_remember_token
-      self.remember_token = SecureRandom.urlsafe_base64
+      self.remember_token = SecureRandom.urlsafe_base64 if !self.remember_token.present?
     end
 
 end

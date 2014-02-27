@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: gallery_images
+#
+#  id         :integer          not null, primary key
+#  gallery_id :integer
+#  path       :string(150)
+#  annotation :text
+#  main       :boolean          default(FALSE), not null
+#  active     :boolean          default(TRUE), not null
+#  position   :integer          default(0), not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class GalleryImage < ActiveRecord::Base
   #attr_accessible :active, :annotation, :main, :path, :position, :gallery_id, :path_cache, :images_attributes
 

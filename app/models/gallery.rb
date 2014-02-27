@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: galleries
+#
+#  id         :integer          not null, primary key
+#  page_id    :integer
+#  url        :string(150)
+#  name       :string(255)      not null
+#  descr      :text
+#  active     :boolean          default(TRUE)
+#  position   :integer          default(0)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Gallery < ActiveRecord::Base
   #3attr_accessible :active, :descr, :name, :url
 

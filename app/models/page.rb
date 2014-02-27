@@ -2,18 +2,20 @@
 #
 # Table name: pages
 #
-#  id         :integer          not null, primary key
-#  parent_id  :integer
-#  name       :string(255)      not null
-#  slug       :string(100)      not null
-#  position   :integer          default(0), not null
-#  visible    :integer          default(1)
-#  menu       :integer          default(1)
-#  active     :boolean          default(TRUE)
-#  sm_p       :string(7)        default("weekly"), not null
-#  st_pr      :decimal(10, 2)   default(0.5), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  parent_id    :integer
+#  name         :string(255)      not null
+#  slug         :string(255)      not null
+#  position     :integer          not null
+#  menu         :integer          default(1)
+#  active       :boolean          default(TRUE)
+#  ptype        :string(20)       default("page"), not null
+#  sm_p         :string(7)        default("weekly"), not null
+#  st_pr        :decimal(10, 2)   default(0.5), not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#  publish_date :date             not null
+#  user_id      :integer
 #
 
 class Page < ActiveRecord::Base
@@ -21,11 +23,6 @@ class Page < ActiveRecord::Base
   after_initialize :set_publish_date
 
   # Associations
-  #default_scope order: 'position'
-  default_scope { order 'position' }
-
-  acts_as_list scope: [:parent_id, :publish_date]
-
   #has_many :page_content, :order => 'position', :autosave => true, :dependent => :destroy  
   has_many :page_content, -> { order 'position' }, :autosave => true, :dependent => :destroy  
   accepts_nested_attributes_for :page_content, :allow_destroy => true
@@ -41,7 +38,7 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :user #, :allow_destroy => true
 
   # Validations
-  validates :name, :slug, :position, :menu, presence: true
+  validates :name, :slug, :menu, presence: true
 
   validates :name, length: { maximum: 255 }
   validates :slug, length: { maximum: 100 }
@@ -51,22 +48,27 @@ class Page < ActiveRecord::Base
   validates :slug, uniqueness: { case_sensitive: false }, format: { with: VALID_SLUG_REGEX }
   validates_uniqueness_of :slug, :scope => :parent_id
 
+  acts_as_list  :scope => [:parent_id, :publish_date]
+  default_scope { order 'position asc' }
+
 
   def content_by_name(name)
-    if self.page_content.find_by_name(name).present?
-      self.page_content.find_by_name(name).content 
+    if self.page_content.find_by(name: name).present?
+      self.page_content.find_by(name: name).content 
     else
       ''
     end
   end
+  alias_method :content, :content_by_name
 
   def field_by_name(name)
-    if self.page_field.find_by_name(name).present?
-      self.page_field.find_by_name(name).value 
+    if self.page_field.find_by(name: name).present?
+      self.page_field.find_by(name: name).value 
     else
       ''
     end
   end
+  alias_method :field, :field_by_name
 
   def children(active = true)
     if active
@@ -114,7 +116,7 @@ class Page < ActiveRecord::Base
   class << self
 
     def find_by_path(path)
-      return self.find_by_slug(path, :conditions => ['active=? and publish_date <= ?', true, Time.now])
+      self.where('slug = ? and active = ? and publish_date <= ?', path, true, Time.now).first
     end
 
 

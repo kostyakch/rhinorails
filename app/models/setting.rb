@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: settings
+#
+#  id    :integer          not null, primary key
+#  name  :string(120)      default(""), not null
+#  value :string(255)      default(""), not null
+#  descr :text
+#
+
 class Setting < ActiveRecord::Base
 	before_save :name_downcase
 
