@@ -12,7 +12,7 @@
 <% end %>
 
 
-<%= form_for @page, :url => admin_pages_path do |f| %>
+<%= form_for @page, :url => admin_pages_path, :multipart => true do |f| %>
     <legend><%= t(:_NEW_PAGE) %></legend>   
 
    	<%= render 'fields', f: f %>	   

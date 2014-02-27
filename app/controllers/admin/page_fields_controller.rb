@@ -31,6 +31,17 @@ class Admin::PageFieldsController < ApplicationController
         end
     end
 
+    def upload_image
+		FieldUploader.configure do |config|
+			config.store_dir = 'uploads/images/pages'
+		end
+						
+		uploader = FieldUploader.new
+		uploader.store!(params[:file])
+		
+		render json: { filelink: uploader.url }
+	end
+
     private
         # Never trust parameters from the scary internet, only allow the white list through.
         def admin_page_params

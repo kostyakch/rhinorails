@@ -12,6 +12,8 @@ class PageField < ActiveRecord::Base
 
 	validates :ftype, inclusion: { in: FIELD_TYPES.keys.map(&:to_s) }
 
+	mount_uploader :file, FieldUploader
+
 	def select_list
 		FIELD_TYPES.map { |ft| [ft[1], ft[0]] }
 	end
