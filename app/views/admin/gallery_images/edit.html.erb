@@ -1,9 +1,0 @@
-<% provide(:title, 'Редактирование изображения') %>
-
-<% render 'admin/galleries/sidebar' %>
-
-<%= form_for @image, :url => admin_gallery_image_path do |f| %>
-    <legend>Редактирование изображения</legend>   
-
-   	<%= render 'fields', f: f %>	   
-<% end %>

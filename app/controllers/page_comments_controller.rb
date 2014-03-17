@@ -1,24 +1,24 @@
 class PageCommentsController < ApplicationController
 
 	def new
-		@page_comment = PageComment.new
-		@page_comment.user = User.new
+		@page_comment = Rhinoart::PageComment.new
+		@page_comment.user = Rhinoart::User.new
 	end
 
 	def create
-		@page = Page.find(params[:page_comment][:page_id])
+		@page = Rhinoart::Page.find(params[:page_comment][:page_id])
 		
 		params[:page_comment][:approved] = Rails.configuration.comments_approved
 		params[:page_comment][:user_attributes][:id] = nil
-		@page_comment = PageComment.new(page_comment_params)
+		@page_comment = Rhinoart::PageComment.new(page_comment_params)
 		
 
 		# Попытаемся найти пользователя по емаил
-		user = User.find_by_email(params[:page_comment][:user_attributes][:email].downcase)
+		user = Rhinoart::User.find_by_email(params[:page_comment][:user_attributes][:email].downcase)
 		if user
 			# Нашли пользователя в БД. Нужно удалить user_attributes, чтобы не обновлять пользователя
 			params[:page_comment].delete(:user_attributes)
-			@page_comment = PageComment.new(params[:page_comment])
+			@page_comment = Rhinoart::PageComment.new(params[:page_comment])
 
 			@page_comment.user_id = user.id
 		else

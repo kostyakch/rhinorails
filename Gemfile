@@ -43,4 +43,5 @@ group :development do
   #gem 'debugger'  
 end
 
+gem 'rhinoart', path: "vendor/engines/rhinoart"
 #gem "devise"

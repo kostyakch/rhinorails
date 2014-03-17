@@ -23,3 +23,5 @@ doc/
 
 /public/uploads/
 Rhino.sh
+
+/vendor/engines/*
